@@ -3,7 +3,7 @@ import React from 'react';
 
 import LAYOUT from './layout';
 import SignIn from './pages/sign-in/index';
-import SignOn from './pages/sign-on/index';
+import SignUp from './pages/sign-up/index';
 
 
 const router = createBrowserRouter([
@@ -13,7 +13,7 @@ const router = createBrowserRouter([
           children:[
             {
               index:true,
-              element:<SignOn/>
+              element:<SignUp/>
             },
             {
               path:'/sign-in',
