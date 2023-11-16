@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { TiInfoOutline } from "react-icons/ti";
 
-const Text = ({children,type,placeholder}) => {
+const Text = (props) => {
+  const [isInfo,setIsInfo] = useState(false)
+  const {error,touch} = props
   return (
-    <div>
-      <input id='input' value={children} type={type ? type : "text"} placeholder={placeholder} className='x-button'/><br />
+    <div className='input-wrapper'>
+      <input {...props} className='x-button' style={(error && touch) ? {border:"2px solid red"} : null} />
+      {(error && touch) ? (<button className='input-info-button' onClick={()=>setIsInfo(!isInfo)}><TiInfoOutline /><span className='input-info-content' style={isInfo ? {display:'block'} : null}>{error}</span></button>) : null}
     </div>
   )
 }

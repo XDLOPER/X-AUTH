@@ -1,0 +1,1 @@
+input info tuşuna basınca hepsini açıyor buna Form Konponenti sebep oluyor kullanıma engel teşgil etmiyor

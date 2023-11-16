@@ -1,9 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const SubmitButton = ({children,to,on}) => {
+const SubmitButton = (props) => {
+  const {children,to,on,} = props
   return (
-    <Link to={to}><button style={{opacity:on ? 1 : 0}} disabled={on ? true : false} className='button-submit x-button'>{children}</button></Link>
+    <Link to={to}><button {...props} style={{opacity:on ? 1 : 0}} disabled={on ? false : true} className='button-submit x-button'>{children}</button></Link>
   )
 }
 
