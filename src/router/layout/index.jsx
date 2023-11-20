@@ -1,12 +1,17 @@
 import React,{useState} from 'react'
 import {Outlet,Link} from 'react-router-dom'
 
+import {setButtonSubmit,setButtonBack,setButtonNext} from '../../store/app/actions.js'
+import {useButtonSubmitActive,useButtonBackActive,useButtonNextActive, useButtonBackURL, useButtonNextURL, useButtonSubmitURL} from '../../store/app/hooks'
+
 import logo from '../../media/images/logo.png'
-import style from './index.css'
+import style from '../../style/layout.css'
 import SubmitButton from '../../components/buttons/submit'
 
 const LAYOUT = () => {
   const [formData, setFormData] = useState({});
+  //setButtonBack({active:true,URL:''})
+  //setButtonNext({active:true,URL:''})
 
   const handleButtonClick = () => {
     // Burada form verilerini işleyebilir veya isteği başlatabilirsiniz
@@ -15,7 +20,7 @@ const LAYOUT = () => {
 
   return (
     <div id="x_auth" style={style.x_auth}>
-        <div className="wrapper">
+        <div className="wrapper d-flex flex">
           <div className="auth">
             <header id="auth">
               <div className="circle">
@@ -31,9 +36,9 @@ const LAYOUT = () => {
             </div>  
             <footer id="auth">
               <div className="buttonGroup">
-                <SubmitButton to="/sign-in">back</SubmitButton>
-                <SubmitButton on onClick={handleButtonClick}>giriş yap</SubmitButton>
-                <SubmitButton to="/sign-in">next</SubmitButton>
+                <SubmitButton on={useButtonBackActive() ? true : false} to={useButtonBackURL()}>back</SubmitButton>
+                <SubmitButton on={useButtonSubmitActive() ? true : false} to={useButtonSubmitURL()} onClick={handleButtonClick}>giriş yap</SubmitButton>
+                <SubmitButton on={useButtonNextActive() ? true : false} to={useButtonNextURL()}>next</SubmitButton>
               </div>
               <p>X-Auth Inc.</p>
             </footer>

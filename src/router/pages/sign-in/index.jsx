@@ -1,16 +1,35 @@
-import React,{useState} from 'react'
-import { Link } from 'react-router-dom'
-
-import {onClickHandler} from './controller'
+import React,{useEffect, useState} from 'react'
+import { Outlet, useNavigate } from 'react-router';
 
 
 
 function SignIn() {
+  const navigate = useNavigate()
+  const URL = window.location.pathname
+
+  // İlk başta sign-in layout gözükmesin diye step-1 e yönlendiriyoruz 
+  useEffect(() => {
+    const lastSegment = URL.split('/').pop();
+    if (lastSegment === 'sign-in') {
+      navigate('step-1');
+    }
+  }, [URL, navigate]);
+
   return (
+    <div>
     <div className="wrapper">
-        <h1 className='auth-title'>Kayıt Ol</h1>
-        <Link to="/">back</Link>
+      <h1 className='auth-title'>kayıt ol</h1>
+
+      <div className="content">
+          <br /><br />
+            <Outlet/>           
+          <br />
+          <br />
+          <br />
+      </div>
+    
     </div>
+  </div>
   );
 }
 
