@@ -16,7 +16,10 @@ const Index = () => {
   
   const currentYear = (new Date()).getFullYear()
   const initialValues = {
-
+    //step 2
+    email:'',
+    password:'',
+    rePassword: '',
   }
 
   const onSubmit = (values)=>{console.log(JSON.stringify(values))}
@@ -34,7 +37,11 @@ const Index = () => {
   return (
     <>          
       <form onSubmit={formik.handleSubmit}>
-        <h1>2</h1>
+        <div>
+          <Text name="email" type="email" placeholder="email" value={formik.values.email} onChange={formik.handleChange} onBlur={formik.handleBlur} touch={formik.touched.email} error={formik.errors.email}/>
+          <Text name="password" type="password" placeholder="password" value={formik.values.password} onChange={formik.handleChange} onBlur={formik.handleBlur} touch={formik.touched.password} error={formik.errors.password}/>
+          <Text name="password" type="password" placeholder="password" value={formik.values.rePassword} onChange={formik.handleChange} onBlur={formik.handleBlur} touch={formik.touched.rePassword} error={formik.errors.rePassword}/>
+        </div>
       </form>  
     </>
   )

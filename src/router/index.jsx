@@ -7,6 +7,7 @@ import SignInStep1 from './pages/sign-in/step-1';
 import SignInStep2 from './pages/sign-in/step-2';
 import SignInStep3 from './pages/sign-in/step-3';
 import SignInStep4 from './pages/sign-in/step-4';
+import SignInStep5 from './pages/sign-in/step-5';
 import SignUp from './pages/sign-up/index';
 import Test from '../test/formik'
 
@@ -27,6 +28,7 @@ const router = createBrowserRouter([
                 {path:'step-2',element:<SignInStep2/>},
                 {path:'step-3',element:<SignInStep3/>},
                 {path:'step-4',element:<SignInStep4/>},
+                {path:'step-5',element:<SignInStep5/>},
               ]
             },
             {

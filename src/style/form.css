@@ -1,5 +1,11 @@
 
 .input-wrapper{position: relative; width: 100%;}
+.otp-input-class input{
+	flex:1 !important;
+	color:#000;
+	height:100px !important;
+	font-size:30px !important;
+}
 
 input,select{
 	text-transform: none !important;
@@ -45,6 +51,7 @@ input::placeholder{color:#000 !important}
 	border-radius:10px;
 }
 .input-wrapper .input-info-span:hover > .input-info-content{display: block !important;}
+
 
 
 select{width: 100% !important; padding: 0; height:40px !important;}

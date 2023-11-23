@@ -10,7 +10,7 @@ const Select = (props) => {
         {
           data?.map((value,index)=>{
             return <>
-              <option key={value} value={value}>{value}</option>
+              <option key={index} value={value}>{value}</option>
             </>
           })
         }

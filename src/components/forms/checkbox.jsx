@@ -2,7 +2,7 @@ import React from 'react'
 
 const Checkbox = ({children,on,label}) => {
   return (
-    <div>
+    <div style={{height:'30px'}}>
           <label className="checkbox-container">
             <input type="checkbox" />
             <span className='label'>{label}</span>

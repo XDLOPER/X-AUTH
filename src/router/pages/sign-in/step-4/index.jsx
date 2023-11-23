@@ -1,25 +1,18 @@
-import React,{useEffect} from 'react'
-import { useOutletContext } from 'react-router';
+import React,{useEffect,useState} from 'react'
 import { useFormik } from 'formik';
-import path,{dirname} from 'path-browserify'
+import OtpInput from 'react-otp-input';
 
 import {setButtonSubmit,setButtonBack,setButtonNext, setMainTitle} from '../../../../store/app/actions'
 import {useButtonBackTitle,useButtonSubmitTitle,useButtonNextTitle} from '../../../../store/app/hooks'
 
 import Text from '../../../../components/forms/text';
-import Select from '../../../../components/forms/select';
-
-import * as date from '../../../../utils/consts/date'
-import {gender} from '../../../../utils/consts/gender'
 
 const Index = () => {
-  
-  const currentYear = (new Date()).getFullYear()
-  const initialValues = {
+  const [otp, setOtp] = useState('');
 
-      //step 4
-      infoCheck:false,
-      
+  const initialValues = {
+    //step 4
+    phoneCode:''
   }
 
   const onSubmit = (values)=>{console.log(JSON.stringify(values))}
@@ -29,16 +22,35 @@ const Index = () => {
       onSubmit
   })
 
+  const handleOtpChange = (otp) => {
+    setOtp(otp);
+    
+    formik.handleChange({ target: { name: 'phoneCode', value: otp } });
+  };
+  console.log(formik.values.phoneCode)
+  
+
   useEffect(() => {
-    setButtonNext({title:'back',active:false,URL:'sign-in/step-3'})
+    setButtonNext({title:'',active:true,URL:'sign-in/step-5'})
     setButtonBack({title:'',active:true,URL:'sign-in/step-3'})
-    setButtonSubmit({title:'kayıt ol',active:true,URL:''});
+    setButtonSubmit({title:'kayıt ol',active:false,URL:''});
   },[]);
 
   return (
     <>          
         <form onSubmit={formik.handleSubmit}>
-            <h1>4</h1>
+          <p>SMS Olarak Gelen Kodu Kutucuklara Gir</p>
+          <div className='otp-input-class'>
+            <OtpInput
+              name="phoneCode"
+              inputType='number'
+              numInputs={6}
+              value={formik.values.phoneCode}
+              onChange={handleOtpChange}
+              renderSeparator={<div style={{height:'100%',margin:'5px'}}></div>}
+              renderInput={(props) => <input {...props} className='x-button' />}
+            />
+          </div>
         </form>
     </>
   )

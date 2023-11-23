@@ -25,13 +25,6 @@ const Index = () => {
         year:currentYear
       },
       gender:'',
-
-      //step 3
-      country:'',
-      phone:'',
-
-      //step 4
-      infoCheck:false,
       
   }
 

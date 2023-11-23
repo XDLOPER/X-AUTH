@@ -1,28 +1,27 @@
-import React,{useEffect} from 'react'
-import { useOutletContext } from 'react-router';
+import React,{useEffect,useMemo} from 'react'
 import { useFormik } from 'formik';
-import path,{dirname} from 'path-browserify'
+import country from 'country-list-js';
 
 import {setButtonSubmit,setButtonBack,setButtonNext, setMainTitle} from '../../../../store/app/actions'
 import {useButtonBackTitle,useButtonSubmitTitle,useButtonNextTitle} from '../../../../store/app/hooks'
 
-import Text from '../../../../components/forms/text';
 import Select from '../../../../components/forms/select';
+import Text from '../../../../components/forms/text';
 
-import * as date from '../../../../utils/consts/date'
-import {gender} from '../../../../utils/consts/gender'
 
 const Index = () => {
   
-  const currentYear = (new Date()).getFullYear()
-  const initialValues = {
-
-      //step 3
-      country:'',
-      phone:'',
-
-      
-  }
+    const countryName = country.names();
+    const countryArray = countryName.map((value,index)=>{
+        const finded = country.findByName(value)
+        return /*finded.code.iso2 + ' : ' + */'+'+finded.dialing_code
+    })
+    console.log(country.findByName('Bangladesh'))
+    const initialValues = {
+        //step 3
+        country:'',
+        phone:''
+    }
 
   const onSubmit = (values)=>{console.log(JSON.stringify(values))}
 
@@ -40,7 +39,21 @@ const Index = () => {
   return (
     <>          
         <form onSubmit={formik.handleSubmit}>
-            <h1>3</h1>
+            <div>
+                <p>Şimdi Telefon Numaranı Gir Ve yola Devam Et Bir Sonraki Aşamada Telefonuna SMS ile Onay Kodu Gelicek</p>
+                <Select
+                                name="country"
+                                data={countryArray}
+                                onChange={(e) => {
+                                    formik.handleChange(e);
+                                }}
+                                onBlur={formik.handleBlur}
+                                touch={formik.touched?.country} 
+                                error={formik.errors?.country}
+                            >
+                </Select>
+                <Text name="phone" type="number" placeholder="phone" value={formik.values.phone} onChange={formik.handleChange} onBlur={formik.handleBlur} touch={formik.touched?.phone} error={formik.errors?.phone}/>
+            </div>
         </form>
     </>
   )
