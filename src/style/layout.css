@@ -49,44 +49,36 @@ div#x_auth div.content{flex:100; display: block !important;}
         animation: circleImage 2s  forwards;
         animation-iteration-count: infinite;
     } 
-    .circleone {
+    .circleone,.circletwo,.circlethree,.circlefour  {
         display:block !important;
         position: absolute;
         height:  100%;
         width:  100%;
-        border-radius: 50%;
+        border-radius: 100%;
         border: 2px solid #000;
+        text-align: center;
+    }
+    .circleone{
         animation-name: spinx;
         animation-duration:3s;
         animation-iteration-count: infinite;
-        text-align: center;
     }
     .circletwo {
-        display:block !important;
-        position: absolute;
-        height: 100%;
-        width:  100%;
-        border-radius: 50%;
-        border: 2px solid #000;
         animation-name: spiny;
         animation-duration:3.05s;
         animation-iteration-count: infinite;
         text-align: center;
 
     }
-    .circlethree {
-        display:block !important;
-        position: absolute;
-        height: 100%;
-        width:  100%;
-        border: 2px solid #000;
-        border-radius:13px;
+    .circlethree{
+        border-radius:20%;
+        transform: rotate(45deg);
         animation-name: spinz;
         animation-duration:3s;
         animation-iteration-count: infinite;
         text-align: center;
-
     }
+    
     @keyframes circleImage {
         0% {
             opacity:0.5;
@@ -136,8 +128,8 @@ div#x_auth div.content{flex:100; display: block !important;}
     }
     @keyframes spinz {
         0% {
-            transform: rotateZ(0deg);
-           opacity:1;
+            transform: rotate(45deg);
+            opacity:1;
         }
 
         50% {
@@ -146,16 +138,13 @@ div#x_auth div.content{flex:100; display: block !important;}
             opacity:1;
           
         }
-        100% {
-            transform: rotateZ(720deg);
-          opacity:1;
-        }
+
     }
 
 div#x_auth hr#auth{flex:1; width:10%; height: 2px; background: #000; border-radius:999px; border: none; margin:10px auto 0px; opacity: 1;}
 div#x_auth .auth-title{text-align: center; font-weight: bolder; font-size: 20px; text-transform: capitalize ;}
 
 footer#auth{flex:0; position: relative;  bottom:0; width: 100%; background-color: transparent;}
-footer#auth .buttonGroup{display: flex; padding:20px 0px; gap:0 5px;}
+footer#auth .buttonGroup{overflow: hidden; display: grid; grid-template-columns: 10% auto 10%; gap: 100px !important;  height:35px; margin-bottom:10px; gap:0 5px;}
 footer#auth  p{margin-bottom:0; text-align: center; flex:1;  align-self: center; font-weight: 900; letter-spacing: 0.5px; font-size: 10px; color:#c2c2c2}
 

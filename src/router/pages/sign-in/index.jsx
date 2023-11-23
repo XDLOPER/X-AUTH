@@ -1,35 +1,30 @@
 import React,{useEffect, useState} from 'react'
 import { Outlet, useNavigate } from 'react-router';
-
+import {setButtonBack, setButtonNext, setButtonSubmit, setMainTitle} from '../../../store/app/actions'
+import {useButtonBackActive, useButtonNextActive} from '../../../store/app/hooks'
 
 
 function SignIn() {
   const navigate = useNavigate()
   const URL = window.location.pathname
 
-  // İlk başta sign-in layout gözükmesin diye step-1 e yönlendiriyoruz 
+  useEffect(() => {
+    setMainTitle('kayıt ol');
+    setButtonSubmit({active:false,URL:'/'});
+  }, [useButtonNextActive,useButtonBackActive]);
+ 
   useEffect(() => {
     const lastSegment = URL.split('/').pop();
-    if (lastSegment === 'sign-in') {
+    if (lastSegment === 'sign-in' || 'sign-in/') {
       navigate('step-1');
     }
-  }, [URL, navigate]);
+  }, [navigate]);
+  
 
   return (
-    <div>
-    <div className="wrapper">
-      <h1 className='auth-title'>kayıt ol</h1>
-
-      <div className="content">
-          <br /><br />
-            <Outlet/>           
-          <br />
-          <br />
-          <br />
-      </div>
-    
-    </div>
-  </div>
+    <>
+      <Outlet/>
+    </>
   );
 }
 

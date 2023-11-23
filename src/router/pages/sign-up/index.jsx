@@ -3,11 +3,12 @@
   import { useFormik,Formik as LoginForm,Form ,Field} from 'formik'
   import * as Yup from 'yup'
 
-  import SubmitButton from '../../../components/buttons/submit'
+  import {setButtonBack, setMainTitle,setButtonNext,setButtonSubmit} from '../../../store/app/actions.js'
   import Text from '../../../components/forms/text'
   import Checkbox from '../../../components/forms/checkbox'
 
 const SignUp = (props) => {
+  useEffect(() => {setMainTitle('oturum aç')})
   const context = useOutletContext();
    
   const initialValues = {
@@ -44,31 +45,22 @@ const SignUp = (props) => {
     // Formik'in içindeki submitForm fonksiyonunu çağırarak formu submit et
     formik.submitForm();
   };
-
-  useEffect(() => {
-    console.log(context(formik.values))
-  },[formik.values])
-
+  useEffect(()=>{
+    setButtonBack({active:false,URL:''})
+    setButtonSubmit({title:'oturum aç',active:true,URL:'/'})
+    setButtonNext({active:false,URL:''})
+  },[])
     return (
-      <div>
-        <div className="wrapper">
-          <h1 className='auth-title'>oturum aç</h1>
-
-          <div className="content">
-              <br /><br />
-              <form onSubmit={formik.handleSubmit}>
+      <>
+            <form onSubmit={formik.handleSubmit}>
                   <Text name="usernameAndPhone" type="text" placeholder="username & phone" value={formik.values.usernameAndPhone} onChange={formik.handleChange} onBlur={formik.handleBlur} touch={formik.touched.usernameAndPhone} error={formik.errors.usernameAndPhone}/>
                   <Text name="password" type="password" placeholder="password" value={formik.values.password} onChange={formik.handleChange} onBlur={formik.handleBlur} touch={formik.touched.password} error={formik.errors.password}/>
-              </form>             
-
-            <Checkbox label="not forget me"></Checkbox>
+                  <Checkbox label="not forget me"></Checkbox>
+            </form> 
               <br />
               <br />
             <Link to="/sign-in" style={{textAlign:"center",position:"absolute",left:"50%",transform:"translate(-50%)"}}>kayıt ol</Link>
-          </div>
-        
-        </div>
-      </div>
+      </>
     )
 }
 

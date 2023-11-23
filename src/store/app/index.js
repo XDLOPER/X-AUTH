@@ -1,23 +1,31 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+
 const initialState = {
     auth:true,
     theme:'default',
     language:'default',
-    buttons:{
-        buttonBack:{
+    mainTitle:'',
+    buttons:[
+        {
+            type:'left',
+            title:'back',
             active:false,
             URL:''
         },
-        buttonSubmit:{
+        {
+            type:'center',
+            title:'submit',
             active:false,
             URL:''
         },
-        buttonNext:{
-            active:false,
+        {
+            type:'right',
+            title:'next',
+            active:false,   
             URL:''
         },
-    }
+    ]
 }
 
 const app = createSlice({
@@ -33,17 +41,20 @@ const app = createSlice({
         _setLanguage:(state,action)=>{
             state.language = action.payload
         },
+        _setMainTitle:(state,action)=>{
+            state.mainTitle = action.payload
+        },
         _setButtonBack:(state,action)=>{
-            state.buttons.buttonBack = action.payload
+            state.buttons[0] = { ...state.buttons[0], ...action.payload };
         },
         _setButtonNext:(state,action)=>{
-            state.buttons.buttonNext = action.payload
+            state.buttons[2] = { ...state.buttons[2], ...action.payload };
         },
         _setButtonSubmit:(state,action)=>{
-            state.buttons.buttonSubmit = action.payload
+            state.buttons[1] = { ...state.buttons[1], ...action.payload };
         }
     }
 })
 
-export const {_setAuth,_setTheme,_setLanguage,_setButtonBack,_setButtonNext,_setButtonSubmit} = app.actions
+export const {_setAuth,_setTheme,_setLanguage,_setMainTitle,_setButtonBack,_setButtonNext,_setButtonSubmit} = app.actions
 export default app.reducer

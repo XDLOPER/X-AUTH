@@ -1,8 +1,10 @@
-import React from 'react'
+import React,{useEffect} from 'react'
+import { useOutletContext } from 'react-router';
 import { useFormik } from 'formik';
 import path,{dirname} from 'path-browserify'
 
-import {setButtonSubmit,setButtonBack,setButtonNext} from '../../../../store/app/actions.js'
+import {setButtonSubmit,setButtonBack,setButtonNext, setMainTitle} from '../../../../store/app/actions'
+import {useButtonBackTitle,useButtonSubmitTitle,useButtonNextTitle} from '../../../../store/app/hooks'
 
 import Text from '../../../../components/forms/text';
 import Select from '../../../../components/forms/select';
@@ -11,12 +13,9 @@ import * as date from '../../../../utils/consts/date'
 import {gender} from '../../../../utils/consts/gender'
 
 const Index = () => {
-
-  setButtonNext({active:true,URL:'sign-in/step-2'})
+  
   const currentYear = (new Date()).getFullYear()
   const initialValues = {
-      step:1,
-
       //step 1
       name:'',
       surname:'',
@@ -26,12 +25,6 @@ const Index = () => {
         year:currentYear
       },
       gender:'',
-
-      //step 2
-      username:'',
-      email:'',
-      password:'',
-      rePassword:'',
 
       //step 3
       country:'',
@@ -48,6 +41,11 @@ const Index = () => {
       initialValues,
       onSubmit
   })
+
+  useEffect(() => {
+    setButtonNext({title:'',active:true,URL:'sign-in/step-2'})
+    setButtonBack({title:'login',active:true,URL:'/'});
+  },[]);
 
   return (
     <>          
