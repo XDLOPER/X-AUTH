@@ -1,5 +1,5 @@
   import React,{useEffect} from 'react'
-  import { Link,useOutletContext  } from 'react-router-dom'
+  import { Link } from 'react-router-dom'
   import { useFormik,Formik as LoginForm,Form ,Field} from 'formik'
   import * as Yup from 'yup'
 
@@ -8,9 +8,7 @@
   import Checkbox from '../../../components/forms/checkbox'
 
 const SignUp = (props) => {
-  useEffect(() => {setMainTitle('oturum aç')})
-  const context = useOutletContext();
-   
+
   const initialValues = {
       usernameAndPhone:"",
       password:""
@@ -46,8 +44,10 @@ const SignUp = (props) => {
     formik.submitForm();
   };
   useEffect(()=>{
+    setMainTitle('oturum aç')
+
     setButtonBack({active:false,URL:''})
-    setButtonSubmit({title:'oturum aç',active:true,URL:'/'})
+    setButtonSubmit({title:'oturum aç',active:true,disabled:true,URL:'/'})
     setButtonNext({active:false,URL:''})
   },[])
     return (

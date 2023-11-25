@@ -11,21 +11,18 @@ const initialState = {
             type:'left',
             title:'back',
             active:false,
-            disabled:false,
             URL:''
         },
         {
             type:'center',
             title:'submit',
             active:false,
-            disabled:false,
             URL:''
         },
         {
             type:'right',
             title:'next',
-            active:false,  
-            disabled:false, 
+            active:false,   
             URL:''
         },
     ]

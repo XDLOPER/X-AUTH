@@ -1,36 +1,55 @@
 import React,{useEffect} from 'react'
-import { useOutletContext } from 'react-router';
 import { useFormik } from 'formik';
-import path,{dirname} from 'path-browserify'
+import * as Yup from 'yup'
 
 import {setButtonSubmit,setButtonBack,setButtonNext, setMainTitle} from '../../../../store/app/actions'
-import {useButtonBackTitle,useButtonSubmitTitle,useButtonNextTitle} from '../../../../store/app/hooks'
 
 import Text from '../../../../components/forms/text';
-import Select from '../../../../components/forms/select';
+import { setStep } from '../../../../store/sign-in/actions';
 
-import * as date from '../../../../utils/consts/date'
-import {gender} from '../../../../utils/consts/gender'
+
 
 const Index = () => {
-  
-  const currentYear = (new Date()).getFullYear()
+
+
   const initialValues = {
     //step 2
-    email:'',
+    username:'',
     password:'',
     rePassword: '',
   }
+
+  const validationSchema = Yup.object({
+    username:Yup
+    .string()
+    .matches(/^[a-zA-Z]+$/, 'Sadece harf içermelidir')
+    .required('Bu alan zorunludur'),  
+
+    password:Yup
+    .string()
+    .matches(/^[a-zA-Z]+$/, 'Sadece harf içermelidir')
+    .required('Bu alan zorunludur'),
+
+    rePassword:Yup
+    .string()
+    .oneOf([Yup.ref('password'), null], 'Şifreler uyuşmuyor') // Yup.ref('password') ile password u referans gösteriyoruz 
+    .required('Bu alan zorunludur'),
+  
+  })
 
   const onSubmit = (values)=>{console.log(JSON.stringify(values))}
 
   const formik = useFormik({
       initialValues,
+      validationSchema,
       onSubmit
   })
 
   useEffect(() => {
-    setButtonNext({title:'',active:true,URL:'sign-in/step-3'})
+    const pathname = window.location.pathname;
+    setStep(pathname.split('/')[pathname.split('/').length -1].split('-')[1])
+
+    setButtonNext({title:'',active:true,disabled:false,URL:'sign-in/step-3'})
     setButtonBack({title:'',active:true,URL:'sign-in/step-1'});
   },[]);
 
@@ -38,9 +57,27 @@ const Index = () => {
     <>          
       <form onSubmit={formik.handleSubmit}>
         <div>
-          <Text name="email" type="email" placeholder="email" value={formik.values.email} onChange={formik.handleChange} onBlur={formik.handleBlur} touch={formik.touched.email} error={formik.errors.email}/>
-          <Text name="password" type="password" placeholder="password" value={formik.values.password} onChange={formik.handleChange} onBlur={formik.handleBlur} touch={formik.touched.password} error={formik.errors.password}/>
-          <Text name="password" type="password" placeholder="password" value={formik.values.rePassword} onChange={formik.handleChange} onBlur={formik.handleBlur} touch={formik.touched.rePassword} error={formik.errors.rePassword}/>
+          <Text
+            name="username" 
+            type="username" 
+            placeholder="username" 
+            value={formik.values.username} 
+            onChange={formik.handleChange} 
+            onBlur={formik.handleBlur} 
+            touch={formik.touched?.username} 
+            error={formik.errors?.username}
+          />
+          <Text 
+            name="password" 
+            type="password" 
+            placeholder="password" 
+            value={formik.values.password} 
+            onChange={formik.handleChange} 
+            onBlur={formik.handleBlur} 
+            touch={formik.touched?.password} 
+            error={formik.errors?.password}
+          />
+          <Text name="rePassword" type="password" placeholder="password" value={formik.values.rePassword} onChange={formik.handleChange} onBlur={formik.handleBlur} touch={formik.touched.rePassword} error={formik.errors.rePassword}/>
         </div>
       </form>  
     </>

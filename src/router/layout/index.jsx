@@ -49,7 +49,7 @@ const LAYOUT = () => {
                 {
                   buttonsArray.map((value,index)=>{
                     return <>
-                      <X_button key={index} on={value.active} to={value.URL}>
+                      <X_button key={index} on={value.active} to={value.URL} disabled={value.disabled}>
                         {console.log(value)}
                         {(value.type === "left" && value.title === "") ? <BsArrowLeft/> : (value.type === "left") && value.title}
                         {(value.type === "center" && value.title === "") ? <IoChevronDownOutline/> : (value.type === "center") && value.title}

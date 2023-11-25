@@ -21,15 +21,16 @@ input,select{
 	color:#000 !important;
 }
 
+select{width: 100% !important; padding: 0; height:45px !important;}
+
 input::placeholder{color:#000 !important}
 
 .input-wrapper .input-info-button{
 	position: absolute;
-	top: 0px;
-	right: 0px;
 	width: 35px;
 	height: 35px;
-	margin: 1%;
+	top: 4px;
+	right: 2% !important;
 	cursor: pointer;
 	z-index: 99;
 }
@@ -51,11 +52,6 @@ input::placeholder{color:#000 !important}
 	border-radius:10px;
 }
 .input-wrapper .input-info-span:hover > .input-info-content{display: block !important;}
-
-
-
-select{width: 100% !important; padding: 0; height:40px !important;}
-
 
 
 

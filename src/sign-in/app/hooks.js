@@ -15,10 +15,6 @@ export const useButtonBackActive = () => useSelector(state => state.app.buttons[
 export const useButtonNextActive = () => useSelector(state => state.app.buttons[2].active)
 export const useButtonSubmitActive = () => useSelector(state => state.app.buttons[1].active)
 
-export const useButtonBackDisabled = () => useSelector(state => state.app.buttons[0].disabled)
-export const useButtonNextDisabled = () => useSelector(state => state.app.buttons[2].disabled)
-export const useButtonSubmitDisabled = () => useSelector(state => state.app.buttons[1].disabled)
-
 export const useButtonBackURL = () => useSelector(state => state.app.buttons[0].URL)
 export const useButtonNextURL = () => useSelector(state => state.app.buttons[2].URL)
 export const useButtonSubmitURL = () => useSelector(state => state.app.buttons[1].URL)

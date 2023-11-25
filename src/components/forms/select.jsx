@@ -10,12 +10,12 @@ const Select = (props) => {
         {
           data?.map((value,index)=>{
             return <>
-              <option key={index} value={value}>{value}</option>
+              <option key={index}>{value}</option>
             </>
           })
         }
       </select>
-      
+      {(error && touch) ? (<button className='input-info-button' onClick={()=>setIsInfo(!isInfo)}><TiInfoOutline /><span className='input-info-content' style={isInfo ? {display:'block'} : null}>{error}</span></button>) : null}
     </div>
   )
 }
