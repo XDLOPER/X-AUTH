@@ -44,7 +44,8 @@ div#x_auth div.content{flex:100; display: block !important;}
         padding: 5px;
         transition: all 0.5s;
     }  
-    .circle div img {
+    .circle div{flex:1;}
+    .circle div img.loading {
         flex: 1;
         animation: circleImage 2s  forwards;
         animation-iteration-count: infinite;

@@ -21,7 +21,7 @@ input,select{
 	color:#000 !important;
 }
 
-select{width: 100% !important; padding: 0; height:45px !important;}
+select{width: 100% !important; padding: 0; height:45px !important; text-indent: 10px !important;}
 
 input::placeholder{color:#000 !important}
 

@@ -5,6 +5,7 @@ const initialState = {
     auth:true,
     theme:'default',
     language:'default',
+    loading:false,
     mainTitle:'',
     buttons:[
         {
@@ -44,6 +45,9 @@ const app = createSlice({
         _setLanguage:(state,action)=>{
             state.language = action.payload
         },
+        _setLoading:(state,action)=>{
+            state.loading = action.payload
+        },
         _setMainTitle:(state,action)=>{
             state.mainTitle = action.payload
         },
@@ -59,5 +63,5 @@ const app = createSlice({
     }
 })
 
-export const {_setAuth,_setTheme,_setLanguage,_setMainTitle,_setButtonBack,_setButtonNext,_setButtonSubmit} = app.actions
+export const {_setAuth,_setTheme,_setLanguage,_setLoading,_setMainTitle,_setButtonBack,_setButtonNext,_setButtonSubmit} = app.actions
 export default app.reducer

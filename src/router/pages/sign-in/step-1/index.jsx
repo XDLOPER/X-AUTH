@@ -23,7 +23,7 @@ const Index = () => {
         moon:date.moons[0],
         year:currentYear
       },
-      gender:'',
+      gender:gender[0],
       
   }
   const validationSchema = Yup.object({

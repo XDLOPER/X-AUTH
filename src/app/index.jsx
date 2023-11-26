@@ -15,7 +15,7 @@ import '../style/index.css';
 import '../style/form.css';
 
 
-const X_AUTH_SETUP = ({children}) => {
+const X_AUTH_APP = ({children}) => {
   return (
     <React.StrictMode>
       <Provider store={store}>
@@ -27,7 +27,7 @@ const X_AUTH_SETUP = ({children}) => {
   )
 }
 
-export default X_AUTH_SETUP
+export default X_AUTH_APP
 
 
 

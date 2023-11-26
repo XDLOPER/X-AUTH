@@ -3,8 +3,8 @@ import {Outlet,Link} from 'react-router-dom'
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import { IoChevronDownOutline } from "react-icons/io5";
 
-import {setButtonSubmit,setButtonBack,setButtonNext,setMainTitle} from '../../store/app/actions'
-import {useButtonSubmitActive,useButtonBackActive,useButtonNextActive, useButtonBackURL, useButtonNextURL, useButtonSubmitURL,useMainTitle, useButtonSubmitTitle, useButtonNextTitle, useButtonBackTitle,useButtons} from '../../store/app/hooks'
+import {setLoading,setButtonSubmit,setButtonBack,setButtonNext,setMainTitle} from '../../store/app/actions'
+import {useButtonSubmitActive,useButtonBackActive,useButtonNextActive, useButtonBackURL, useButtonNextURL, useButtonSubmitURL,useMainTitle, useButtonSubmitTitle, useButtonNextTitle, useButtonBackTitle,useButtons, useLoading} from '../../store/app/hooks'
 
 import logo from '../../media/images/logo.png'
 import style from '../../style/layout.css'
@@ -12,9 +12,11 @@ import X_button from '../../components/buttons/x-button'
 
 const LAYOUT = () => {
   const [formData, setFormData] = useState({});
+  const loading = useLoading()
+  const buttonsArray = useButtons()
   
-  const buttonsArray = useButtons();
-  
+  setTimeout(()=>{setLoading(!loading);console.log('tekrar')},10000)
+
   const handleButtonClick = () => {
     // Burada form verilerini işleyebilir veya isteği başlatabilirsiniz
     console.log("Form Verileri:", formData);
@@ -25,10 +27,14 @@ const LAYOUT = () => {
           <div className="auth">
             <header id="auth">
               <div className="circle">
-                <div className="circleone"></div>
-                <div className="img"><img src={logo} alt=""/></div>
-                <div className="circletwo"></div>
-                <div className="circlethree"></div>
+                {
+                    <>
+                      <div className="img" style={useLoading() !== true ? {padding:0} : null}><img style={useLoading() !== true ? {animationName:'pasive'} : null} className='loadingImage' src={logo} alt=""/></div>
+                      <div style={useLoading() !== true ? {animationName:'pasive'} : null} className="circleone"></div>
+                      <div style={useLoading() !== true ? {animationName:'pasive'} : null} className="circletwo"></div>
+                      <div style={useLoading() !== true ? {animationName:'pasive'} : null} className="circlethree"></div>
+                    </>
+                }
               </div>
             </header>
             <hr id='auth'></hr>
