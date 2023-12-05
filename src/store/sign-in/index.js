@@ -5,7 +5,7 @@ const initialState = {
     step:1,
 }
 
-const app = createSlice({
+const signIn = createSlice({
     initialState,
     name:'signIn',
     reducers:{
@@ -15,5 +15,5 @@ const app = createSlice({
     }
 })
 
-export const {_setStep} = app.actions
-export default app.reducer
+export const {_setStep} = signIn.actions
+export default signIn.reducer

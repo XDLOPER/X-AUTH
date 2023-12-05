@@ -2,8 +2,7 @@ import React,{useEffect,useMemo} from 'react'
 import { useFormik } from 'formik';
 import * as Yup from 'yup'
 
-import {setButtonSubmit,setButtonBack,setButtonNext, setMainTitle} from '../../../../store/app/actions'
-import {useButtonBackTitle,useButtonSubmitTitle,useButtonNextTitle} from '../../../../store/app/hooks'
+import {setButtonSubmit,setButtonBack,setButtonNext} from '../../../../store/buttons/actions'
 import {countryList,country} from '../../../../utils/helpers/country/findCountryInfo'
 
 import Select from '../../../../components/forms/select';

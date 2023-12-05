@@ -2,7 +2,7 @@ import React,{useEffect} from 'react'
 import { useFormik } from 'formik';
 import * as Yup from 'yup'
 
-import {setButtonSubmit,setButtonBack,setButtonNext, setMainTitle} from '../../../../store/app/actions'
+import {setButtonSubmit,setButtonBack,setButtonNext} from '../../../../store/buttons/actions'
 
 import Text from '../../../../components/forms/text';
 import { setStep } from '../../../../store/sign-in/actions';
@@ -49,7 +49,7 @@ const Index = () => {
     const pathname = window.location.pathname;
     setStep(pathname.split('/')[pathname.split('/').length -1].split('-')[1])
 
-    setButtonNext({title:'',active:true,disabled:false,URL:'sign-in/step-3'})
+    setButtonNext({title:'',active:true,disabled:false,URL:'sign-in/step-5'})
     setButtonBack({title:'',active:true,URL:'sign-in/step-1'});
   },[]);
 

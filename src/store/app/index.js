@@ -7,29 +7,6 @@ const initialState = {
     language:'default',
     loading:false,
     mainTitle:'',
-    buttons:[
-        {
-            type:'left',
-            title:'back',
-            active:false,
-            disabled:false,
-            URL:''
-        },
-        {
-            type:'center',
-            title:'submit',
-            active:false,
-            disabled:false,
-            URL:''
-        },
-        {
-            type:'right',
-            title:'next',
-            active:false,  
-            disabled:false, 
-            URL:''
-        },
-    ]
 }
 
 const app = createSlice({
@@ -51,17 +28,8 @@ const app = createSlice({
         _setMainTitle:(state,action)=>{
             state.mainTitle = action.payload
         },
-        _setButtonBack:(state,action)=>{
-            state.buttons[0] = { ...state.buttons[0], ...action.payload };
-        },
-        _setButtonNext:(state,action)=>{
-            state.buttons[2] = { ...state.buttons[2], ...action.payload };
-        },
-        _setButtonSubmit:(state,action)=>{
-            state.buttons[1] = { ...state.buttons[1], ...action.payload };
-        }
     }
 })
 
-export const {_setAuth,_setTheme,_setLanguage,_setLoading,_setMainTitle,_setButtonBack,_setButtonNext,_setButtonSubmit} = app.actions
+export const {_setAuth,_setTheme,_setLanguage,_setLoading,_setMainTitle} = app.actions
 export default app.reducer

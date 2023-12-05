@@ -1,7 +1,7 @@
 import React,{useEffect} from 'react'
 import { useFormik } from 'formik';
 import * as Yup from 'yup'
-import {setButtonSubmit,setButtonBack,setButtonNext, setMainTitle} from '../../../../store/app/actions'
+import {setButtonSubmit,setButtonBack,setButtonNext} from '../../../../store/buttons/actions'
 
 import Checkbox from '../../../../components/forms/checkbox';
 import { setStep } from '../../../../store/sign-in/actions';
@@ -40,7 +40,7 @@ const Index = () => {
     setStep(pathname.split('/')[pathname.split('/').length -1].split('-')[1])
 
     setButtonNext({title:'back',active:false,URL:''})
-    setButtonBack({title:'',active:true,URL:'sign-in/step-4'})
+    setButtonBack({title:'',active:true,URL:'sign-in/step-2'})
     setButtonSubmit({title:'kayıt ol',active:true,disabled:true,URL:''});
   },[]);
   console.log(formik.errors)

@@ -1,49 +1,35 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-
 const initialState = {
-    auth:true,
-    theme:'default',
-    language:'default',
-    mainTitle:'',
     buttons:[
         {
             type:'left',
             title:'back',
             active:false,
+            disabled:false,
             URL:''
         },
         {
             type:'center',
             title:'submit',
             active:false,
+            disabled:false,
             URL:''
         },
         {
             type:'right',
             title:'next',
-            active:false,   
+            active:false,  
+            disabled:false, 
             URL:''
         },
     ]
 }
 
-const app = createSlice({
+const buttons = createSlice({
     initialState,
-    name:'app',
+    name:'buttons',
     reducers:{
-        _setAuth:(state,action)=>{
-            state.auth = action.payload
-        },
-        _setTheme:(state,action)=>{
-            state.theme = action.payload
-        },
-        _setLanguage:(state,action)=>{
-            state.language = action.payload
-        },
-        _setMainTitle:(state,action)=>{
-            state.mainTitle = action.payload
-        },
         _setButtonBack:(state,action)=>{
             state.buttons[0] = { ...state.buttons[0], ...action.payload };
         },
@@ -56,5 +42,5 @@ const app = createSlice({
     }
 })
 
-export const {_setAuth,_setTheme,_setLanguage,_setMainTitle,_setButtonBack,_setButtonNext,_setButtonSubmit} = app.actions
-export default app.reducer
+export const {_setButtonBack,_setButtonNext,_setButtonSubmit} = buttons.actions
+export default buttons.reducer

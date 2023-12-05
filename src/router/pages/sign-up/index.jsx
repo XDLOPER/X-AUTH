@@ -3,7 +3,8 @@
   import { useFormik,Formik as LoginForm,Form ,Field} from 'formik'
   import * as Yup from 'yup'
 
-  import {setButtonBack, setMainTitle,setButtonNext,setButtonSubmit} from '../../../store/app/actions.js'
+  import {setMainTitle} from '../../../store/app/actions.js'
+  import {setButtonBack,setButtonNext,setButtonSubmit} from '../../../store/buttons/actions.js'
   import Text from '../../../components/forms/text'
   import Checkbox from '../../../components/forms/checkbox'
 
@@ -53,7 +54,7 @@ const SignUp = (props) => {
     return (
       <>
             <form onSubmit={formik.handleSubmit}>
-                  <Text name="usernameAndPhone" type="text" placeholder="username & phone" value={formik.values.usernameAndPhone} onChange={formik.handleChange} onBlur={formik.handleBlur} touch={formik.touched.usernameAndPhone} error={formik.errors.usernameAndPhone}/>
+                  <Text name="usernameAndPhone" type="text" placeholder="username & phone" value={formik.values.usernameAndPhone} onChange={formik.handleChange} onBlur={formik.handleBlur} touch={formik.touched.usernameAndPhone} error={formik.errors.usernameAndPhone} />
                   <Text name="password" type="password" placeholder="password" value={formik.values.password} onChange={formik.handleChange} onBlur={formik.handleBlur} touch={formik.touched.password} error={formik.errors.password}/>
                   <Checkbox label="not forget me"></Checkbox>
             </form> 

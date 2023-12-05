@@ -1,23 +1,56 @@
-import React, { useState } from 'react'
-import { TiInfoOutline } from "react-icons/ti";
+import React, { useState, useEffect ,useRef } from 'react';
+import { TiInfoOutline } from 'react-icons/ti';
+import { Form, OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 const Select = (props) => {
-  const [isInfo,setIsInfo] = useState(false)
-  const {error,touch,data} = props
-  return (
-    <div className='input-wrapper'>
-      <select {...props} className='x-button' style={(error && touch) ? {border:"2px solid red"} : null} >
-        {
-          data?.map((value,index)=>{
-            return <>
-              <option key={index}>{value}</option>
-            </>
-          })
-        }
-      </select>
-      {(error && touch) ? (<button className='input-info-button' onClick={()=>setIsInfo(!isInfo)}><TiInfoOutline /><span className='input-info-content' style={isInfo ? {display:'block'} : null}>{error}</span></button>) : null}
-    </div>
-  )
-}
+  const [showTooltip, setShowTooltip] = useState(false);
+  //const [isInfo, setIsInfo] = useState(false);
+  const refTooltip = useRef(null);
+  const { error, touch, data, ...rest } = props;
 
-export default Select
+  const touchAndError = (err,elseErr) => {
+    return (error && touch) ? err : elseErr
+  }
+
+  useEffect(() => {
+    setShowTooltip(error ? true : false)
+  }, [error]);
+  return (
+    <div className="input-wrapper">
+      <OverlayTrigger
+        placement="right"
+        overlay={
+          <Tooltip show={showTooltip}>
+            <strong>{touchAndError(error,null)}</strong>
+          </Tooltip>
+        }
+      >
+        {/* The content you want to trigger the overlay should be inside OverlayTrigger */}
+      <Form.Select
+          ref={refTooltip}
+          className="x-button"
+          style={touchAndError({ border: '2px solid red' },{})}
+          {...rest}
+      >
+          {data?.map((value, index) => (
+            <option key={index}>{value}</option>
+          ))}
+      </Form.Select>
+
+      </OverlayTrigger>
+
+      {/* before error message panel
+      {error && touch ? (
+        <button className="input-info-button" onClick={() => setIsInfo(!isInfo)}>
+          <TiInfoOutline />
+          <span className="input-info-content" style={isInfo ? { display: 'block' } : null}>
+            {error}
+          </span>
+        </button>
+      ) : null}
+      */}
+    </div>
+  );
+};
+
+export default Select;

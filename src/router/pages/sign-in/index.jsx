@@ -1,7 +1,8 @@
 import React,{useEffect, useState} from 'react'
 import { Outlet, useNavigate } from 'react-router';
-import {setButtonBack, setButtonNext, setButtonSubmit, setMainTitle} from '../../../store/app/actions'
-import {useButtonBackActive, useButtonNextActive} from '../../../store/app/hooks'
+import {setButtonBack, setButtonNext, setButtonSubmit} from '../../../store/buttons/actions'
+import {setMainTitle} from '../../../store/app/actions'
+import {useButtonBackActive, useButtonNextActive} from '../../../store/buttons/hooks'
 
 
 function SignIn() {

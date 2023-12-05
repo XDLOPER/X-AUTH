@@ -1,0 +1,7 @@
+@media screen and (max-width: 500px) {
+    .div#x_auth{
+        width: 100% !important;
+        height: 100% !important;
+        transform:none !important;
+    }
+}

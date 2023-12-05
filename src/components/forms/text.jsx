@@ -1,13 +1,48 @@
-import React, { useState } from 'react'
+import React, { useState ,useRef, useEffect} from 'react'
+import { Button, Overlay ,OverlayTrigger,Tooltip } from 'react-bootstrap';
 import { TiInfoOutline } from "react-icons/ti";
 
 const Text = (props) => {
-  const [isInfo,setIsInfo] = useState(false)
-  const {error,touch} = props
+  const {error,touch,...rest} = props
+  const target = useRef(null);
+
+  const touchAndError = (err,elseErr) => {
+    return (error && touch) ? err : elseErr
+  }
+
   return (
     <div className='input-wrapper'>
-      <input {...props} className='x-button' style={(error && touch) ? {border:"2px solid red"} : null} />
-      {(error && touch) ? (<button className='input-info-button' onClick={()=>setIsInfo(!isInfo)}><TiInfoOutline /><span className='input-info-content' style={isInfo ? {display:'block'} : null}>{error}</span></button>) : null}
+        <OverlayTrigger
+          //trigger="click"
+          placement={'right'}
+          overlay={
+            <Tooltip id={`tooltip-right`}>
+              <strong>{touchAndError(error,null)}</strong>
+            </Tooltip>
+          }
+        >
+          <input
+            ref={target}
+            className='x-button'
+            style={touchAndError({ border: '2px solid red' },{})}
+            {...rest}
+          />
+        </OverlayTrigger>
+
+      {/* eski sistem için  
+      {error && touch ? (
+        <button
+          className='input-info-button'
+          onClick={() => setIsInfo(!isInfo)}
+        >
+          <TiInfoOutline />
+          <span className='input-info-content' style={isInfo ? { display: 'block' } : null}>
+            {error}
+          </span>
+        </button>
+      ) : null}
+      */}
+      
     </div>
   )
 }

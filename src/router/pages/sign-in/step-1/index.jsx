@@ -2,7 +2,7 @@ import React,{useEffect} from 'react'
 import { useFormik } from 'formik';
 import * as Yup from 'yup'
 
-import {setButtonSubmit,setButtonBack,setButtonNext, setMainTitle} from '../../../../store/app/actions'
+import {setButtonSubmit,setButtonBack,setButtonNext} from '../../../../store/buttons/actions'
 import {setStep} from '../../../../store/sign-in/actions'
 
 import Text from '../../../../components/forms/text';
