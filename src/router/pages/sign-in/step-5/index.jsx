@@ -1,10 +1,13 @@
 import React,{useEffect} from 'react'
 import { useFormik } from 'formik';
 import * as Yup from 'yup'
+
 import {setButtonSubmit,setButtonBack,setButtonNext} from '../../../../store/buttons/actions'
+import { setStep } from '../../../../store/sign-in/actions';
 
 import Checkbox from '../../../../components/forms/checkbox';
-import { setStep } from '../../../../store/sign-in/actions';
+
+import { contract } from '../../../../utils/consts/contract';
 
 const Index = () => {
 
@@ -52,6 +55,13 @@ const Index = () => {
           <Checkbox 
             name="infoCheck1" 
             label="Açık Rıza Metnini Okudum Onayladım"
+            modal={{
+              name:'okModal',
+              data:{
+                title:'Açık Rıza Metnini Okudum Onayladım',
+                body:contract[0].body
+              }
+            }}
             {...formik.getFieldProps('infoCheck1')}
             checked={formik.values.infoCheck1}
             touch={formik.touched.infoCheck1} 
@@ -61,6 +71,13 @@ const Index = () => {
           <Checkbox 
             name="infoCheck2" 
             label="Uzak Mesafe Sözleşmesini Okudum Onayladım"
+            modal={{
+              name:'okModal',
+              data:{
+                title:'Uzak Mesafe Sözleşmesini Okudum Onayladım',
+                body:contract[1].body
+              }
+            }}
             {...formik.getFieldProps('infoCheck2')}
             checked={formik.values.infoCheck2}
             touch={formik.touched.infoCheck2} 
@@ -70,6 +87,13 @@ const Index = () => {
           <Checkbox 
             name="infoCheck3" 
             label="Her Türlü Bilgimi Alabilir Başka yerde Kullanabilir"
+            modal={{
+              name:'okModal',
+              data:{
+                title:'Her Türlü Bilgimi Alabilir Başka yerde Kullanabilir',
+                body:contract[2].body
+              }
+            }}
             {...formik.getFieldProps('infoCheck3')}
             checked={formik.values.infoCheck3}
             touch={formik.touched.infoCheck3} 

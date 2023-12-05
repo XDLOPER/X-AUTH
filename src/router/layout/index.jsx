@@ -10,10 +10,7 @@ import {useMainTitle,useLoading} from '../../store/app/hooks'
 import {setLoading} from '../../store/app/actions'
 import {useButtons} from '../../store/buttons/hooks'
 
-import { basicIDGenerate } from '../../utils/helpers/ID/basicIDGenerate'
-
 import logo from '../../media/images/logo.png'
-import style from '../../style/layout.css'
 import X_button from '../../components/buttons/x-button'
 import Modals from '../../components/modals';
 
@@ -44,10 +41,9 @@ const LAYOUT = () => {
     <>
       {
         modals && 
-        modals.map((modal,index) => <Modals key={index} name={modal.name} ID={modal.ID}></Modals>)
+        modals.map((modal,index) => <Modals key={index} name={modal.name} modalData={modal}></Modals>)
       }
-      <button onClick={()=>setModalAppend('okModal')}>modal aac</button>
-      <div id="x_auth" style={style.x_auth}>
+      <div id="x_auth">
           <div className="wrapper d-flex flex">
             <div className="auth">
               <header id="auth">

@@ -12,7 +12,8 @@ const SignUp = (props) => {
 
   const initialValues = {
       usernameAndPhone:"",
-      password:""
+      password:"",
+      dontForgetMe:""
   }
 
   const validate = (values)=>{
@@ -56,7 +57,21 @@ const SignUp = (props) => {
             <form onSubmit={formik.handleSubmit}>
                   <Text name="usernameAndPhone" type="text" placeholder="username & phone" value={formik.values.usernameAndPhone} onChange={formik.handleChange} onBlur={formik.handleBlur} touch={formik.touched.usernameAndPhone} error={formik.errors.usernameAndPhone} />
                   <Text name="password" type="password" placeholder="password" value={formik.values.password} onChange={formik.handleChange} onBlur={formik.handleBlur} touch={formik.touched.password} error={formik.errors.password}/>
-                  <Checkbox label="not forget me"></Checkbox>
+                  <Checkbox
+                    name="infoCheck1" 
+                    label="don't forget me"
+                    modal={{
+                      name:'okModal',
+                      data:{
+                        title:'hesabını açık tutuyoruz',
+                        body:'dont forget me'
+                      }
+                    }}
+                    {...formik.getFieldProps('infoCheck1')}
+                    checked={formik.values.dontForgetMe}
+                    touch={formik.touched.dontForgetMe} 
+                    error={formik.errors.dontForgetMe}
+                  />
             </form> 
               <br />
               <br />

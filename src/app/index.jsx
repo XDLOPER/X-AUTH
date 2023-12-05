@@ -15,6 +15,8 @@ import { Provider, useDispatch } from "react-redux";
 
   import '../style/index.css';
   import '../style/form.css';
+  import '../style/layout.css';
+  import '../style/media.css';
 
 
 const X_AUTH_APP = ({children}) => {
