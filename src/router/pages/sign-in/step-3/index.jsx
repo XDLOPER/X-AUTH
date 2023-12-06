@@ -1,4 +1,5 @@
 import React,{useEffect,useMemo} from 'react'
+import { useOutletContext } from 'react-router';
 import { useFormik } from 'formik';
 import * as Yup from 'yup'
 
@@ -7,10 +8,12 @@ import {countryList,country} from '../../../../utils/helpers/country/findCountry
 
 import Select from '../../../../components/forms/select';
 import Text from '../../../../components/forms/text';
-import { setStep } from '../../../../store/sign-in/actions';
+import { setDataSignIn, setStep } from '../../../../store/controls/actions';
 import { findCountryPhoneLength } from '../../../../utils/helpers/country/findCountryPhoneLength';
 
-const Index = () => {
+
+const Index = ({context}) => {
+  const [buttonFormDataSubmitRef] = useOutletContext(context) 
     //console.log(countryList)
 
     const initialValues = {
@@ -34,7 +37,11 @@ const Index = () => {
         }).required('Bu alan zorunludur'),
       });
 
-  const onSubmit = (values)=>{console.log(JSON.stringify(values))}
+  const onSubmit = (values)=>{
+    console.log('signIn step-3 submit edildi burada controller yapılacak')
+    console.log(JSON.stringify(values))
+    setDataSignIn({...values})
+  }
 
   const formik = useFormik({
       initialValues,
@@ -78,6 +85,7 @@ const Index = () => {
                     error={formik.errors?.phone}
                 />
             </div>
+          <button style={{display:'none'}} ref={buttonFormDataSubmitRef}></button>
         </form>
     </>
   )

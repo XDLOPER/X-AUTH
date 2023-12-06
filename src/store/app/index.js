@@ -6,6 +6,18 @@ const initialState = {
     theme:'default',
     language:'default',
     loading:false,
+    errors:[
+        {
+            title:'error:2313123',
+            body:{
+                errorCode:0,
+                message:'',
+                description:'',
+            },
+            time:''
+        },
+
+    ],
     mainTitle:'',
 }
 
@@ -25,11 +37,14 @@ const app = createSlice({
         _setLoading:(state,action)=>{
             state.loading = action.payload
         },
+        _setErrors:(state,action)=>{
+            state.errors = action.payload
+        },
         _setMainTitle:(state,action)=>{
             state.mainTitle = action.payload
         },
     }
 })
 
-export const {_setAuth,_setTheme,_setLanguage,_setLoading,_setMainTitle} = app.actions
+export const {_setAuth,_setTheme,_setLanguage,_setLoading,_setErrors,_setMainTitle} = app.actions
 export default app.reducer

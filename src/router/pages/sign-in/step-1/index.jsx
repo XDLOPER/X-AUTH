@@ -1,19 +1,24 @@
 import React,{useEffect} from 'react'
+import { useOutletContext } from 'react-router';
 import { useFormik } from 'formik';
 import * as Yup from 'yup'
 
 import {setButtonSubmit,setButtonBack,setButtonNext} from '../../../../store/buttons/actions'
-import {setStep} from '../../../../store/sign-in/actions'
+import {setDataSignIn, setStep} from '../../../../store/controls/actions'
 
 import Text from '../../../../components/forms/text';
 import Select from '../../../../components/forms/select';
 
 import * as date from '../../../../utils/consts/date'
 import {gender} from '../../../../utils/consts/gender'
+import {location} from '../../../../utils/helpers/location'
 
-const Index = () => {
+const Index = ({context}) => {
+  const [buttonFormDataSubmitRef] = useOutletContext(context) 
+
   const currentYear = (new Date()).getFullYear()
   let days;
+
   const initialValues = {
       //step 1
       name:'',
@@ -43,17 +48,21 @@ const Index = () => {
       .required('Bu alan zorunludur'),
 
       moon:Yup
-      .number().typeError('hello'),
+      .string().typeError('hello'),
       
       year:Yup
-      .boolean().typeError('hello'),
+      .string().typeError('hello'),
     }),
 
     gender:Yup
-    .boolean().typeError('hello')
+    .string().typeError('hello')
     
   })
-  const onSubmit = (values)=>{console.log(JSON.stringify(values))}
+  const onSubmit = (values)=>{
+    console.log('signIn step-1 submit edildi burada controller yapılacak')
+    console.log(JSON.stringify(values))
+    setDataSignIn({...values})
+  }
 
   const formik = useFormik({    
       initialValues,
@@ -65,8 +74,7 @@ const Index = () => {
 
   
   useEffect(() => {
-    const pathname = window.location.pathname;
-    setStep(pathname.split('/')[pathname.split('/').length -1].split('-')[1])
+    setStep(location.split('-')[1])
 
     setButtonNext({title:'',active:true,disabled:false,URL:'sign-in/step-2'})
     setButtonBack({title:'login',active:true,URL:'/'});
@@ -145,6 +153,7 @@ const Index = () => {
                 error={formik.errors?.gender}
               >
             </Select>
+            <button style={{display:'none'}} ref={buttonFormDataSubmitRef}></button>
       </form>  
     </>
   )

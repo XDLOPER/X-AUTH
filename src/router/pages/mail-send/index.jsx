@@ -5,7 +5,7 @@ import * as Yup from 'yup'
 import {setButtonSubmit,setButtonBack,setButtonNext} from '../../../store/buttons/actions'
 
 import Text from '../../../components/forms/text';
-import { setStep } from '../../../store/sign-in/actions';
+import { setStep } from '../../../store/controls/actions';
 
 const Index = () => {
     const initialValues = {

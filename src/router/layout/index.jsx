@@ -1,42 +1,38 @@
-import React,{useState,useEffect} from 'react'
-import {Outlet,Link} from 'react-router-dom'
-import { Toast } from 'react-bootstrap';
+import React,{useRef,useState,useEffect} from 'react'
+import {Outlet} from 'react-router-dom'
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import { IoChevronDownOutline } from "react-icons/io5";
 
 import { useModals } from '../../store/modals/hooks';
-import { setModalAppend } from '../../store/modals/actions';
-import {useMainTitle,useLoading} from '../../store/app/hooks'
+import {useMainTitle,useLoading, useErrors} from '../../store/app/hooks'
 import {setLoading} from '../../store/app/actions'
 import {useButtons} from '../../store/buttons/hooks'
+import { useData } from '../../store/controls/hooks';
 
 import logo from '../../media/images/logo.png'
 import X_button from '../../components/buttons/x-button'
 import Modals from '../../components/modals';
+import Toasts from '../../components/toasts';
+
 
 const LAYOUT = () => {
-  const [formData, setFormData] = useState({});
-  const [toastShow, setToastShow] = useState(true);
+  const buttonFormDataSubmitRef = useRef(null)
 
+  const data = useData()
+  const errorList = useErrors()
   const loading = useLoading()
   const modals = useModals()
   const buttonsArray = useButtons()
-
-
-  const toastShowClose = (e) => {
-    setToastShow(!toastShow)
-  }
-
+  
   setTimeout(()=>{setLoading(!loading);console.log('tekrar')},10000)
 
-  console.log(modals)
-
-
-  const handleButtonClick = () => {
-    // Burada form verilerini işleyebilir veya isteği başlatabilirsiniz tüm sayfaların bilgileri burdan yönetilicek
-    console.log("Form Verileri:", formData);
+  const layoutButtonsTrigger = (events,value) => {
+    if(buttonFormDataSubmitRef){
+      buttonFormDataSubmitRef?.current?.click()
+    }
   };
   
+  useEffect(()=>console.log(data))
   return (
     <>
       {
@@ -64,20 +60,18 @@ const LAYOUT = () => {
                   <h1 className='auth-title'>{useMainTitle()}</h1>
                   <div className="content">
                     <div className='content-error'>
-                      <Toast show={toastShow} onClose={toastShowClose} animation="true">
-                        <Toast.Header>
-                          <img
-                            src="holder.js/20x20?text=%20"
-                            className="rounded me-2"
-                            alt=""
-                          />
-                          <strong className="me-auto">Bootstrap</strong>
-                          <small>11 mins ago</small>
-                        </Toast.Header>
-                        <Toast.Body>Woohoo, you're reading this text in a Toast!</Toast.Body>
-                      </Toast>
+                      {
+                        errorList.map((error,index)=>{
+                          return (
+                            <>
+                              <Toasts key={index} data={error}></Toasts>
+                            </>
+                          )
+                          
+                        })
+                      }
                     </div>
-                        <Outlet context={setFormData}></Outlet>           
+                        <Outlet context={[buttonFormDataSubmitRef]}></Outlet>           
                     <br />
                     <br />
                     <br />
@@ -89,11 +83,10 @@ const LAYOUT = () => {
                   {
                     buttonsArray.map((value,index)=>{
                       return <>
-                        <X_button key={index} on={value.active} to={value.URL} disabled={value.disabled}>
-                          {console.log(value)}
-                          {(value.type === "left" && value.title === "") ? <BsArrowLeft/> : (value.type === "left") && value.title}
-                          {(value.type === "center" && value.title === "") ? <IoChevronDownOutline/> : (value.type === "center") && value.title}
-                          {(value.type === "right" && value.title === "") ? <BsArrowRight/> : (value.type === "right") && value.title}
+                        <X_button onClick={(e) => layoutButtonsTrigger(e,value.type)} key={index} on={value.active} to={value.URL} disabled={value.disabled}>
+                          {(value.type === 'left' && value.title === "") ? <BsArrowLeft/> : (value.type === "left") && value.title}
+                          {(value.type === 'center' && value.title === "") ? <IoChevronDownOutline/> : (value.type === "center") && value.title}
+                          {(value.type === 'right' && value.title === "") ? <BsArrowRight/> : (value.type === "right") && value.title}
                         </X_button>
                       </>
                     })

@@ -1,6 +1,6 @@
   import React,{useEffect} from 'react'
-  import { Link } from 'react-router-dom'
-  import { useFormik,Formik as LoginForm,Form ,Field} from 'formik'
+  import { useOutletContext ,Link } from 'react-router-dom'
+  import { useFormik } from 'formik'
   import * as Yup from 'yup'
 
   import {setMainTitle} from '../../../store/app/actions.js'
@@ -8,14 +8,17 @@
   import Text from '../../../components/forms/text'
   import Checkbox from '../../../components/forms/checkbox'
 
-const SignUp = (props) => {
+const SignUp = ({context}) => {
+
+  // outlet context ine erişip yukardaki state i değiştirebiliyoruz kullanım outletContext() = setFormData() yukarıdaki state'i güncelliyo 
+  const [buttonFormDataSubmitRef] = useOutletContext(context) 
 
   const initialValues = {
       usernameAndPhone:"",
       password:"",
       dontForgetMe:""
   }
-
+  
   const validate = (values)=>{
       let errors = {}
 
@@ -31,6 +34,7 @@ const SignUp = (props) => {
   })
 
   const onSubmit = (values) => {
+      console.log('signUp submit edildi')
       console.log(values)
   }
 
@@ -41,24 +45,21 @@ const SignUp = (props) => {
     onSubmit
   })
 
-  const handleButtonSubmit = () => {
-    // Formik'in içindeki submitForm fonksiyonunu çağırarak formu submit et
-    formik.submitForm();
-  };
   useEffect(()=>{
     setMainTitle('oturum aç')
 
     setButtonBack({active:false,URL:''})
-    setButtonSubmit({title:'oturum aç',active:true,disabled:true,URL:'/'})
+    setButtonSubmit({title:'oturum aç',active:true,disabled:false,URL:'/'})
     setButtonNext({active:false,URL:''})
   },[])
+  
     return (
       <>
             <form onSubmit={formik.handleSubmit}>
                   <Text name="usernameAndPhone" type="text" placeholder="username & phone" value={formik.values.usernameAndPhone} onChange={formik.handleChange} onBlur={formik.handleBlur} touch={formik.touched.usernameAndPhone} error={formik.errors.usernameAndPhone} />
                   <Text name="password" type="password" placeholder="password" value={formik.values.password} onChange={formik.handleChange} onBlur={formik.handleBlur} touch={formik.touched.password} error={formik.errors.password}/>
                   <Checkbox
-                    name="infoCheck1" 
+                    name="dontForgetMe" 
                     label="don't forget me"
                     modal={{
                       name:'okModal',
@@ -67,11 +68,12 @@ const SignUp = (props) => {
                         body:'dont forget me'
                       }
                     }}
-                    {...formik.getFieldProps('infoCheck1')}
+                    {...formik.getFieldProps('dontForgetMe')}
                     checked={formik.values.dontForgetMe}
                     touch={formik.touched.dontForgetMe} 
                     error={formik.errors.dontForgetMe}
                   />
+                  <button style={{display:'none'}} ref={buttonFormDataSubmitRef}></button>
             </form> 
               <br />
               <br />

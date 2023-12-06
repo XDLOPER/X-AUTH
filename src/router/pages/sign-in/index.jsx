@@ -1,11 +1,14 @@
 import React,{useEffect, useState} from 'react'
-import { Outlet, useNavigate } from 'react-router';
+import { Outlet, useNavigate, useOutletContext } from 'react-router';
 import {setButtonBack, setButtonNext, setButtonSubmit} from '../../../store/buttons/actions'
 import {setMainTitle} from '../../../store/app/actions'
 import {useButtonBackActive, useButtonNextActive} from '../../../store/buttons/hooks'
 
 
-function SignIn() {
+function SignIn({context}) {
+  const [setFormData,buttonFormDataSubmitRef] = useOutletContext(context) 
+
+
   const navigate = useNavigate()
   const URL = window.location.pathname
 
@@ -21,10 +24,9 @@ function SignIn() {
     }
   }, [navigate]);
   
-
   return (
     <>
-      <Outlet/>
+      <Outlet context={[setFormData,buttonFormDataSubmitRef]}/>
     </>
   );
 }

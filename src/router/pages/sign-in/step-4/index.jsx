@@ -1,13 +1,16 @@
 import React,{useEffect,useState} from 'react'
+import { useOutletContext } from 'react-router';
 import { useFormik } from 'formik';
 import * as Yup from  'yup' 
 import OtpInput from 'react-otp-input';
 
 import {setButtonSubmit,setButtonBack,setButtonNext} from '../../../../store/buttons/actions'
 
-import { setStep } from '../../../../store/sign-in/actions';
+import { setDataSignIn, setStep } from '../../../../store/controls/actions';
 
-const Index = () => {
+
+const Index = ({context}) => {
+  const [buttonFormDataSubmitRef] = useOutletContext(context) 
   const [isInfo,setIsInfo] = useState(false)
   const [otp, setOtp] = useState('');
 
@@ -26,7 +29,11 @@ const Index = () => {
     })
   });
 
-  const onSubmit = (values)=>{console.log(JSON.stringify(values))}
+  const onSubmit = (values)=>{
+    console.log('signIn step-4 submit edildi burada controller yapılacak')
+    console.log(JSON.stringify(values))
+    setDataSignIn({...values})
+  }
 
   const formik = useFormik({
       initialValues,
@@ -69,6 +76,7 @@ const Index = () => {
               </>}
             />
           </div>
+          <button style={{display:'none'}} ref={buttonFormDataSubmitRef}></button>
         </form>
     </>
   )

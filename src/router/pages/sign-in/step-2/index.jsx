@@ -1,16 +1,15 @@
 import React,{useEffect} from 'react'
+import { useOutletContext } from 'react-router';
 import { useFormik } from 'formik';
 import * as Yup from 'yup'
 
 import {setButtonSubmit,setButtonBack,setButtonNext} from '../../../../store/buttons/actions'
-
 import Text from '../../../../components/forms/text';
-import { setStep } from '../../../../store/sign-in/actions';
 
+import { setDataSignIn, setStep } from '../../../../store/controls/actions';
 
-
-const Index = () => {
-
+const Index = ({context}) => {
+  const [buttonFormDataSubmitRef] = useOutletContext(context) 
 
   const initialValues = {
     //step 2
@@ -37,7 +36,11 @@ const Index = () => {
   
   })
 
-  const onSubmit = (values)=>{console.log(JSON.stringify(values))}
+  const onSubmit = (values)=>{
+    console.log('signIn step-2 submit edildi burada controller yapılacak')
+    console.log(JSON.stringify(values))
+    setDataSignIn({...values})
+  }
 
   const formik = useFormik({
       initialValues,
@@ -50,6 +53,7 @@ const Index = () => {
     setStep(pathname.split('/')[pathname.split('/').length -1].split('-')[1])
 
     setButtonNext({title:'',active:true,disabled:false,URL:'sign-in/step-5'})
+    setButtonSubmit({active:false})
     setButtonBack({title:'',active:true,URL:'sign-in/step-1'});
   },[]);
 
@@ -79,6 +83,8 @@ const Index = () => {
           />
           <Text name="rePassword" type="password" placeholder="password" value={formik.values.rePassword} onChange={formik.handleChange} onBlur={formik.handleBlur} touch={formik.touched.rePassword} error={formik.errors.rePassword}/>
         </div>
+        <button style={{display:'none'}} ref={buttonFormDataSubmitRef}></button>
+
       </form>  
     </>
   )

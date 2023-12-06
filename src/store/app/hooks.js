@@ -4,6 +4,7 @@ export const useAuth = () => useSelector(state => state.app.auth)
 export const useTheme = () => useSelector(state => state.app.theme)
 export const useLanguage = () => useSelector(state => state.app.language)
 export const useLoading = () => useSelector(state => state.app.loading)
+export const useErrors = () => useSelector(state => state.app.errors)
 export const useMainTitle = () => useSelector(state => state.app.mainTitle)
 
 export const useButtons = () => useSelector(state => state.app.buttons)

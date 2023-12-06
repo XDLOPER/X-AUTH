@@ -1,15 +1,17 @@
 import React,{useEffect} from 'react'
+import { useOutletContext } from 'react-router';
 import { useFormik } from 'formik';
 import * as Yup from 'yup'
 
 import {setButtonSubmit,setButtonBack,setButtonNext} from '../../../../store/buttons/actions'
-import { setStep } from '../../../../store/sign-in/actions';
+import { setDataSignIn, setStep } from '../../../../store/controls/actions';
 
 import Checkbox from '../../../../components/forms/checkbox';
 
 import { contract } from '../../../../utils/consts/contract';
 
-const Index = () => {
+const Index = ({context}) => {
+  const [buttonFormDataSubmitRef] = useOutletContext(context) 
 
   const initialValues = {
       //step 5
@@ -30,7 +32,11 @@ const Index = () => {
     .oneOf([true], 'Açık Rıza Metni Onaylanmalıdır'),
   });
 
-  const onSubmit = (values)=>{console.log(JSON.stringify(values))}
+  const onSubmit = (values)=>{
+    console.log('signIn step-5 submit edildi burada controller yapılacak')
+    console.log(JSON.stringify(values))
+    setDataSignIn({...values})
+  }
 
   const formik = useFormik({
       initialValues,
@@ -46,7 +52,6 @@ const Index = () => {
     setButtonBack({title:'',active:true,URL:'sign-in/step-2'})
     setButtonSubmit({title:'kayıt ol',active:true,disabled:true,URL:''});
   },[]);
-  console.log(formik.errors)
 
   return (
     <>
@@ -100,6 +105,7 @@ const Index = () => {
             error={formik.errors.infoCheck3}
             >
           </Checkbox>
+          <button style={{display:'none'}} ref={buttonFormDataSubmitRef}></button>
         </form>
     </>
   )
