@@ -1,8 +1,9 @@
 import React,{useEffect} from 'react'
-import { useOutletContext } from 'react-router';
+import { useOutletContext,useNavigate } from 'react-router';
 import { useFormik } from 'formik';
 import * as Yup from 'yup'
 
+import { useData } from '../../../../store/controls/hooks';
 import {setButtonSubmit,setButtonBack,setButtonNext} from '../../../../store/buttons/actions'
 import { setDataSignIn, setStep } from '../../../../store/controls/actions';
 
@@ -12,13 +13,9 @@ import { contract } from '../../../../utils/consts/contract';
 
 const Index = ({context}) => {
   const [buttonFormDataSubmitRef] = useOutletContext(context) 
+  const navigate = useNavigate()
 
-  const initialValues = {
-      //step 5
-      infoCheck1:false,
-      infoCheck2:false,
-      infoCheck3:false,
-  }
+  const formData = useData()
 
   const validationSchema = Yup.object({
     infoCheck1: Yup
@@ -33,13 +30,13 @@ const Index = ({context}) => {
   });
 
   const onSubmit = (values)=>{
-    console.log('signIn step-5 submit edildi burada controller yapılacak')
-    console.log(JSON.stringify(values))
+    //console.log('signIn step-5 submit edildi burada controller yapılacak',JSON.stringify(values))
     setDataSignIn({...values})
+    navigate('/sign-in/step-5')
   }
 
   const formik = useFormik({
-      initialValues,
+      initialValues:{...formData.sign_in},
       validationSchema,
       onSubmit
   })
@@ -48,9 +45,10 @@ const Index = ({context}) => {
     const pathname = window.location.pathname;  
     setStep(pathname.split('/')[pathname.split('/').length -1].split('-')[1])
 
-    setButtonNext({title:'back',active:false,URL:''})
+    setButtonNext({active:false,URL:''})
+    setButtonSubmit({title:'kayıt ol',active:true,URL:''});
     setButtonBack({title:'',active:true,URL:'sign-in/step-2'})
-    setButtonSubmit({title:'kayıt ol',active:true,disabled:true,URL:''});
+
   },[]);
 
   return (

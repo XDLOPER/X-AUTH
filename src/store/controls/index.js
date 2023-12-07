@@ -1,9 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+import { initialValue as signInValue } from "../../utils/consts/controls/sign-in-form";
+import { initialValue as signUpValue } from "../../utils/consts/controls/sign-up-form";
+
 const initialState = {
     data:{
-        sign_up:{},
-        sign_in:{}
+        sign_up:{...signUpValue},
+        sign_in:{...signInValue}
     },
     step:1,
 }

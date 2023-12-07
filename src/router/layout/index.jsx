@@ -26,13 +26,13 @@ const LAYOUT = () => {
   
   setTimeout(()=>{setLoading(!loading);console.log('tekrar')},10000)
 
-  const layoutButtonsTrigger = (events,value) => {
-    if(buttonFormDataSubmitRef){
+  const layoutButtonsTrigger = (events,type) => {
+    if(type !== 'left' && buttonFormDataSubmitRef){
       buttonFormDataSubmitRef?.current?.click()
     }
   };
   
-  useEffect(()=>console.log(data))
+  useEffect(()=>console.log(data),[])
   return (
     <>
       {
@@ -71,7 +71,7 @@ const LAYOUT = () => {
                         })
                       }
                     </div>
-                        <Outlet context={[buttonFormDataSubmitRef]}></Outlet>           
+                      <Outlet context={[buttonFormDataSubmitRef]}></Outlet>           
                     <br />
                     <br />
                     <br />

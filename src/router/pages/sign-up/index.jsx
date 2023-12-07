@@ -1,23 +1,21 @@
   import React,{useEffect} from 'react'
-  import { useOutletContext ,Link } from 'react-router-dom'
+  import { useOutletContext ,Link,useNavigate } from 'react-router-dom'
   import { useFormik } from 'formik'
   import * as Yup from 'yup'
 
+  import { useData } from '../../../store/controls/hooks.js'
+  import { setDataSignUp } from '../../../store/controls/actions.js'
   import {setMainTitle} from '../../../store/app/actions.js'
   import {setButtonBack,setButtonNext,setButtonSubmit} from '../../../store/buttons/actions.js'
+
   import Text from '../../../components/forms/text'
   import Checkbox from '../../../components/forms/checkbox'
 
 const SignUp = ({context}) => {
-
   // outlet context ine erişip yukardaki state i değiştirebiliyoruz kullanım outletContext() = setFormData() yukarıdaki state'i güncelliyo 
   const [buttonFormDataSubmitRef] = useOutletContext(context) 
-
-  const initialValues = {
-      usernameAndPhone:"",
-      password:"",
-      dontForgetMe:""
-  }
+  const navigate = useNavigate()
+  const formData = useData()
   
   const validate = (values)=>{
       let errors = {}
@@ -34,12 +32,13 @@ const SignUp = ({context}) => {
   })
 
   const onSubmit = (values) => {
-      console.log('signUp submit edildi')
-      console.log(values)
+    console.log('signUp submit edildi burada controller yapılacak',JSON.stringify(values))
+    setDataSignUp({...values})
+    
   }
 
   const formik = useFormik({
-    initialValues,
+    initialValues:{...formData.sign_up},
     validate,
     validationSchema,
     onSubmit
@@ -48,9 +47,9 @@ const SignUp = ({context}) => {
   useEffect(()=>{
     setMainTitle('oturum aç')
 
-    setButtonBack({active:false,URL:''})
-    setButtonSubmit({title:'oturum aç',active:true,disabled:false,URL:'/'})
-    setButtonNext({active:false,URL:''})
+    setButtonBack({active:false})
+    setButtonSubmit({title:'oturum aç',active:true})
+    setButtonNext({active:false})
   },[])
   
     return (

@@ -1,36 +1,26 @@
 import React,{useEffect} from 'react'
-import { useOutletContext } from 'react-router';
+import { useOutletContext,useNavigate,useLocation } from 'react-router';
+
 import { useFormik } from 'formik';
 import * as Yup from 'yup'
 
-import {setButtonSubmit,setButtonBack,setButtonNext} from '../../../../store/buttons/actions'
+import { useData } from '../../../../store/controls/hooks';
+import {setButtonBack, setButtonNext} from '../../../../store/buttons/actions'
 import {setDataSignIn, setStep} from '../../../../store/controls/actions'
-
-import Text from '../../../../components/forms/text';
-import Select from '../../../../components/forms/select';
 
 import * as date from '../../../../utils/consts/date'
 import {gender} from '../../../../utils/consts/gender'
 import {location} from '../../../../utils/helpers/location'
 
+import Text from '../../../../components/forms/text';
+import Select from '../../../../components/forms/select';
+
 const Index = ({context}) => {
   const [buttonFormDataSubmitRef] = useOutletContext(context) 
+  const navigate = useNavigate()
 
-  const currentYear = (new Date()).getFullYear()
-  let days;
+  const formData = useData()
 
-  const initialValues = {
-      //step 1
-      name:'',
-      surname:'',
-      date:{
-        day:date.days[0],
-        moon:date.moons[0],
-        year:currentYear
-      },
-      gender:gender[0],
-      
-  }
   const validationSchema = Yup.object({
     name:Yup
     .string()
@@ -59,13 +49,15 @@ const Index = ({context}) => {
     
   })
   const onSubmit = (values)=>{
-    console.log('signIn step-1 submit edildi burada controller yapılacak')
-    console.log(JSON.stringify(values))
+
+    //console.log('signIn step-1 submit edildi burada controller yapılacak',JSON.stringify(values))
     setDataSignIn({...values})
+    navigate('/sign-in/step-2');
+
   }
 
   const formik = useFormik({    
-      initialValues,
+      initialValues:{...formData.sign_in},
       validationSchema,
       onSubmit
   })
@@ -76,8 +68,8 @@ const Index = ({context}) => {
   useEffect(() => {
     setStep(location.split('-')[1])
 
-    setButtonNext({title:'',active:true,disabled:false,URL:'sign-in/step-2'})
-    setButtonBack({title:'login',active:true,URL:'/'});
+    setButtonBack({URL:'/'})
+    setButtonNext({active:true,disabled:false})
   },[]);
 
   return (
@@ -110,6 +102,7 @@ const Index = ({context}) => {
               <Select
                 name="date.day"
                 data={date.days}
+                value={formik.values.date.day}
                 onChange={(e) => {
                   formik.handleChange(e);
                 }}
@@ -121,6 +114,7 @@ const Index = ({context}) => {
               <Select
                 name="date.moon"
                 data={date.moons}
+                value={formik.values.date.moon}
                 onChange={(e) => {
                   formik.handleChange(e);
                 }}
@@ -132,9 +126,9 @@ const Index = ({context}) => {
               <Select
                 name="date.year"
                 data={date.years}
+                value={formik.values.date.year}
                 onChange={(e) => {
                   formik.setFieldValue('date.year', e.target.value);
-                  //formik.handleChange(e);
                 }}
                 onBlur={formik.handleBlur}
                 touch={formik.touched?.date?.year} 
@@ -145,7 +139,6 @@ const Index = ({context}) => {
             <Select
                 name="gender"
                 data={gender}
-
                 value={formik.values.gender}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}

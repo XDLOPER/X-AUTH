@@ -7,15 +7,17 @@ import {useButtonBackActive, useButtonNextActive} from '../../../store/buttons/h
 
 function SignIn({context}) {
   const [setFormData,buttonFormDataSubmitRef] = useOutletContext(context) 
-
-
   const navigate = useNavigate()
+
   const URL = window.location.pathname
 
   useEffect(() => {
     setMainTitle('kayıt ol');
-    setButtonSubmit({active:false,URL:'/'});
-  }, [useButtonNextActive,useButtonBackActive]);
+    
+    setButtonBack({title:'login',active:true,URL:'/'});
+    setButtonSubmit({active:false});
+    setButtonNext({title:'',active:true});
+  }, [useButtonNextActive,useButtonBackActive]); // neden useButtonNextActive,useButtonBackActive yaptığımı unuttum
  
   useEffect(() => {
     const lastSegment = URL.split('/').pop();

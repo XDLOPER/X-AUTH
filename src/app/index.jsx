@@ -1,6 +1,9 @@
 import React,{useEffect} from "react"
-import {RouterProvider} from 'react-router-dom'
+import {RouterProvider, useRoutes} from 'react-router-dom'
 import { Provider, useDispatch } from "react-redux";
+
+// COMPONENT
+  import AppStoreAxess from '../components/app/appStoreAxess'
 
 // CONFIG
   import x_auth_store from '../store/index'
@@ -20,12 +23,18 @@ import { Provider, useDispatch } from "react-redux";
 
 
 const X_AUTH_APP = ({children}) => {
-
+  //const routeElement = useRoutes(router);
   return (
     <>
       <Provider store={x_auth_store}>
         <RouterProvider router={router}>
-      
+          <AppStoreAxess>
+            {(props) => (
+              <div>
+                {/* ... your rendering logic using props */}
+              </div>
+            )}
+          </AppStoreAxess>
         </RouterProvider>
       </Provider>
     </>
