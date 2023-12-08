@@ -32,9 +32,8 @@ const SignUp = ({context}) => {
   })
 
   const onSubmit = (values) => {
-    console.log('signUp submit edildi burada controller yapılacak',JSON.stringify(values))
     setDataSignUp({...values})
-    
+    console.log(formData)
   }
 
   const formik = useFormik({

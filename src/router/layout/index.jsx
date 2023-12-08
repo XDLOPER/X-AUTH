@@ -1,15 +1,17 @@
-import React,{useRef,useState,useEffect} from 'react'
+import React,{useRef} from 'react'
 import {Outlet} from 'react-router-dom'
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import { IoChevronDownOutline } from "react-icons/io5";
+
+import logo from '../../media/images/logo.png'
 
 import { useModals } from '../../store/modals/hooks';
 import {useMainTitle,useLoading, useErrors} from '../../store/app/hooks'
 import {setLoading} from '../../store/app/actions'
 import {useButtons} from '../../store/buttons/hooks'
-import { useData } from '../../store/controls/hooks';
 
-import logo from '../../media/images/logo.png'
+
+import AtomusLoading from '../../components/loading/atomusLoading'
 import X_button from '../../components/buttons/x-button'
 import Modals from '../../components/modals';
 import Toasts from '../../components/toasts';
@@ -18,7 +20,6 @@ import Toasts from '../../components/toasts';
 const LAYOUT = () => {
   const buttonFormDataSubmitRef = useRef(null)
 
-  const data = useData()
   const errorList = useErrors()
   const loading = useLoading()
   const modals = useModals()
@@ -32,7 +33,7 @@ const LAYOUT = () => {
     }
   };
   
-  useEffect(()=>console.log(data),[])
+
   return (
     <>
       {
@@ -43,16 +44,9 @@ const LAYOUT = () => {
           <div className="wrapper d-flex flex">
             <div className="auth">
               <header id="auth">
-                <div className="circle">
-                  {
-                      <>
-                        <div className="img" style={useLoading() !== true ? {padding:0} : null}><img style={useLoading() !== true ? {animationName:'pasive'} : null} className='loadingImage' src={logo} alt=""/></div>
-                        <div style={useLoading() !== true ? {animationName:'pasive'} : null} className="circleone"></div>
-                        <div style={useLoading() !== true ? {animationName:'pasive'} : null} className="circletwo"></div>
-                        <div style={useLoading() !== true ? {animationName:'pasive'} : null} className="circlethree"></div>
-                      </>
-                  }
-                </div>
+                  <div className="loading">
+                    <AtomusLoading loadingState={useLoading()} logo={logo}></AtomusLoading>
+                  </div>
               </header>
               <hr id='auth'></hr>
               <div className='content'>
@@ -63,9 +57,7 @@ const LAYOUT = () => {
                       {
                         errorList.map((error,index)=>{
                           return (
-                            <>
                               <Toasts key={index} data={error}></Toasts>
-                            </>
                           )
                           
                         })
@@ -82,13 +74,13 @@ const LAYOUT = () => {
                 <div className="buttonGroup">
                   {
                     buttonsArray.map((value,index)=>{
-                      return <>
-                        <X_button onClick={(e) => layoutButtonsTrigger(e,value.type)} key={index} on={value.active} to={value.URL} disabled={value.disabled}>
+                      return(
+                        <X_button key={index} type="submit" onClick={(e) => layoutButtonsTrigger(e,value.type)} on={value.active} to={value.URL} disabled={value.disabled}>
                           {(value.type === 'left' && value.title === "") ? <BsArrowLeft/> : (value.type === "left") && value.title}
                           {(value.type === 'center' && value.title === "") ? <IoChevronDownOutline/> : (value.type === "center") && value.title}
                           {(value.type === 'right' && value.title === "") ? <BsArrowRight/> : (value.type === "right") && value.title}
                         </X_button>
-                      </>
+                      )
                     })
                   }
                 </div>

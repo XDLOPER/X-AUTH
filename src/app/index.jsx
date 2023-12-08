@@ -3,7 +3,7 @@ import {RouterProvider, useRoutes} from 'react-router-dom'
 import { Provider, useDispatch } from "react-redux";
 
 // COMPONENT
-  import AppStoreAxess from '../components/app/appStoreAxess'
+  import ProjectMiddlewares from '../components/middlewares/project'
 
 // CONFIG
   import x_auth_store from '../store/index'
@@ -23,19 +23,23 @@ import { Provider, useDispatch } from "react-redux";
 
 
 const X_AUTH_APP = ({children}) => {
-  //const routeElement = useRoutes(router);
   return (
     <>
       <Provider store={x_auth_store}>
-        <RouterProvider router={router}>
-          <AppStoreAxess>
-            {(props) => (
-              <div>
-                {/* ... your rendering logic using props */}
-              </div>
-            )}
-          </AppStoreAxess>
-        </RouterProvider>
+        <ProjectMiddlewares>
+          {
+            props => {
+              const {projectLoading} = props
+
+              if(projectLoading){
+                return <RouterProvider router={router}></RouterProvider>
+              }else{
+                return <h1>loading...</h1>
+              }
+              
+            }
+          }
+        </ProjectMiddlewares>
       </Provider>
     </>
   )

@@ -1,5 +1,7 @@
 import { useSelector } from "react-redux/es/hooks/useSelector";
 
+export const useApp = () => useSelector(state => state.app)
+
 export const useAuth = () => useSelector(state => state.app.auth)
 export const useTheme = () => useSelector(state => state.app.theme)
 export const useLanguage = () => useSelector(state => state.app.language)
