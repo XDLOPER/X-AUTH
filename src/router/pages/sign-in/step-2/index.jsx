@@ -3,6 +3,7 @@ import { useOutletContext,useNavigate } from 'react-router';
 import { useFormik } from 'formik';
 import * as Yup from 'yup'
 
+import { useDataUniversalWords } from '../../../../store/app/hooks';
 import { useData } from '../../../../store/controls/hooks';
 import {setButtonSubmit,setButtonBack,setButtonNext} from '../../../../store/buttons/actions'
 import Text from '../../../../components/forms/text';
@@ -12,24 +13,26 @@ import { setDataSignIn, setStep } from '../../../../store/controls/actions';
 const Index = ({context}) => {
   const [buttonFormDataSubmitRef] = useOutletContext(context) 
   const navigate = useNavigate()
-
   const formData = useData()
+  const universalWords = useDataUniversalWords().forms
   
+
   const validationSchema = Yup.object({
     username:Yup
-    .string()
-    .matches(/^[a-zA-Z]+$/, 'Sadece harf içermelidir')
-    .required('Bu alan zorunludur'),  
+    .string(universalWords.validCharacter)
+    .matches(/^[a-zA-Z0-9.\-_]+$/, universalWords.username)
+    .required(universalWords.required),  
 
     password:Yup
-    .string()
-    .matches(/^[a-zA-Z]+$/, 'Sadece harf içermelidir')
-    .required('Bu alan zorunludur'),
+    .string(universalWords.validCharacter)
+    .matches(/^[\s\S]{6,30}$/, universalWords.password)
+    .required(universalWords.required),  
+
 
     rePassword:Yup
-    .string()
-    .oneOf([Yup.ref('password'), null], 'Şifreler uyuşmuyor') // Yup.ref('password') ile password u referans gösteriyoruz 
-    .required('Bu alan zorunludur'),
+    .string(universalWords.validCharacter)
+    .oneOf([Yup.ref('password'), null], universalWords.rePassword) // Yup.ref('password') ile password u referans gösteriyoruz 
+    .required(universalWords.required),  
   
   })
 

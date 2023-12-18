@@ -18,6 +18,9 @@ const initialState = {
         },
 
     ],
+    data:{
+        universalWords:{}
+    },
     mainTitle:'',
 }
 
@@ -40,11 +43,14 @@ const app = createSlice({
         _setErrors:(state,action)=>{
             state.errors = action.payload
         },
+        _setDataUniversalWords:(state,action)=>{
+            state.data.universalWords = action.payload
+        },
         _setMainTitle:(state,action)=>{
             state.mainTitle = action.payload
         },
     }
 })
 
-export const {_setAuth,_setTheme,_setLanguage,_setLoading,_setErrors,_setMainTitle} = app.actions
+export const {_setAuth,_setTheme,_setLanguage,_setLoading,_setErrors,_setDataUniversalWords,_setMainTitle} = app.actions
 export default app.reducer

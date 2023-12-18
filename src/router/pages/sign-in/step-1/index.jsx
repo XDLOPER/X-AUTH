@@ -1,9 +1,10 @@
-import React,{useEffect} from 'react'
+import React,{useEffect,useState} from 'react'
 import { useOutletContext,useNavigate,useLocation } from 'react-router';
 
 import { useFormik } from 'formik';
 import * as Yup from 'yup'
 
+import { useDataUniversalWords } from '../../../../store/app/hooks';
 import { useData } from '../../../../store/controls/hooks';
 import {setButtonBack, setButtonNext} from '../../../../store/buttons/actions'
 import {setDataSignIn, setStep} from '../../../../store/controls/actions'
@@ -18,34 +19,41 @@ import Select from '../../../../components/forms/select';
 const Index = ({context}) => {
   const [buttonFormDataSubmitRef] = useOutletContext(context) 
   const navigate = useNavigate()
-
   const formData = useData()
+
+  const universalWords = useDataUniversalWords().forms
+  const [days, setDays] = useState(date.days);
+
 
   const validationSchema = Yup.object({
     name:Yup
-    .string()
-    .matches(/^[a-zA-Z]+$/, 'Sadece harf içermelidir')
-    .required('Bu alan zorunludur'),  
+    .string(universalWords.validCharacter)
+    .matches(/^[a-zA-ZçğıiöşüĞİÖŞÜÇ]+(\s[a-zA-ZçğıiöşüĞİÖŞÜÇ]+)?$/, universalWords.privateCharacter)
+    .required(universalWords.required),  
 
     surname:Yup
-    .string()
-    .matches(/^[a-zA-Z]+$/, 'Sadece harf içermelidir'),
+    .string(universalWords.validCharacter)
+    .matches(/^[a-zA-Z]+$/, universalWords.privateCharacter),
 
     date:Yup.object({
       day:Yup
-      .number('geçerli bir değer girin')
-      .min('3')
-      .required('Bu alan zorunludur'),
+      .number(universalWords.validCharacter)
+      .required(universalWords.required),
 
       moon:Yup
-      .string().typeError('hello'),
+      .string(universalWords.validCharacter)
+      .required(universalWords.required),
       
       year:Yup
-      .string().typeError('hello'),
+      .string(universalWords.validCharacter)
+      .required(universalWords.required),
+
     }),
 
     gender:Yup
-    .string().typeError('hello')
+    .string(universalWords.validCharacter)
+    .required(universalWords.required),
+
     
   })
   const onSubmit = (values)=>{
@@ -62,9 +70,40 @@ const Index = ({context}) => {
       onSubmit
   })
 
-  const yearControl = formik.values.date.year % 4 === 0;
+  const moons = date.moons.map(date => date.name)
+  const years = [...date.years].reverse()
 
-  
+  useEffect(() => {
+    const updatedDays = date.days.filter((day) => {
+      const findMoonDay = date.moons.find((value) => value.name === formik.values.date.moon);
+
+          if(findMoonDay.name === date.moons[1].name){
+            if(
+              formik.values.date.year % 4 === 0
+            ){
+              if(day <= findMoonDay?.day[1]){
+                return day
+              }
+            }
+            else{
+              if(day <= findMoonDay?.day[0]){
+                return day
+              }
+            }
+          }
+
+          if(day <= findMoonDay?.day){
+            return day
+          }
+
+      }
+    );
+
+    // gün state'ini güncelle yoksa class içindeki verileri okuyamıyor state değişimi yapamıyoruz
+    setDays(updatedDays);
+  }, [formik.values.date.moon,formik.values.date.year]);
+
+
   useEffect(() => {
     setStep(location.split('-')[1])
 
@@ -101,7 +140,7 @@ const Index = ({context}) => {
             <div style={{display:"flex",gap:'10px'}}>
               <Select
                 name="date.day"
-                data={date.days}
+                data={days}
                 value={formik.values.date.day}
                 onChange={(e) => {
                   formik.handleChange(e);
@@ -113,7 +152,7 @@ const Index = ({context}) => {
               </Select>
               <Select
                 name="date.moon"
-                data={date.moons}
+                data={moons}
                 value={formik.values.date.moon}
                 onChange={(e) => {
                   formik.handleChange(e);
@@ -125,7 +164,7 @@ const Index = ({context}) => {
               </Select>
               <Select
                 name="date.year"
-                data={date.years}
+                data={years}
                 value={formik.values.date.year}
                 onChange={(e) => {
                   formik.setFieldValue('date.year', e.target.value);

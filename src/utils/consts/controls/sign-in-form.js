@@ -7,8 +7,8 @@ export const initialValue = {
     surname:'',
     date:{
       day:date.days[0],
-      moon:date.moons[0],
-      year:date.years[0]
+      moon:date.moons[0].name,
+      year:date.years[date.years.length -1]
     },
     gender:gender[0],
 

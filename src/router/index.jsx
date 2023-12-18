@@ -12,6 +12,9 @@ import MailSend from './pages/mail-send';
 import SignInStep4 from './pages/sign-in/step-4';
 
 import SignInStep5 from './pages/sign-in/step-5';
+
+import Finish from '../router/pages/finish';
+
 import SignUp from './pages/sign-up/index';
 import Test from '../test/formik'
 
@@ -39,7 +42,8 @@ const router = createBrowserRouter([
             {
               path:'/test',
               element:<Test/>
-            }
+            },
+            {path:'finish',element:<Finish/>},
           ]
         },
       ])

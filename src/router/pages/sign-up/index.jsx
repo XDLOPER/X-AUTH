@@ -14,7 +14,6 @@
 const SignUp = ({context}) => {
   // outlet context ine erişip yukardaki state i değiştirebiliyoruz kullanım outletContext() = setFormData() yukarıdaki state'i güncelliyo 
   const [buttonFormDataSubmitRef] = useOutletContext(context) 
-  const navigate = useNavigate()
   const formData = useData()
   
   const validate = (values)=>{

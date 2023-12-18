@@ -7,6 +7,7 @@ export const useTheme = () => useSelector(state => state.app.theme)
 export const useLanguage = () => useSelector(state => state.app.language)
 export const useLoading = () => useSelector(state => state.app.loading)
 export const useErrors = () => useSelector(state => state.app.errors)
+export const useDataUniversalWords = () => useSelector(state => state.app.data.universalWords)
 export const useMainTitle = () => useSelector(state => state.app.mainTitle)
 
 export const useButtons = () => useSelector(state => state.app.buttons)

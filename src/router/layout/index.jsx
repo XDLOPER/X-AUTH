@@ -1,12 +1,14 @@
-import React,{useRef} from 'react'
+import React,{useRef,useEffect} from 'react'
 import {Outlet} from 'react-router-dom'
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import { IoChevronDownOutline } from "react-icons/io5";
 
 import logo from '../../media/images/logo.png'
 
+
 import { useModals } from '../../store/modals/hooks';
 import {useMainTitle,useLoading, useErrors} from '../../store/app/hooks'
+import {useDataSignIn} from '../../store/controls/hooks'
 import {setLoading} from '../../store/app/actions'
 import {useButtons} from '../../store/buttons/hooks'
 
@@ -24,7 +26,8 @@ const LAYOUT = () => {
   const loading = useLoading()
   const modals = useModals()
   const buttonsArray = useButtons()
-  
+  const formData = useDataSignIn()
+
   setTimeout(()=>{setLoading(!loading);console.log('tekrar')},10000)
 
   const layoutButtonsTrigger = (events,type) => {
@@ -33,7 +36,6 @@ const LAYOUT = () => {
     }
   };
   
-
   return (
     <>
       {

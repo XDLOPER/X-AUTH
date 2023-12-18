@@ -3,6 +3,7 @@ import { useOutletContext,useNavigate } from 'react-router';
 import { useFormik } from 'formik';
 import * as Yup from 'yup'
 
+import { useDataUniversalWords } from '../../../../store/app/hooks';
 import { useData } from '../../../../store/controls/hooks';
 import {setButtonSubmit,setButtonBack,setButtonNext} from '../../../../store/buttons/actions'
 import { setDataSignIn, setStep } from '../../../../store/controls/actions';
@@ -14,32 +15,38 @@ import { contract } from '../../../../utils/consts/contract';
 const Index = ({context}) => {
   const [buttonFormDataSubmitRef] = useOutletContext(context) 
   const navigate = useNavigate()
-
   const formData = useData()
-
+  const universalWords = useDataUniversalWords().forms
+  
   const validationSchema = Yup.object({
     infoCheck1: Yup
-    .boolean()
-    .oneOf([true], 'Açık Rıza Metni Onaylanmalıdır'),
+    .boolean(universalWords.required)
+    .oneOf([true], universalWords.checkbox),
     infoCheck2: Yup
-    .boolean()
-    .oneOf([true], 'Açık Rıza Metni Onaylanmalıdır'),
+    .boolean(universalWords.required)
+    .oneOf([true], universalWords.checkbox),
     infoCheck3: Yup
-    .boolean()
-    .oneOf([true], 'Açık Rıza Metni Onaylanmalıdır'),
+    .boolean(universalWords.required)
+    .oneOf([true], universalWords.checkbox),
   });
 
   const onSubmit = (values)=>{
+    
     //console.log('signIn step-5 submit edildi burada controller yapılacak',JSON.stringify(values))
     setDataSignIn({...values})
-    navigate('/sign-in/step-5')
+    navigate('/finish')
+    console.log(formData)
+    //navigate('/api/v1/register')
   }
+
+
 
   const formik = useFormik({
       initialValues:{...formData.sign_in},
       validationSchema,
       onSubmit
   })
+
 
   useEffect(() => {
     const pathname = window.location.pathname;  

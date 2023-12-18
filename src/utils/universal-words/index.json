@@ -1,0 +1,12 @@
+{
+    "forms":{
+        "username":". , - , _ kullanımı dışında özel karakter kullanılamaz boşluk bırakılamaz",
+        "password":"parola güçlü olmalı minimum 6 maximum 30 karakter içermeli",
+        "rePassword":"şifreler uyuşmuyor",
+
+        "checkbox":"kutucuğu onaylamanız gerekiyor",
+        "privateCharacter":"özel karakter kullanmayın veya boşluk bırakmayınız",
+        "validCharacter":"geçerli bir değer girin",
+        "required":"bu alan zorunludur"
+    }
+}

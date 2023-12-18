@@ -1,16 +1,19 @@
-import React,{useEffect} from "react"
-import {RouterProvider, useRoutes} from 'react-router-dom'
-import { Provider, useDispatch } from "react-redux";
+import React from "react"
+import { RouterProvider } from 'react-router-dom'
+import { Provider } from "react-redux";
 
 // COMPONENT
   import ProjectMiddlewares from '../components/middlewares/project'
+  import AtomusLoading from "../components/loading/atomusLoading";
+
+// MEDIA
+  import logo from '../media/images/logo.png'
 
 // CONFIG
   import x_auth_store from '../store/index'
   import router from '../router'
-
+  
 // BOOTSTRAP
-  // bootstrap style
   import '../../node_modules/bootstrap/dist/css/bootstrap-reboot.min.css'; // browser style reset
   import '../../node_modules/bootstrap/dist/css/bootstrap-utilities.min.css';
   import '../../node_modules/bootstrap/dist/css/bootstrap-grid.min.css';
@@ -34,7 +37,7 @@ const X_AUTH_APP = ({children}) => {
               if(projectLoading){
                 return <RouterProvider router={router}></RouterProvider>
               }else{
-                return <h1>loading...</h1>
+                return <AtomusLoading loadingState={!projectLoading} logo={logo}/>
               }
               
             }
