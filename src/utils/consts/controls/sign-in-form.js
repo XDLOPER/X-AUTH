@@ -1,7 +1,7 @@
 
 export const initialValue = {
     // signup
-    usernameAndPhone:"",
+    usernameAndEmail:"",
     password:"",
     dontForgetMe:""
 }

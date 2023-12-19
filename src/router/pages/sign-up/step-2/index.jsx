@@ -20,7 +20,7 @@ const Index = ({context}) => {
   const validationSchema = Yup.object({
     username:Yup
     .string(universalWords.validCharacter)
-    .matches(/^[a-zA-Z0-9.\-_]+$/, universalWords.username)
+    .matches(/^[a-zA-Z0-9.\-_]+$/, universalWords.username.privateCharacter)
     .required(universalWords.required),  
 
     password:Yup

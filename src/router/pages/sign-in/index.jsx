@@ -5,39 +5,53 @@
 
   import { useData } from '../../../store/controls/hooks.js'
   import { setDataSignIn } from '../../../store/controls/actions.js'
-  import {setMainTitle} from '../../../store/app/actions.js'
+  import { useDataUniversalWords } from '../../../store/app/hooks.js'
+  import {setLoading, setMainTitle} from '../../../store/app/actions.js'
   import {setButtonBack,setButtonNext,setButtonSubmit} from '../../../store/buttons/actions.js'
 
   import Text from '../../../components/forms/text.jsx'
   import Checkbox from '../../../components/forms/checkbox.jsx'
 
+  import {examplefetch} from '../../../utils/helpers/exampleFetch'
+
+
 const SignIn = ({context}) => {
   // outlet context ine erişip yukardaki state i değiştirebiliyoruz kullanım outletContext() = setFormData() yukarıdaki state'i güncelliyo 
   const [buttonFormDataSubmitRef] = useOutletContext(context) 
   const formData = useData()
-  
-  const validate = (values)=>{
-      let errors = {}
-
-      if(values.usernameAndPhone.length < 3){
-          errors.usernameAndPhone = "required the three characters"
-      }
-
-      return errors
-  }
+  const navigate = useNavigate()
+  const universalWords = useDataUniversalWords().forms
 
   const validationSchema = Yup.object({
-      password:Yup.string().required('Required')
+    usernameAndEmail:Yup
+    .string(universalWords.validCharacter)
+    .matches(/^[a-zA-Z0-9.\-_]+$/, universalWords.username.privateCharacter)
+    .required(universalWords.required),
+
+    password:Yup
+    .string(universalWords.validCharacter)
+    .matches(/^[\s\S]{6,30}$/, universalWords.password)
+    .required(universalWords.required),  
   })
 
   const onSubmit = (values) => {
+    setLoading(true)
+    setButtonSubmit({disabled:true})
     setDataSignIn({...values})
+
     console.log(formData)
+
+    examplefetch().then((result)=>{
+      setLoading(false)
+      setButtonSubmit({disabled:false})
+      navigate('/finish')
+    }).catch((error) => {alert(error?.message)});
+
+
   }
 
   const formik = useFormik({
     initialValues:{...formData.sign_in},
-    validate,
     validationSchema,
     onSubmit
   })
@@ -53,7 +67,7 @@ const SignIn = ({context}) => {
     return (
       <>
             <form onSubmit={formik.handleSubmit}>
-                  <Text name="usernameAndPhone" type="text" placeholder="username & phone" value={formik.values.usernameAndPhone} onChange={formik.handleChange} onBlur={formik.handleBlur} touch={formik.touched.usernameAndPhone} error={formik.errors.usernameAndPhone} />
+                  <Text name="usernameAndEmail" type="text" placeholder="username & email" value={formik.values.usernameAndEmail} onChange={formik.handleChange} onBlur={formik.handleBlur} touch={formik.touched.usernameAndEmail} error={formik.errors.usernameAndEmail} />
                   <Text name="password" type="password" placeholder="password" value={formik.values.password} onChange={formik.handleChange} onBlur={formik.handleBlur} touch={formik.touched.password} error={formik.errors.password}/>
                   <Checkbox
                     name="dontForgetMe" 
@@ -61,8 +75,8 @@ const SignIn = ({context}) => {
                     modal={{
                       name:'okModal',
                       data:{
-                        title:'hesabını açık tutuyoruz',
-                        body:'dont forget me'
+                        title:'Hesabını Açık Tutuyoruz',
+                        body:'Merhaba! Sana, hesabını güvenli bir şekilde korumak ve daha iyi bir hizmet sunabilmek adına bir bilgilendirme iletiyoruz. "Token" terimi, internet üzerindeki bilgi alışverişinde kullanılan şifrelenmiş bir kimlik bilgisini ifade eder. Hesabını açık tutabilmemiz ve seni daha iyi tanıyabilmemiz için bu bilgileri kullanıyoruz.\n\nBu tokenlar, kimlik doğrulama ve yetkilendirme süreçlerinde rol oynar, böylece yalnızca yetkili kişilerin hesaplarına erişim sağlanır. Senin güvenliğin bizim önceliğimizdir ve bu bilgilendirme, hesabını güvende tutmak adına attığımız adımlardan biridir. Eğer herhangi bir şüphen veya sorunun varsa, lütfen bize bildir. Teşekkür ederiz!'
                       }
                     }}
                     {...formik.getFieldProps('dontForgetMe')}

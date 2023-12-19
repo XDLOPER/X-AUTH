@@ -11,6 +11,9 @@ import { setDataSignUp, setStep } from '../../../../store/controls/actions';
 import Checkbox from '../../../../components/forms/checkbox';
 
 import { contract } from '../../../../utils/consts/contract';
+import { setLoading } from '../../../../store/app/actions';
+
+import {examplefetch} from '../../../../utils/helpers/exampleFetch'
 
 const Index = ({context}) => {
   const [buttonFormDataSubmitRef] = useOutletContext(context) 
@@ -31,12 +34,22 @@ const Index = ({context}) => {
   });
 
   const onSubmit = (values)=>{
-    
+    setLoading(true)
+    setButtonSubmit({disabled:true})
     //console.log('signIn step-5 submit edildi burada controller yapılacak',JSON.stringify(values))
     setDataSignUp({...values})
-    navigate('/finish')
+
+
+    examplefetch().then(result => {
+      setLoading(false)
+      setButtonSubmit({disabled:false})
+      navigate('/finish')
+
+      
+      console.log(result);
+    });
+
     console.log(formData)
-    //navigate('/api/v1/register')
   }
 
 
@@ -64,11 +77,11 @@ const Index = ({context}) => {
           <p>Aşşağıda Bulunan Metinlerleri Onayladığımı Arz Ederim Bu Metinler Benim Üzerimde Tüm Haklarımı Elimden Alıyor Adeta Beni Çorak Bırakıyor</p>
           <Checkbox 
             name="infoCheck1" 
-            label="Açık Rıza Metnini Okudum Onayladım"
+            label="Genel Hesap Yetkilerini Onaylıyorum"
             modal={{
               name:'okModal',
               data:{
-                title:'Açık Rıza Metnini Okudum Onayladım',
+                title:contract[0].title,
                 body:contract[0].body
               }
             }}
@@ -80,11 +93,11 @@ const Index = ({context}) => {
           </Checkbox>
           <Checkbox 
             name="infoCheck2" 
-            label="Uzak Mesafe Sözleşmesini Okudum Onayladım"
+            label="Ödeme İşlemleri Yetkilerini Onaylıyorum"
             modal={{
               name:'okModal',
               data:{
-                title:'Uzak Mesafe Sözleşmesini Okudum Onayladım',
+                title:contract[1].title,
                 body:contract[1].body
               }
             }}
@@ -96,11 +109,11 @@ const Index = ({context}) => {
           </Checkbox>
           <Checkbox 
             name="infoCheck3" 
-            label="Her Türlü Bilgimi Alabilir Başka yerde Kullanabilir"
+            label="İşlemler ve İstatistikler Yetkilerini Onaylıyorum"
             modal={{
               name:'okModal',
               data:{
-                title:'Her Türlü Bilgimi Alabilir Başka yerde Kullanabilir',
+                title:contract[2].title,
                 body:contract[2].body
               }
             }}

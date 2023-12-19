@@ -26,9 +26,9 @@ const Index = ({context}) => {
     setMainTitle('');
     setLoading(false)
 
-    setButtonBack({URL:'/',active:true,})
+    setButtonBack({URL:'/',active:false,})
     setButtonSubmit({URL:'/',active:false,})
-    setButtonNext({active:false,disabled:false})
+    setButtonNext({active:false,})
   },[]);
   
   return (
