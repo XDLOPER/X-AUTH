@@ -20,5 +20,3 @@ export let years = []
 for (let yearCycle = (new Date().getUTCFullYear()) -150; yearCycle <= (new Date().getUTCFullYear()); yearCycle++) {
     years.push(yearCycle)
 } 
-
-console.log(years)

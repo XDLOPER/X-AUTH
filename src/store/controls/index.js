@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { initialValue as signInValue } from "../../utils/consts/controls/sign-in-form";
 import { initialValue as signUpValue } from "../../utils/consts/controls/sign-up-form";
+import { initialValue as signInValue } from "../../utils/consts/controls/sign-in-form";
 
 const initialState = {
     data:{

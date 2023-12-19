@@ -1,4 +1,4 @@
-import React,{useEffect,useMemo} from 'react'
+import React,{useEffect} from 'react'
 import { useOutletContext } from 'react-router';
 import { useFormik } from 'formik';
 import * as Yup from 'yup'
@@ -8,7 +8,7 @@ import {countryList,country} from '../../../../utils/helpers/country/findCountry
 
 import Select from '../../../../components/forms/select';
 import Text from '../../../../components/forms/text';
-import { setDataSignIn, setStep } from '../../../../store/controls/actions';
+import { setDataSignUp, setStep } from '../../../../store/controls/actions';
 import { findCountryPhoneLength } from '../../../../utils/helpers/country/findCountryPhoneLength';
 
 
@@ -40,7 +40,7 @@ const Index = ({context}) => {
   const onSubmit = (values)=>{
     console.log('signIn step-3 submit edildi burada controller yapılacak')
     console.log(JSON.stringify(values))
-    setDataSignIn({...values})
+    setDataSignUp({...values})
   }
 
   const formik = useFormik({
@@ -53,9 +53,9 @@ const Index = ({context}) => {
     const pathname = window.location.pathname;
     setStep(pathname.split('/')[pathname.split('/').length -1].split('-')[1])
 
-    setButtonNext({title:'',active:true,disabled:false,URL:'sign-in/step-4'})
-    setButtonSubmit({title:'',active:false,URL:'sign-in/step-2'})
-    setButtonBack({title:'',active:true,URL:'sign-in/step-2'});
+    setButtonNext({title:'',active:true,disabled:false,URL:'sign-up/step-4'})
+    setButtonSubmit({title:'',active:false,URL:'sign-up/step-2'})
+    setButtonBack({title:'',active:true,URL:'sign-up/step-2'});
   },[]);
 
   return (

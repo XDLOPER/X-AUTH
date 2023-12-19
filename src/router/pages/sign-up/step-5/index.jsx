@@ -6,7 +6,7 @@ import * as Yup from 'yup'
 import { useDataUniversalWords } from '../../../../store/app/hooks';
 import { useData } from '../../../../store/controls/hooks';
 import {setButtonSubmit,setButtonBack,setButtonNext} from '../../../../store/buttons/actions'
-import { setDataSignIn, setStep } from '../../../../store/controls/actions';
+import { setDataSignUp, setStep } from '../../../../store/controls/actions';
 
 import Checkbox from '../../../../components/forms/checkbox';
 
@@ -33,7 +33,7 @@ const Index = ({context}) => {
   const onSubmit = (values)=>{
     
     //console.log('signIn step-5 submit edildi burada controller yapılacak',JSON.stringify(values))
-    setDataSignIn({...values})
+    setDataSignUp({...values})
     navigate('/finish')
     console.log(formData)
     //navigate('/api/v1/register')
@@ -42,7 +42,7 @@ const Index = ({context}) => {
 
 
   const formik = useFormik({
-      initialValues:{...formData.sign_in},
+      initialValues:{...formData.sign_up},
       validationSchema,
       onSubmit
   })
@@ -54,7 +54,7 @@ const Index = ({context}) => {
 
     setButtonNext({active:false,URL:''})
     setButtonSubmit({title:'kayıt ol',active:true,URL:''});
-    setButtonBack({title:'',active:true,URL:'sign-in/step-2'})
+    setButtonBack({title:'',active:true,URL:'sign-up/step-2'})
 
   },[]);
 

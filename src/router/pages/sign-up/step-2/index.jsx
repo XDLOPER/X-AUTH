@@ -8,7 +8,7 @@ import { useData } from '../../../../store/controls/hooks';
 import {setButtonSubmit,setButtonBack,setButtonNext} from '../../../../store/buttons/actions'
 import Text from '../../../../components/forms/text';
 
-import { setDataSignIn, setStep } from '../../../../store/controls/actions';
+import { setDataSignUp, setStep } from '../../../../store/controls/actions';
 
 const Index = ({context}) => {
   const [buttonFormDataSubmitRef] = useOutletContext(context) 
@@ -38,12 +38,12 @@ const Index = ({context}) => {
 
   const onSubmit = (values)=>{
     //console.log('signIn step-2 submit edildi burada controller yapılacak',JSON.stringify(values))
-    setDataSignIn({...values})
-    navigate('/sign-in/step-5')
+    setDataSignUp({...values})
+    navigate('/sign-up/step-5')
   }
 
   const formik = useFormik({
-      initialValues:{...formData.sign_in},
+      initialValues:{...formData.sign_up},
       validationSchema,
       onSubmit
   })
@@ -54,7 +54,7 @@ const Index = ({context}) => {
 
     setButtonNext({active:true})
     setButtonSubmit({active:false})
-    setButtonBack({URL:'sign-in/step-1'});
+    setButtonBack({URL:'sign-up/step-1'});
   },[]);
 
   return (

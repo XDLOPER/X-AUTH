@@ -1,66 +1,82 @@
-import React,{useEffect, useState} from 'react'
-import { Outlet, useNavigate, useOutletContext } from 'react-router';
-import {setButtonBack, setButtonNext, setButtonSubmit} from '../../../store/buttons/actions'
-import {setMainTitle} from '../../../store/app/actions'
-import {useButtonBackActive, useButtonNextActive} from '../../../store/buttons/hooks'
+  import React,{useEffect} from 'react'
+  import { useOutletContext ,Link,useNavigate } from 'react-router-dom'
+  import { useFormik } from 'formik'
+  import * as Yup from 'yup'
 
+  import { useData } from '../../../store/controls/hooks.js'
+  import { setDataSignIn } from '../../../store/controls/actions.js'
+  import {setMainTitle} from '../../../store/app/actions.js'
+  import {setButtonBack,setButtonNext,setButtonSubmit} from '../../../store/buttons/actions.js'
 
-function SignIn({context}) {
-  const [setFormData,buttonFormDataSubmitRef] = useOutletContext(context) 
-  const navigate = useNavigate()
+  import Text from '../../../components/forms/text.jsx'
+  import Checkbox from '../../../components/forms/checkbox.jsx'
 
-  const URL = window.location.pathname
-
-  useEffect(() => {
-    setMainTitle('kayıt ol');
-    
-    setButtonBack({title:'login',active:true,URL:'/'});
-    setButtonSubmit({active:false});
-    setButtonNext({title:'',active:true});
-  }, [useButtonNextActive,useButtonBackActive]); // neden useButtonNextActive,useButtonBackActive yaptığımı unuttum
- 
-  useEffect(() => {
-    const lastSegment = URL.split('/').pop();
-    if (lastSegment === 'sign-in' || 'sign-in/') {
-      navigate('step-1');
-    }
-  }, [navigate]);
+const SignIn = ({context}) => {
+  // outlet context ine erişip yukardaki state i değiştirebiliyoruz kullanım outletContext() = setFormData() yukarıdaki state'i güncelliyo 
+  const [buttonFormDataSubmitRef] = useOutletContext(context) 
+  const formData = useData()
   
-  return (
-    <>
-      <Outlet context={[setFormData,buttonFormDataSubmitRef]}/>
-    </>
-  );
+  const validate = (values)=>{
+      let errors = {}
+
+      if(values.usernameAndPhone.length < 3){
+          errors.usernameAndPhone = "required the three characters"
+      }
+
+      return errors
+  }
+
+  const validationSchema = Yup.object({
+      password:Yup.string().required('Required')
+  })
+
+  const onSubmit = (values) => {
+    setDataSignIn({...values})
+    console.log(formData)
+  }
+
+  const formik = useFormik({
+    initialValues:{...formData.sign_in},
+    validate,
+    validationSchema,
+    onSubmit
+  })
+
+  useEffect(()=>{
+    setMainTitle('oturum aç')
+
+    setButtonBack({active:false})
+    setButtonSubmit({title:'oturum aç',active:true})
+    setButtonNext({active:false})
+  },[])
+  
+    return (
+      <>
+            <form onSubmit={formik.handleSubmit}>
+                  <Text name="usernameAndPhone" type="text" placeholder="username & phone" value={formik.values.usernameAndPhone} onChange={formik.handleChange} onBlur={formik.handleBlur} touch={formik.touched.usernameAndPhone} error={formik.errors.usernameAndPhone} />
+                  <Text name="password" type="password" placeholder="password" value={formik.values.password} onChange={formik.handleChange} onBlur={formik.handleBlur} touch={formik.touched.password} error={formik.errors.password}/>
+                  <Checkbox
+                    name="dontForgetMe" 
+                    label="don't forget me"
+                    modal={{
+                      name:'okModal',
+                      data:{
+                        title:'hesabını açık tutuyoruz',
+                        body:'dont forget me'
+                      }
+                    }}
+                    {...formik.getFieldProps('dontForgetMe')}
+                    checked={formik.values.dontForgetMe}
+                    touch={formik.touched.dontForgetMe} 
+                    error={formik.errors.dontForgetMe}
+                  />
+                  <button style={{display:'none'}} ref={buttonFormDataSubmitRef}></button>
+            </form> 
+              <br />
+              <br />
+            <Link to="/sign-up" style={{textAlign:"center",position:"absolute",left:"50%",transform:"translate(-50%)"}}>kayıt ol</Link>
+      </>
+    )
 }
 
-/*
-    <div className="App">
-      <div className="wrapper">
-        <div className="auth">
-        {
-          login ?
-          <>
-            <input type="text" key="4" name="username" value={authForm.username} onChange={onChangeHandler} placeholder="username/email"/>
-            <input type="text" key="5" name="password" value={authForm.password} onChange={onChangeHandler} placeholder="parola"/>
-            <button type="button" onClick={(e)=>{onClickHandler(authForm,setLogin,'login',e)}}>giriş yap</button>
-          </>
-           : 
-          <>
-            <input type="text" key="1" name="username" value={authForm.username} onChange={onChangeHandler} placeholder="username"/>
-            <input type="text" key="2" name="email" value={authForm.email} onChange={onChangeHandler} placeholder="email"/>
-            <input type="text" key="3" name="password" value={authForm.password} onChange={onChangeHandler} placeholder="parola"/>
-            <button type="button" key="4" onClick={(e)=>{onClickHandler(authForm,setLogin,'register',e)}}>kayıt ol</button>
-          </>
-        }
-        {
-          login ?
-            <button onClick={(e)=>setLogin((false))}>kayıt olmak için tıkla</button>
-          :
-            <button onClick={(e)=>setLogin((true))}>giriş yapmak için</button>
-        }
-        </div>
-      </div>
-    </div>
-*/
-
-export default SignIn
+  export default SignIn

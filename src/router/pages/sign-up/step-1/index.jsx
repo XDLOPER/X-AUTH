@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react'
-import { useOutletContext,useNavigate,useLocation } from 'react-router';
+import { useOutletContext,useNavigate } from 'react-router';
 
 import { useFormik } from 'formik';
 import * as Yup from 'yup'
@@ -7,7 +7,7 @@ import * as Yup from 'yup'
 import { useDataUniversalWords } from '../../../../store/app/hooks';
 import { useData } from '../../../../store/controls/hooks';
 import {setButtonBack, setButtonNext} from '../../../../store/buttons/actions'
-import {setDataSignIn, setStep} from '../../../../store/controls/actions'
+import {setDataSignUp, setStep} from '../../../../store/controls/actions'
 
 import * as date from '../../../../utils/consts/date'
 import {gender} from '../../../../utils/consts/gender'
@@ -59,27 +59,27 @@ const Index = ({context}) => {
   const onSubmit = (values)=>{
 
     //console.log('signIn step-1 submit edildi burada controller yapılacak',JSON.stringify(values))
-    setDataSignIn({...values})
-    navigate('/sign-in/step-2');
+    setDataSignUp({...values})
+    navigate('/sign-up/step-2');
 
   }
 
   const formik = useFormik({    
-      initialValues:{...formData.sign_in},
+      initialValues:{...formData.sign_up},
       validationSchema,
       onSubmit
   })
 
-  const moons = date.moons.map(date => date.name)
-  const years = [...date.years].reverse()
+  const moons = date.moons?.map(date => date?.name)
+  const years = [...date?.years].reverse()
 
   useEffect(() => {
     const updatedDays = date.days.filter((day) => {
-      const findMoonDay = date.moons.find((value) => value.name === formik.values.date.moon);
+      const findMoonDay = date?.moons.find((value) => value?.name === formik.values.date?.moon);
 
-          if(findMoonDay.name === date.moons[1].name){
+          if(findMoonDay?.name === date.moons[1]?.name){
             if(
-              formik.values.date.year % 4 === 0
+              formik.values.date?.year % 4 === 0
             ){
               if(day <= findMoonDay?.day[1]){
                 return day
@@ -101,7 +101,7 @@ const Index = ({context}) => {
 
     // gün state'ini güncelle yoksa class içindeki verileri okuyamıyor state değişimi yapamıyoruz
     setDays(updatedDays);
-  }, [formik.values.date.moon,formik.values.date.year]);
+  }, [formik.values.date?.moon,formik.values.date?.year]);
 
 
   useEffect(() => {
@@ -141,7 +141,7 @@ const Index = ({context}) => {
               <Select
                 name="date.day"
                 data={days}
-                value={formik.values.date.day}
+                value={formik.values.date?.day}
                 onChange={(e) => {
                   formik.handleChange(e);
                 }}
@@ -153,7 +153,7 @@ const Index = ({context}) => {
               <Select
                 name="date.moon"
                 data={moons}
-                value={formik.values.date.moon}
+                value={formik.values.date?.moon}
                 onChange={(e) => {
                   formik.handleChange(e);
                 }}
@@ -165,7 +165,7 @@ const Index = ({context}) => {
               <Select
                 name="date.year"
                 data={years}
-                value={formik.values.date.year}
+                value={formik.values.date?.year}
                 onChange={(e) => {
                   formik.setFieldValue('date.year', e.target.value);
                 }}

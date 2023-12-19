@@ -7,7 +7,7 @@ const initialState = {
     language:'default',
     loading:false,
     errors:[
-        {
+        /*{
             title:'error:2313123',
             body:{
                 errorCode:0,
@@ -15,7 +15,7 @@ const initialState = {
                 description:'',
             },
             time:''
-        },
+        }*/,
 
     ],
     data:{

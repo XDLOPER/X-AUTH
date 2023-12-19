@@ -34,7 +34,7 @@ const Index = ({context}) => {
   return (
     <>          
       <div style={{width:"100%",height:'100%',display:'flex'}}>
-        <img src={vectorURL} alt="" style={{width:"75%",margin:'0 auto'}}/>
+        <img src={vectorURL ? vectorURL : null} alt="" style={{width:"75%",margin:'0 auto'}}/>
       </div>
       <div style={{width:"100%",height:'100%',display:'flex'}}>
         <b style={{margin:'0 auto'}}>yönlendiriliyorsunuz...</b>

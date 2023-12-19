@@ -6,7 +6,7 @@ import OtpInput from 'react-otp-input';
 
 import {setButtonSubmit,setButtonBack,setButtonNext} from '../../../../store/buttons/actions'
 
-import { setDataSignIn, setStep } from '../../../../store/controls/actions';
+import { setDataSignUp, setStep } from '../../../../store/controls/actions';
 
 
 const Index = ({context}) => {
@@ -32,7 +32,7 @@ const Index = ({context}) => {
   const onSubmit = (values)=>{
     console.log('signIn step-4 submit edildi burada controller yapılacak')
     console.log(JSON.stringify(values))
-    setDataSignIn({...values})
+    setDataSignUp({...values})
   }
 
   const formik = useFormik({
@@ -53,8 +53,8 @@ const Index = ({context}) => {
     const pathname = window.location.pathname;
     setStep(pathname.split('/')[pathname.split('/').length -1].split('-')[1])
 
-    setButtonNext({title:'',active:true,disabled:false,URL:'sign-in/step-5'})
-    setButtonBack({title:'',active:true,URL:'sign-in/step-3'})
+    setButtonNext({title:'',active:true,disabled:false,URL:'sign-up/step-5'})
+    setButtonBack({title:'',active:true,URL:'sign-up/step-3'})
     setButtonSubmit({title:'kayıt ol',active:false,URL:''});
   },[]);
 
