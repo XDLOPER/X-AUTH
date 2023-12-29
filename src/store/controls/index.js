@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { initialValue as signUpValue } from "../../utils/consts/controls/sign-up-form";
-import { initialValue as signInValue } from "../../utils/consts/controls/sign-in-form";
+import { initialValue as signUpValue } from "../../utils/models/sign-up-form";
+import { initialValue as signInValue } from "../../utils/models/sign-in-form";
 
 const initialState = {
     data:{
-        sign_up:{...signUpValue},
-        sign_in:{...signInValue}
+        signUp:{...signUpValue},
+        signIn:{...signInValue}
     },
     step:1,
 }
@@ -16,10 +16,10 @@ const controls = createSlice({
     name:'controls',
     reducers:{
         _setDataSignUp:(state,action)=>{
-            state.data.sign_up = {...state.data.sign_up, ...action.payload}
+            state.data.signUp = {...state.data.signUp, ...action.payload}
         },
         _setDataSignIn:(state,action)=>{
-            state.data.sign_in = {...state.data.sign_in, ...action.payload}
+            state.data.signIn = {...state.data.signIn, ...action.payload}
         },
         _setStep:(state,action)=>{
             state.step = action.payload

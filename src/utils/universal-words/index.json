@@ -1,7 +1,9 @@
 {
     "forms":{
+        "twoCharacter":"2 karakterden fazla olmalı",
+        "tenCharacter":"10 karakterden az olmalı",
         "username":{
-            "privateCharacter":". , - , _ kullanımı dışında özel karakter kullanılamaz boşluk bırakılamaz"
+            "privateCharacter":". , - , _ kullanımı dışında özel karakter kullanılamaz boşluk bırakılamaz.Özel Karakterden en fazla 3 hak vardır"
         },
         "password":"parola güçlü olmalı minimum 6 maximum 30 karakter içermeli",
         "rePassword":"şifreler uyuşmuyor",

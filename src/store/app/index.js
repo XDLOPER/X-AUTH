@@ -15,7 +15,7 @@ const initialState = {
                 description:'',
             },
             time:''
-        }*/,
+        },*/
 
     ],
     data:{
@@ -41,7 +41,7 @@ const app = createSlice({
             state.loading = action.payload
         },
         _setErrors:(state,action)=>{
-            state.errors = action.payload
+            state.errors = [...state.errors,action.payload]
         },
         _setDataUniversalWords:(state,action)=>{
             state.data.universalWords = action.payload

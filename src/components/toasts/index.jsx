@@ -9,10 +9,10 @@ const Toasts = (props) => {
   return (
     <Toast show={show} onClose={toastShowClose} animation="true" delay={3000} autohide {...rest}>
         <Toast.Header>
-            <strong className="me-auto">{data.title}</strong>
-            <small>{data.time}</small>
+            <strong className="me-auto">{data?.title}</strong>
+            <small>{data?.time}</small>
         </Toast.Header>
-        <Toast.Body>{data.body ? 'buradan devam edecek body array gelebilir gelmeyedebilir' : 'bir sorun oluştu'}</Toast.Body>
+        <Toast.Body>{data?.body ? data.body?.message : 'bir sorun oluştu'}</Toast.Body>
     </Toast>
   )
 }

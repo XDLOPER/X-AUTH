@@ -33,6 +33,7 @@ const Index = ({context}) => {
 
     surname:Yup
     .string(universalWords.validCharacter)
+    .matches(/^[a-zA-ZçğıiöşüĞİÖŞÜÇ]+[a-zA-ZçğıiöşüĞİÖŞÜÇ]*$/, universalWords.privateCharacter)
     .matches(/^[a-zA-Z]+$/, universalWords.privateCharacter),
 
     date:Yup.object({
@@ -65,7 +66,7 @@ const Index = ({context}) => {
   }
 
   const formik = useFormik({    
-      initialValues:{...formData.sign_up},
+      initialValues:{...formData.signUp},
       validationSchema,
       onSubmit
   })

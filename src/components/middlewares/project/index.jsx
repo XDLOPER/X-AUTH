@@ -14,7 +14,7 @@ const ProjectMiddlewares = ({children}) => {
       try {
         const value = await import('../../../utils/universal-words/index.json');
         const data = JSON.parse(JSON.stringify(value));
-        setDataUniversalWords(data.default)
+        setDataUniversalWords(data.default) // error bug
 
         setLoading(true);
       } catch (error) {

@@ -6,7 +6,7 @@
   import { useData } from '../../../store/controls/hooks.js'
   import { setDataSignIn } from '../../../store/controls/actions.js'
   import { useDataUniversalWords } from '../../../store/app/hooks.js'
-  import {setLoading, setMainTitle} from '../../../store/app/actions.js'
+  import {setErrors, setLoading, setMainTitle} from '../../../store/app/actions.js'
   import {setButtonBack,setButtonNext,setButtonSubmit} from '../../../store/buttons/actions.js'
 
   import Text from '../../../components/forms/text.jsx'
@@ -25,7 +25,8 @@ const SignIn = ({context}) => {
   const validationSchema = Yup.object({
     usernameAndEmail:Yup
     .string(universalWords.validCharacter)
-    .matches(/^[a-zA-Z0-9.\-_]+$/, universalWords.username.privateCharacter)
+    .min(2, universalWords.twoCharacter)
+    .matches(/^(?=(?:[^.]*\.){0,3}[^.]*$)(?=(?:[^-]*-){0,3}[^-]*$)(?=(?:[^_]*_){0,3}[^_]*$)(?=(?:[^@]*@){0,3}[^@]*$)[a-zA-Z0-9._@-]+$/,universalWords.username.privateCharacter)
     .required(universalWords.required),
 
     password:Yup
@@ -39,25 +40,55 @@ const SignIn = ({context}) => {
     setButtonSubmit({disabled:true})
     setDataSignIn({...values})
 
-    console.log(formData)
-
-    examplefetch().then((result)=>{
-      setLoading(false)
-      setButtonSubmit({disabled:false})
+    // comunicate the backend
+    fetch('/api/v1/auth/login',{
+      method:'POST',
+      headers:{
+        'Content-type': 'application/json'
+      },
+      body:JSON.stringify({
+        username:values.usernameAndEmail,
+        email:values.usernameAndEmail,
+        password:values.password
+      })
+    })
+    .then(response =>{
+      return response.json() // Bu da bir promise döndürüyor
+    }) 
+    .then(data => {
+      if(data.status !== 'SUCCESS'){
+        setErrors({
+          title:data?.status,
+          body:{
+            message:data?.message 
+          },
+          time:data?.time
+        })
+        
+    }else{
       navigate('/finish')
-    }).catch((error) => {alert(error?.message)});
+    }
+
+    setButtonSubmit({disabled:false})
+    setLoading(false)
+  })
+  .catch(error => {
+    console.error(error);
+  })
+  //
 
 
   }
 
   const formik = useFormik({
-    initialValues:{...formData.sign_in},
+    initialValues:{...formData.signIn},
     validationSchema,
     onSubmit
   })
 
   useEffect(()=>{
     setMainTitle('oturum aç')
+    setLoading(false)
 
     setButtonBack({active:false})
     setButtonSubmit({title:'oturum aç',active:true})

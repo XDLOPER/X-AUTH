@@ -24,7 +24,7 @@ const Index = ({context}) => {
 
   useEffect(() => {
     setMainTitle('');
-    setLoading(false)
+    setLoading(true)
 
     setButtonBack({URL:'/',active:false,})
     setButtonSubmit({URL:'/',active:false,})

@@ -4,14 +4,14 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup'
 
 import { useDataUniversalWords } from '../../../../store/app/hooks';
-import { useData } from '../../../../store/controls/hooks';
+import { useData, useDataSignUp } from '../../../../store/controls/hooks';
 import {setButtonSubmit,setButtonBack,setButtonNext} from '../../../../store/buttons/actions'
 import { setDataSignUp, setStep } from '../../../../store/controls/actions';
 
 import Checkbox from '../../../../components/forms/checkbox';
 
 import { contract } from '../../../../utils/consts/contract';
-import { setLoading } from '../../../../store/app/actions';
+import { setErrors, setLoading } from '../../../../store/app/actions';
 
 import {examplefetch} from '../../../../utils/helpers/exampleFetch'
 
@@ -39,23 +39,42 @@ const Index = ({context}) => {
     //console.log('signIn step-5 submit edildi burada controller yapılacak',JSON.stringify(values))
     setDataSignUp({...values})
 
+    console.log({...formData.signUp})
+    fetch('/api/v1/auth/register',{
+      method:'POST',
+      headers:{
+        'Content-type': 'application/json'
+      },
+      body:JSON.stringify({
+        ...formData.signUp,email:'degisecek@gg'+Math.random(0,100)*100+".com"
+      })
+    })
+    .then(response =>{
+      return response.json() // Bu da bir promise döndürüyor
+    }) 
+    .then(data => {
+      if(data.status !== 'SUCCESS'){
 
-    examplefetch().then(result => {
-      setLoading(false)
-      setButtonSubmit({disabled:false})
+        
+    }else{
       navigate('/finish')
+    }
 
-      
-      console.log(result);
-    });
+    setButtonSubmit({disabled:false})
+    setLoading(false)
+    })
+    .catch(error => {
+      console.error(error);
+    })
+    //
 
-    console.log(formData)
+    console.log(formData.signUp)
   }
 
 
 
   const formik = useFormik({
-      initialValues:{...formData.sign_up},
+      initialValues:{...formData.signUp},
       validationSchema,
       onSubmit
   })
@@ -76,7 +95,7 @@ const Index = ({context}) => {
         <form onSubmit={formik.handleSubmit}>
           <p>Aşşağıda Bulunan Metinlerleri Onayladığımı Arz Ederim Bu Metinler Benim Üzerimde Tüm Haklarımı Elimden Alıyor Adeta Beni Çorak Bırakıyor</p>
           <Checkbox 
-            name="infoCheck1" 
+            name="contract.infoCheck1" 
             label="Genel Hesap Yetkilerini Onaylıyorum"
             modal={{
               name:'okModal',
@@ -85,14 +104,14 @@ const Index = ({context}) => {
                 body:contract[0].body
               }
             }}
-            {...formik.getFieldProps('infoCheck1')}
-            checked={formik.values.infoCheck1}
-            touch={formik.touched.infoCheck1} 
-            error={formik.errors.infoCheck1}
+            {...formik.getFieldProps('contract.infoCheck1')}
+            checked={formik.values.contract?.infoCheck1}
+            touch={formik.touched.contract?.infoCheck1} 
+            error={formik.errors.contract?.infoCheck1}
           >
           </Checkbox>
           <Checkbox 
-            name="infoCheck2" 
+            name="contract.infoCheck2" 
             label="Ödeme İşlemleri Yetkilerini Onaylıyorum"
             modal={{
               name:'okModal',
@@ -101,14 +120,14 @@ const Index = ({context}) => {
                 body:contract[1].body
               }
             }}
-            {...formik.getFieldProps('infoCheck2')}
-            checked={formik.values.infoCheck2}
-            touch={formik.touched.infoCheck2} 
-            error={formik.errors.infoCheck2}
+            {...formik.getFieldProps('contract.infoCheck2')}
+            checked={formik.values.contract?.infoCheck2}
+            touch={formik.touched.contract?.infoCheck2} 
+            error={formik.errors.contract?.infoCheck2}
           >
           </Checkbox>
           <Checkbox 
-            name="infoCheck3" 
+            name="contract.infoCheck3" 
             label="İşlemler ve İstatistikler Yetkilerini Onaylıyorum"
             modal={{
               name:'okModal',
@@ -117,10 +136,10 @@ const Index = ({context}) => {
                 body:contract[2].body
               }
             }}
-            {...formik.getFieldProps('infoCheck3')}
-            checked={formik.values.infoCheck3}
-            touch={formik.touched.infoCheck3} 
-            error={formik.errors.infoCheck3}
+            {...formik.getFieldProps('contract.infoCheck3')}
+            checked={formik.values.contract?.infoCheck3}
+            touch={formik.touched.contract?.infoCheck3} 
+            error={formik.errors.contract?.infoCheck3}
             >
           </Checkbox>
           <button style={{display:'none'}} ref={buttonFormDataSubmitRef}></button>

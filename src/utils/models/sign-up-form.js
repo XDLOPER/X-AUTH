@@ -1,5 +1,5 @@
-import * as date from '../date'
-import {gender} from '../gender'
+import * as date from '../consts/date'
+import {gender} from '../consts/gender'
 
 export const initialValue = {
     // step 1
@@ -18,7 +18,10 @@ export const initialValue = {
     rePassword: '',
 
     // step 3
-    infoCheck1:false,
-    infoCheck2:false,
-    infoCheck3:false,
+    contract:{
+      infoCheck1:false,
+      infoCheck2:false,
+      infoCheck3:false,
+    }
+
 }

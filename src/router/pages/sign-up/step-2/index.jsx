@@ -9,6 +9,7 @@ import {setButtonSubmit,setButtonBack,setButtonNext} from '../../../../store/but
 import Text from '../../../../components/forms/text';
 
 import { setDataSignUp, setStep } from '../../../../store/controls/actions';
+import { setErrors, setLoading } from '../../../../store/app/actions';
 
 const Index = ({context}) => {
   const [buttonFormDataSubmitRef] = useOutletContext(context) 
@@ -20,6 +21,8 @@ const Index = ({context}) => {
   const validationSchema = Yup.object({
     username:Yup
     .string(universalWords.validCharacter)
+    .min(2, universalWords.twoCharacter)
+    .max(10, universalWords.tenCharacter)
     .matches(/^[a-zA-Z0-9.\-_]+$/, universalWords.username.privateCharacter)
     .required(universalWords.required),  
 
@@ -37,13 +40,40 @@ const Index = ({context}) => {
   })
 
   const onSubmit = (values)=>{
+    setLoading(true)
+    setButtonSubmit({disabled:true})
     //console.log('signIn step-2 submit edildi burada controller yapılacak',JSON.stringify(values))
     setDataSignUp({...values})
-    navigate('/sign-up/step-5')
+    
+    fetch('/api/v1/auth/users')
+    .then(response => response.json()) // Bu da bir promise döndürebilir
+    .then(data => {
+      console.log(data); // Burada, isteğin JSON verisini alabilirsiniz
+
+      const usernameValid = data.message.find((value) => value.username === values.username)
+
+      if(usernameValid){
+        setErrors({
+          title:'kullanıcı adı kullanılıyor',
+          body:{
+            message:'farklı bir kullanıcı adı seçmelisin'
+          },
+        })
+      }else{
+        setButtonSubmit({disabled:false})
+        setLoading(false)
+        navigate('/sign-up/step-5')
+      }
+    })
+    .catch(error => {
+      console.error(error);
+    });
+    
+    //navigate('/sign-up/step-5')
   }
 
   const formik = useFormik({
-      initialValues:{...formData.sign_up},
+      initialValues:{...formData.signUp},
       validationSchema,
       onSubmit
   })
