@@ -7,7 +7,7 @@ import logo from '../../media/images/logo.png'
 
 import { useModals } from '../../store/modals/hooks';
 import {useMainTitle,useLoading, useErrors} from '../../store/app/hooks'
-import {setLoading} from '../../store/app/actions'
+import {setDeleteErrors, setErrors, setLoading} from '../../store/app/actions'
 import {useButtons} from '../../store/buttons/hooks'
 
 import AtomusLoading from '../../components/loading/atomusLoading'
@@ -30,6 +30,13 @@ const LAYOUT = () => {
     if(type !== 'left' && buttonFormDataSubmitRef){
       buttonFormDataSubmitRef?.current?.click()
     }
+  };
+
+  const onCloseToast = (index) => {
+    const newList = [...errorList]; // react hookları direk errorList üzerinden diziyi değiştirmeye izin vermiyor.
+    newList.pop(); // Diziden bir öğe çıkar
+    console.log(newList);
+    setDeleteErrors(newList);
   };
   
   return (
@@ -55,11 +62,12 @@ const LAYOUT = () => {
                       {
                         errorList.map((error,index)=>{
                           return (
-                              <Toasts key={index} data={error}></Toasts>
+                              <Toasts key={index} data={error} onClose={onCloseToast} style={{position:"relative",top:`${-80 * index}px`}}></Toasts>
                           )
                           
                         })
                       }
+                      <div className={errorList.length > 2 ? 'gradient-bar' : 'pasive'}></div>
                     </div>
                       <Outlet context={[buttonFormDataSubmitRef]}></Outlet>           
                     <br />

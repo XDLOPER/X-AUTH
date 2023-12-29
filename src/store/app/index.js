@@ -41,7 +41,15 @@ const app = createSlice({
             state.loading = action.payload
         },
         _setErrors:(state,action)=>{
-            state.errors = [...state.errors,action.payload]
+            if(state.errors.length < 3){
+                state.errors = [...state.errors,action.payload]
+            }else{
+                const endTwoErrors = state.errors.slice(-2) // slice(-1,-2) methodu yanlış çalışıyor. onun yerine -2 yazarsak direk -1,-2'nci değerleri alıyor
+                state.errors = [...endTwoErrors,action.payload]
+            }
+        },
+        _setDeleteErrors:(state,action)=>{
+            state.errors = action.payload
         },
         _setDataUniversalWords:(state,action)=>{
             state.data.universalWords = action.payload
@@ -52,5 +60,5 @@ const app = createSlice({
     }
 })
 
-export const {_setAuth,_setTheme,_setLanguage,_setLoading,_setErrors,_setDataUniversalWords,_setMainTitle} = app.actions
+export const {_setAuth,_setTheme,_setLanguage,_setLoading,_setErrors,_setDeleteErrors,_setDataUniversalWords,_setMainTitle} = app.actions
 export default app.reducer

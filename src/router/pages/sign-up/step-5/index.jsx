@@ -22,15 +22,17 @@ const Index = ({context}) => {
   const universalWords = useDataUniversalWords().forms
   
   const validationSchema = Yup.object({
-    infoCheck1: Yup
-    .boolean(universalWords.required)
-    .oneOf([true], universalWords.checkbox),
-    infoCheck2: Yup
-    .boolean(universalWords.required)
-    .oneOf([true], universalWords.checkbox),
-    infoCheck3: Yup
-    .boolean(universalWords.required)
-    .oneOf([true], universalWords.checkbox),
+    contract:Yup.object({
+      infoCheck1: Yup
+      .boolean(universalWords.required)
+      .oneOf([true], universalWords.checkbox),
+      infoCheck2: Yup
+      .boolean(universalWords.required)
+      .oneOf([true], universalWords.checkbox),
+      infoCheck3: Yup
+      .boolean(universalWords.required)
+      .oneOf([true], universalWords.checkbox),
+    })
   });
 
   const onSubmit = (values)=>{
@@ -39,14 +41,15 @@ const Index = ({context}) => {
     //console.log('signIn step-5 submit edildi burada controller yapılacak',JSON.stringify(values))
     setDataSignUp({...values})
 
-    console.log({...formData.signUp})
+
+  // comunicate the backend
     fetch('/api/v1/auth/register',{
       method:'POST',
       headers:{
         'Content-type': 'application/json'
       },
       body:JSON.stringify({
-        ...formData.signUp,email:'degisecek@gg'+Math.random(0,100)*100+".com"
+        ...formData.signUp,...values,email:'yasokaso'+Math.floor(Math.random()*100)+'@hotmail.com'
       })
     })
     .then(response =>{
@@ -54,7 +57,13 @@ const Index = ({context}) => {
     }) 
     .then(data => {
       if(data.status !== 'SUCCESS'){
-
+        setErrors({
+          title:data?.status,
+          body:{
+            message:data?.message 
+          },
+          time:data?.time
+        })
         
     }else{
       navigate('/finish')
@@ -65,13 +74,19 @@ const Index = ({context}) => {
     })
     .catch(error => {
       console.error(error);
+      setErrors({
+        title:'ERROR',
+        body:{
+          message:error.message
+        },
+      })
+      setButtonSubmit({disabled:false})
+      setLoading(false)
     })
-    //
+  //
 
     console.log(formData.signUp)
   }
-
-
 
   const formik = useFormik({
       initialValues:{...formData.signUp},

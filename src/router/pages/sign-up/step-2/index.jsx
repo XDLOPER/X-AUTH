@@ -50,23 +50,32 @@ const Index = ({context}) => {
     .then(data => {
       console.log(data); // Burada, isteğin JSON verisini alabilirsiniz
 
-      const usernameValid = data.message.find((value) => value.username === values.username)
+      const usernameValid = data.message?.find((value) => value.username === values.username)
 
       if(usernameValid){
         setErrors({
-          title:'kullanıcı adı kullanılıyor',
+          title:'info',
           body:{
-            message:'farklı bir kullanıcı adı seçmelisin'
+            message:'"' + usernameValid.username + '"' + " " + 'kullanıcı adı zaten mevcut'
           },
+          time:data?.time
         })
       }else{
-        setButtonSubmit({disabled:false})
-        setLoading(false)
         navigate('/sign-up/step-5')
       }
+      setButtonSubmit({disabled:false})
+      setLoading(false)
     })
     .catch(error => {
       console.error(error);
+      setErrors({
+        title:'ERROR',
+        body:{
+          message:error.message
+        },
+      })
+      setButtonSubmit({disabled:false})
+      setLoading(false)
     });
     
     //navigate('/sign-up/step-5')

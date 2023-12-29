@@ -40,7 +40,7 @@ const SignIn = ({context}) => {
     setButtonSubmit({disabled:true})
     setDataSignIn({...values})
 
-    // comunicate the backend
+  // comunicate the backend
     fetch('/api/v1/auth/login',{
       method:'POST',
       headers:{
@@ -71,10 +71,18 @@ const SignIn = ({context}) => {
 
     setButtonSubmit({disabled:false})
     setLoading(false)
-  })
-  .catch(error => {
-    console.error(error);
-  })
+    })
+    .catch(error => {
+      console.error(error);
+      setErrors({
+        title:'ERROR',
+        body:{
+          message:error.message
+        },
+      })
+      setButtonSubmit({disabled:false})
+      setLoading(false)
+    })
   //
 
 

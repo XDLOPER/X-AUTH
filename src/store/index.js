@@ -6,8 +6,6 @@ import controls from './controls/index'
 import modals from './modals/index'
 import buttons from './buttons/index'
 
-
-
 const store = configureStore({
     reducer:{
         project,
