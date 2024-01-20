@@ -1,6 +1,5 @@
 import React, { useState ,useRef, useEffect} from 'react'
 import { Button, Overlay ,OverlayTrigger,Tooltip } from 'react-bootstrap';
-import { TiInfoOutline } from "react-icons/ti";
 
 const Text = (props) => {
   const {error,touch,...rest} = props
@@ -8,7 +7,7 @@ const Text = (props) => {
 
   const touchAndError = (err,elseErr) => {
     return (error && touch) ? err : elseErr
-  }
+  } 
 
   return (
     <div className='input-wrapper'>
@@ -16,9 +15,12 @@ const Text = (props) => {
           //trigger="click"
           placement={'right'}
           overlay={
+            error && touch ?
             <Tooltip id={`tooltip-right`}>
               <strong>{touchAndError(error,null)}</strong>
             </Tooltip>
+            :
+            <></>
           }
         >
           <input

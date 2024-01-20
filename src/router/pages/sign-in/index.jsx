@@ -6,13 +6,15 @@
   import { useData } from '../../../store/controls/hooks.js'
   import { setDataSignIn } from '../../../store/controls/actions.js'
   import { useDataUniversalWords } from '../../../store/app/hooks.js'
-  import {setErrors, setLoading, setMainTitle} from '../../../store/app/actions.js'
+  import {setDeleteErrors, setErrors, setLoading, setMainTitle} from '../../../store/app/actions.js'
   import {setButtonBack,setButtonNext,setButtonSubmit} from '../../../store/buttons/actions.js'
 
   import Text from '../../../components/forms/text.jsx'
   import Checkbox from '../../../components/forms/checkbox.jsx'
 
   import {examplefetch} from '../../../utils/helpers/exampleFetch'
+  import { sentenceCutter } from '../../../utils/helpers/sentenceCutter.js'
+  
 
 
 const SignIn = ({context}) => {
@@ -60,11 +62,10 @@ const SignIn = ({context}) => {
         setErrors({
           title:data?.status,
           body:{
-            message:data?.message 
+            message: sentenceCutter(data?.message,50)  
           },
           time:data?.time
         })
-        
     }else{
       navigate('/finish')
     }
@@ -77,7 +78,7 @@ const SignIn = ({context}) => {
       setErrors({
         title:'ERROR',
         body:{
-          message:error.message
+          message:sentenceCutter(error?.message,50)
         },
       })
       setButtonSubmit({disabled:false})
@@ -97,6 +98,8 @@ const SignIn = ({context}) => {
   useEffect(()=>{
     setMainTitle('oturum aç')
     setLoading(false)
+
+    setDeleteErrors([])
 
     setButtonBack({active:false})
     setButtonSubmit({title:'oturum aç',active:true})

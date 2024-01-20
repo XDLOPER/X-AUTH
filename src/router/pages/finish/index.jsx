@@ -4,12 +4,12 @@ import { useOutletContext,useNavigate,useLocation } from 'react-router';
 import { useDataUniversalWords } from '../../../store/app/hooks';
 import { useData } from '../../../store/controls/hooks';
 import {setButtonBack, setButtonNext, setButtonSubmit} from '../../../store/buttons/actions'
-import {setDataSignIn, setStep} from '../../../store/controls/actions'
+import {setDataSignIn, setDataSignUp, setStep} from '../../../store/controls/actions'
 
 import {location} from '../../../utils/helpers/location'
 
 import vectorURL from '../../../media/images/finish.png'
-import { setLoading, setMainTitle } from '../../../store/app/actions';
+import { setDeleteErrors, setLoading, setMainTitle } from '../../../store/app/actions';
 
 const Index = ({context}) => {
   const [buttonFormDataSubmitRef] = useOutletContext(context) 
@@ -25,6 +25,8 @@ const Index = ({context}) => {
   useEffect(() => {
     setMainTitle('');
     setLoading(true)
+
+    setDeleteErrors([])
 
     setButtonBack({URL:'/',active:false,})
     setButtonSubmit({URL:'/',active:false,})

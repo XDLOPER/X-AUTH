@@ -35,7 +35,6 @@ const LAYOUT = () => {
   const onCloseToast = (index) => {
     const newList = [...errorList]; // react hookları direk errorList üzerinden diziyi değiştirmeye izin vermiyor.
     newList.pop(); // Diziden bir öğe çıkar
-    console.log(newList);
     setDeleteErrors(newList);
   };
   
@@ -60,14 +59,14 @@ const LAYOUT = () => {
                   <div className="content">
                     <div className='content-error'>
                       {
-                        errorList.map((error,index)=>{
+                        errorList?.map((error,index)=>{
                           return (
                               <Toasts key={index} data={error} onClose={onCloseToast} style={{position:"relative",top:`${-80 * index}px`}}></Toasts>
                           )
                           
                         })
                       }
-                      <div className={errorList.length > 2 ? 'gradient-bar' : 'pasive'}></div>
+                      <div className={errorList?.length > 2 ? 'gradient-bar' : 'pasive'}></div>
                     </div>
                       <Outlet context={[buttonFormDataSubmitRef]}></Outlet>           
                     <br />

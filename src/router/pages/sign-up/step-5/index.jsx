@@ -11,9 +11,11 @@ import { setDataSignUp, setStep } from '../../../../store/controls/actions';
 import Checkbox from '../../../../components/forms/checkbox';
 
 import { contract } from '../../../../utils/consts/contract';
-import { setErrors, setLoading } from '../../../../store/app/actions';
+import { setDeleteErrors, setErrors, setLoading } from '../../../../store/app/actions';
 
 import {examplefetch} from '../../../../utils/helpers/exampleFetch'
+import { sentenceCutter } from '../../../../utils/helpers/sentenceCutter';
+
 
 const Index = ({context}) => {
   const [buttonFormDataSubmitRef] = useOutletContext(context) 
@@ -60,7 +62,7 @@ const Index = ({context}) => {
         setErrors({
           title:data?.status,
           body:{
-            message:data?.message 
+            message:sentenceCutter(data?.message,50) 
           },
           time:data?.time
         })
@@ -77,7 +79,7 @@ const Index = ({context}) => {
       setErrors({
         title:'ERROR',
         body:{
-          message:error.message
+          message:sentenceCutter(error?.message,50)
         },
       })
       setButtonSubmit({disabled:false})
@@ -99,6 +101,8 @@ const Index = ({context}) => {
     const pathname = window.location.pathname;  
     setStep(pathname.split('/')[pathname.split('/').length -1].split('-')[1])
 
+    setDeleteErrors([])
+
     setButtonNext({active:false,URL:''})
     setButtonSubmit({title:'kayıt ol',active:true,URL:''});
     setButtonBack({title:'',active:true,URL:'sign-up/step-2'})
@@ -108,7 +112,8 @@ const Index = ({context}) => {
   return (
     <>
         <form onSubmit={formik.handleSubmit}>
-          <p>Aşşağıda Bulunan Metinlerleri Onayladığımı Arz Ederim Bu Metinler Benim Üzerimde Tüm Haklarımı Elimden Alıyor Adeta Beni Çorak Bırakıyor</p>
+          <p>Aşağıda yer alan ifadeleri onayladığımı beyan ederim. Bu ifadeler,birtakım sınırlamalara tabi olduğumu kabul ettiğimi göstermektedir. Bu hususta gerekli olan tüm yükümlülükleri yerine getireceğimi taahhüt ederim.</p>
+          <div style={{height:"10px"}} />
           <Checkbox 
             name="contract.infoCheck1" 
             label="Genel Hesap Yetkilerini Onaylıyorum"

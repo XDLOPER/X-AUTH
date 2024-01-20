@@ -11,6 +11,9 @@ import Text from '../../../../components/forms/text';
 import { setDataSignUp, setStep } from '../../../../store/controls/actions';
 import { setErrors, setLoading } from '../../../../store/app/actions';
 
+import { sentenceCutter } from '../../../../utils/helpers/sentenceCutter';
+
+
 const Index = ({context}) => {
   const [buttonFormDataSubmitRef] = useOutletContext(context) 
   const navigate = useNavigate()
@@ -48,15 +51,13 @@ const Index = ({context}) => {
     fetch('/api/v1/auth/users')
     .then(response => response.json()) // Bu da bir promise döndürebilir
     .then(data => {
-      console.log(data); // Burada, isteğin JSON verisini alabilirsiniz
-
       const usernameValid = data.message?.find((value) => value.username === values.username)
 
       if(usernameValid){
         setErrors({
           title:'info',
           body:{
-            message:'"' + usernameValid.username + '"' + " " + 'kullanıcı adı zaten mevcut'
+          message:sentenceCutter('"' + usernameValid.username + '"' + " " + 'kullanıcı adı zaten mevcut',50)
           },
           time:data?.time
         })
@@ -71,7 +72,7 @@ const Index = ({context}) => {
       setErrors({
         title:'ERROR',
         body:{
-          message:error.message
+          message:sentenceCutter(error?.message,50)
         },
       })
       setButtonSubmit({disabled:false})
