@@ -1,7 +1,8 @@
 import React,{useEffect} from 'react'
-import { useOutletContext,useNavigate } from 'react-router';
-import { useFormik } from 'formik';
+import { useOutletContext,useNavigate } from 'react-router'
+import { useFormik } from 'formik'
 import * as Yup from 'yup'
+import axios from 'axios'
 
 import { useDataUniversalWords } from '../../../../store/app/hooks';
 import { useData, useDataSignUp } from '../../../../store/controls/hooks';
@@ -15,7 +16,8 @@ import { setDeleteErrors, setErrors, setLoading } from '../../../../store/app/ac
 
 import {examplefetch} from '../../../../utils/helpers/exampleFetch'
 import { sentenceCutter } from '../../../../utils/helpers/sentenceCutter';
-
+import { convertMoonStringToIndex } from '../../../../utils/helpers/convert/convertDateStringToIndex'
+import { convertGenderLanguage } from '../../../../utils/helpers/convert/convertGenderLanguage'
 
 const Index = ({context}) => {
   const [buttonFormDataSubmitRef] = useOutletContext(context) 
@@ -45,34 +47,33 @@ const Index = ({context}) => {
 
 
   // comunicate the backend
-    fetch('/api/v1/auth/register',{
-      method:'POST',
-      headers:{
-        'Content-type': 'application/json'
+    const postData = {
+      ...formData.signUp,...values,
+      date:{
+        ...formData.signUp.date,
+        moon:convertMoonStringToIndex(formData.signUp.date.moon),
       },
-      body:JSON.stringify({
-        ...formData.signUp,...values,email:'yasokaso'+Math.floor(Math.random()*100)+'@hotmail.com'
-      })
-    })
-    .then(response =>{
-      return response.json() // Bu da bir promise döndürüyor
-    }) 
-    .then(data => {
-      if(data.status !== 'SUCCESS'){
-        setErrors({
-          title:data?.status,
-          body:{
-            message:sentenceCutter(data?.message,50) 
-          },
-          time:data?.time
-        })
-        
-    }else{
-      navigate('/finish')
+      gender:convertGenderLanguage(formData.signUp.gender)
     }
+    
+    axios.post('/v1/auth/register', {
+      ...postData
+    })
+    .then(response => {
 
-    setButtonSubmit({disabled:false})
-    setLoading(false)
+      if(!response.data.success){
+        setErrors({
+          title:'error',
+          body:{
+            message:sentenceCutter(response.data?.message,50) 
+          },
+        }) 
+      }else{
+        navigate('/finish')
+      }
+
+      setButtonSubmit({disabled:false})
+      setLoading(false)
     })
     .catch(error => {
       console.error(error);
@@ -87,7 +88,7 @@ const Index = ({context}) => {
     })
   //
 
-    console.log(formData.signUp)
+    console.log({...formData.signUp,...values})
   }
 
   const formik = useFormik({
@@ -112,7 +113,7 @@ const Index = ({context}) => {
   return (
     <>
         <form onSubmit={formik.handleSubmit}>
-          <p>Aşağıda yer alan ifadeleri onayladığımı beyan ederim. Bu ifadeler,birtakım sınırlamalara tabi olduğumu kabul ettiğimi göstermektedir. Bu hususta gerekli olan tüm yükümlülükleri yerine getireceğimi taahhüt ederim.</p>
+          <b>Uygulama için gerekli izinleri doldurmanız gerekmektedir. (Yan tarafta bulunan bilgi bölümünden içeriğe göz atabilirsiniz).</b>
           <div style={{height:"10px"}} />
           <Checkbox 
             name="contract.infoCheck1" 

@@ -2,6 +2,7 @@ import React,{useEffect} from 'react'
 import { useOutletContext,useNavigate } from 'react-router';
 import { useFormik } from 'formik';
 import * as Yup from 'yup'
+import axios from 'axios'
 
 import { useDataUniversalWords } from '../../../../store/app/hooks';
 import { useData } from '../../../../store/controls/hooks';
@@ -19,7 +20,6 @@ const Index = ({context}) => {
   const navigate = useNavigate()
   const formData = useData()
   const universalWords = useDataUniversalWords().forms
-  
 
   const validationSchema = Yup.object({
     username:Yup
@@ -27,13 +27,17 @@ const Index = ({context}) => {
     .min(2, universalWords.twoCharacter)
     .max(10, universalWords.tenCharacter)
     .matches(/^[a-zA-Z0-9.\-_]+$/, universalWords.username.privateCharacter)
+    .required(universalWords.required),
+
+    email:Yup
+    .string(universalWords.validCharacter)
+    .email(universalWords.email.check)
     .required(universalWords.required),  
 
     password:Yup
     .string(universalWords.validCharacter)
     .matches(/^[\s\S]{6,30}$/, universalWords.password)
     .required(universalWords.required),  
-
 
     rePassword:Yup
     .string(universalWords.validCharacter)
@@ -47,28 +51,30 @@ const Index = ({context}) => {
     setButtonSubmit({disabled:true})
     //console.log('signIn step-2 submit edildi burada controller yapılacak',JSON.stringify(values))
     setDataSignUp({...values})
-    
-    fetch('/api/v1/auth/users')
-    .then(response => response.json()) // Bu da bir promise döndürebilir
-    .then(data => {
-      const usernameValid = data.message?.find((value) => value.username === values.username)
 
-      if(usernameValid){
+    axios.post('/v1/auth/login', {
+      username: values.username,
+      email: values.email,
+      password: values.password
+    })
+    .then(response => {
+
+      if(response.data.message.includes('not match')){
         setErrors({
           title:'info',
           body:{
-          message:sentenceCutter('"' + usernameValid.username + '"' + " " + 'kullanıcı adı zaten mevcut',50)
+            message:sentenceCutter('"' + values.username + '"' + " " + 'kullanıcı adı zaten mevcut',50)
           },
-          time:data?.time
         })
       }else{
-        navigate('/sign-up/step-5')
+          navigate('/sign-up/step-5')
       }
+
       setButtonSubmit({disabled:false})
       setLoading(false)
     })
     .catch(error => {
-      console.error(error);
+      console.error(error)
       setErrors({
         title:'ERROR',
         body:{
@@ -77,7 +83,7 @@ const Index = ({context}) => {
       })
       setButtonSubmit({disabled:false})
       setLoading(false)
-    });
+    })
     
     //navigate('/sign-up/step-5')
   }
@@ -94,7 +100,7 @@ const Index = ({context}) => {
 
     setButtonNext({active:true})
     setButtonSubmit({active:false})
-    setButtonBack({URL:'sign-up/step-1'});
+    setButtonBack({URL:'sign-up/step-1',title:''});
   },[]);
 
   return (
@@ -104,24 +110,34 @@ const Index = ({context}) => {
           <Text
             name="username" 
             type="username" 
-            placeholder="username" 
+            placeholder="kullanıcı adı" 
             value={formik.values.username} 
             onChange={formik.handleChange} 
             onBlur={formik.handleBlur} 
             touch={formik.touched?.username} 
             error={formik.errors?.username}
           />
+          <Text
+            name="email" 
+            type="email" 
+            placeholder="e posta adresi" 
+            value={formik.values.email} 
+            onChange={formik.handleChange} 
+            onBlur={formik.handleBlur} 
+            touch={formik.touched?.email} 
+            error={formik.errors?.email}
+          />
           <Text 
             name="password" 
             type="password" 
-            placeholder="password" 
+            placeholder="şifre" 
             value={formik.values.password} 
             onChange={formik.handleChange} 
             onBlur={formik.handleBlur} 
             touch={formik.touched?.password} 
             error={formik.errors?.password}
           />
-          <Text name="rePassword" type="password" placeholder="password" value={formik.values.rePassword} onChange={formik.handleChange} onBlur={formik.handleBlur} touch={formik.touched.rePassword} error={formik.errors.rePassword}/>
+          <Text name="rePassword" type="password" placeholder="şifre (tekrardan)" value={formik.values.rePassword} onChange={formik.handleChange} onBlur={formik.handleBlur} touch={formik.touched.rePassword} error={formik.errors.rePassword}/>
         </div>
         <button style={{display:'none'}} ref={buttonFormDataSubmitRef}></button>
 

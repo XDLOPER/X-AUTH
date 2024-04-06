@@ -14,10 +14,11 @@ export const initialValue = {
 
     // step 2
     username:'',
+    email:'',
     password:'',
     rePassword: '',
 
-    // step 3
+    // step 5
     contract:{
       infoCheck1:false,
       infoCheck2:false,

@@ -36,7 +36,7 @@ const router = createBrowserRouter([
               children:[
                 {path:'step-1',element:<SignUpStep1/>},
                 {path:'step-2',element:<SignUpStep2/>},
-                {path:'step-3',element:<MailSend/>},
+                {path:'step-3',element:<SignUpStep3/>},
                 {path:'step-4',element:<SignUpStep4/>},
                 {path:'step-5',element:<SignUpStep5/>},
               ]

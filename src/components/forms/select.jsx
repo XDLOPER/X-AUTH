@@ -1,5 +1,4 @@
 import React, { useState, useEffect ,useRef } from 'react';
-import { TiInfoOutline } from 'react-icons/ti';
 import { Form, OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 const Select = (props) => {
@@ -20,9 +19,12 @@ const Select = (props) => {
       <OverlayTrigger
         placement="right"
         overlay={
-          <Tooltip show={showTooltip}>
+          error && touch ?
+          <Tooltip id={`tooltip-right`}>
             <strong>{touchAndError(error,null)}</strong>
           </Tooltip>
+          : 
+          <></>
         }
       >
         {/* The content you want to trigger the overlay should be inside OverlayTrigger */}

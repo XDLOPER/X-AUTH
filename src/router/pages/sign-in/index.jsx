@@ -2,6 +2,7 @@
   import { useOutletContext ,Link,useNavigate } from 'react-router-dom'
   import { useFormik } from 'formik'
   import * as Yup from 'yup'
+  import axios from 'axios'
 
   import { useData } from '../../../store/controls/hooks.js'
   import { setDataSignIn } from '../../../store/controls/actions.js'
@@ -43,35 +44,30 @@ const SignIn = ({context}) => {
     setDataSignIn({...values})
 
   // comunicate the backend
-    fetch('/api/v1/auth/login',{
-      method:'POST',
-      headers:{
-        'Content-type': 'application/json'
-      },
-      body:JSON.stringify({
-        username:values.usernameAndEmail,
-        email:values.usernameAndEmail,
-        password:values.password
-      })
-    })
-    .then(response =>{
-      return response.json() // Bu da bir promise döndürüyor
-    }) 
-    .then(data => {
-      if(data.status !== 'SUCCESS'){
-        setErrors({
-          title:data?.status,
-          body:{
-            message: sentenceCutter(data?.message,50)  
-          },
-          time:data?.time
-        })
-    }else{
-      navigate('/finish')
+    const postData = {
+      ...formData.signIn,...values,
+      username:formData.signIn.usernameAndEmail,
+      email:formData.signIn.usernameAndEmail
     }
+    
+    axios.post('/v1/auth/login', {
+      ...postData
+    })
+    .then(response => {
 
-    setButtonSubmit({disabled:false})
-    setLoading(false)
+      if(!response.data.success){
+        setErrors({
+          title:'error',
+          body:{
+            message:sentenceCutter(response.data?.message,50) 
+          },
+        }) 
+      }else{
+        navigate('/finish')
+      }
+
+      setButtonSubmit({disabled:false})
+      setLoading(false)
     })
     .catch(error => {
       console.error(error);
@@ -109,11 +105,11 @@ const SignIn = ({context}) => {
     return (
       <>
             <form onSubmit={formik.handleSubmit}>
-                  <Text name="usernameAndEmail" type="text" placeholder="username & email" value={formik.values.usernameAndEmail} onChange={formik.handleChange} onBlur={formik.handleBlur} touch={formik.touched.usernameAndEmail} error={formik.errors.usernameAndEmail} />
-                  <Text name="password" type="password" placeholder="password" value={formik.values.password} onChange={formik.handleChange} onBlur={formik.handleBlur} touch={formik.touched.password} error={formik.errors.password}/>
+                  <Text name="usernameAndEmail" type="text" placeholder="kullanıcı adı & e-posta" value={formik.values.usernameAndEmail} onChange={formik.handleChange} onBlur={formik.handleBlur} touch={formik.touched.usernameAndEmail} error={formik.errors.usernameAndEmail} />
+                  <Text name="password" type="password" placeholder="şifre" value={formik.values.password} onChange={formik.handleChange} onBlur={formik.handleBlur} touch={formik.touched.password} error={formik.errors.password}/>
                   <Checkbox
                     name="dontForgetMe" 
-                    label="don't forget me"
+                    label="Oturumu açık tut"
                     modal={{
                       name:'okModal',
                       data:{

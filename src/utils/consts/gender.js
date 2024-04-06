@@ -1,1 +1,1 @@
-export const gender = ['female', 'male','private']
+export const gender = ['kadın', 'erkek','özel']

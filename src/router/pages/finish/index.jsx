@@ -24,13 +24,13 @@ const Index = ({context}) => {
 
   useEffect(() => {
     setMainTitle('');
-    setLoading(true)
+    setLoading(false)
 
     setDeleteErrors([])
 
     setButtonBack({URL:'/',active:false,})
     setButtonSubmit({URL:'/',active:false,})
-    setButtonNext({active:false,})
+    setButtonNext({URL:'/',active:false,})
   },[]);
   
   return (
@@ -39,7 +39,7 @@ const Index = ({context}) => {
         <img src={vectorURL ? vectorURL : null} alt="" style={{width:"75%",margin:'0 auto'}}/>
       </div>
       <div style={{width:"100%",height:'100%',display:'flex'}}>
-        <b style={{margin:'0 auto'}}>yönlendiriliyorsunuz...</b>
+        <b style={{margin:'0 auto'}}>Kaydınız Tamamlandı...</b>
       </div>
     </>
   )

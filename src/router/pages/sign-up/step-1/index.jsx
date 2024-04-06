@@ -9,12 +9,12 @@ import { useData } from '../../../../store/controls/hooks';
 import {setButtonBack, setButtonNext} from '../../../../store/buttons/actions'
 import {setDataSignUp, setStep} from '../../../../store/controls/actions'
 
+import Text from '../../../../components/forms/text';
+import Select from '../../../../components/forms/select';
+
 import * as date from '../../../../utils/consts/date'
 import {gender} from '../../../../utils/consts/gender'
 import {location} from '../../../../utils/helpers/location'
-
-import Text from '../../../../components/forms/text';
-import Select from '../../../../components/forms/select';
 
 const Index = ({context}) => {
   const [buttonFormDataSubmitRef] = useOutletContext(context) 
@@ -108,9 +108,9 @@ const Index = ({context}) => {
   useEffect(() => {
     setStep(location.split('-')[1])
 
-    setButtonBack({URL:'/'})
+    setButtonBack({URL:'/',title:'oturum'})
     setButtonNext({active:true,disabled:false})
-  },[]);
+  },[])
 
   return (
     <>          
@@ -120,7 +120,7 @@ const Index = ({context}) => {
               <Text
                 name="name" 
                 type="text" 
-                placeholder="name" 
+                placeholder="isim" 
                 value={formik.values.name} 
                 onChange={formik.handleChange} 
                 onBlur={formik.handleBlur} 
@@ -130,7 +130,7 @@ const Index = ({context}) => {
               <Text 
                 name="surname" 
                 type="text" 
-                placeholder="surname" 
+                placeholder="soyisim" 
                 value={formik.values.surname} 
                 onChange={formik.handleChange} 
                 onBlur={formik.handleBlur} 

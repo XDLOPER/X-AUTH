@@ -40,7 +40,8 @@ div#x_auth hr#auth{ width:10%; height: 4px; background: #000; border-radius:999p
 div#x_auth .auth-title{text-align: center; font-weight: bolder; font-size: 20px; text-transform: capitalize ;}
 
 footer#auth{flex:0; position: relative;  bottom:0; width: 100%; background-color: transparent;}
-footer#auth .buttonGroup{overflow: hidden; display: grid; grid-template-columns: 10% auto 10%; gap: 100px !important;  height:35px; margin-bottom:10px; gap:0 5px;}
+footer#auth .buttonGroup{overflow: hidden; display: grid; grid-template-columns: 15% auto 15%;  height:35px; margin-bottom:10px; gap:0 5px;}
+footer#auth .buttonGroup{overflow: hidden; display: grid; grid-template-columns: 15% auto 15%;  height:35px; margin-bottom:10px; gap:0 5px;}
 footer#auth  p{margin-bottom:0; text-align: center; flex:1;  align-self: center; font-weight: 900; letter-spacing: 0.5px; font-size: 10px; color:#c2c2c2}
 
 /* animations */
@@ -105,5 +106,4 @@ footer#auth  p{margin-bottom:0; text-align: center; flex:1;  align-self: center;
     }
 
 }
-
 /* others */

@@ -50,19 +50,18 @@ const Index = ({context}) => {
   })
 
   useEffect(() => {
-    const pathname = window.location.pathname;
+    const pathname = window.location.pathname
     setStep(pathname.split('/')[pathname.split('/').length -1].split('-')[1])
 
-    setButtonNext({title:'',active:true,disabled:false,URL:'sign-up/step-4'})
-    setButtonSubmit({title:'',active:false,URL:'sign-up/step-2'})
-    setButtonBack({title:'',active:true,URL:'sign-up/step-2'});
+    setButtonNext({title:'',active:true,disabled:false,URL:'sign-up/step-5'})
+    setButtonBack({title:'',active:true,URL:'sign-up/step-2'})
   },[]);
 
   return (
     <>          
         <form onSubmit={formik.handleSubmit}>
             <div>
-                <p>Şimdi Telefon Numaranı Gir Ve yola Devam Et Bir Sonraki Aşamada Telefonuna SMS ile Onay Kodu Gelicek</p>
+                <p>awdawdŞimdi Telefon Numaranı Gir Ve yola Devam Et Bir Sonraki Aşamada Telefonuna SMS ile Onay Kodu Gelicek</p>
                 <Select
                     name="country"
                     data={countryList.map(value => [value.name])}
