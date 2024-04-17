@@ -52,7 +52,9 @@ const Index = ({context}) => {
     //console.log('signIn step-2 submit edildi burada controller yapılacak',JSON.stringify(values))
     setDataSignUp({...values})
 
-    axios.post('/v1/auth/login', {
+    console.log()
+
+    axios.post('/auth/login', {
       username: values.username,
       email: values.email,
       password: values.password

@@ -49,10 +49,18 @@ const SignIn = ({context}) => {
       username:formData.signIn.usernameAndEmail,
       email:formData.signIn.usernameAndEmail
     }
-    
-    axios.post('/v1/auth/login', {
+
+    const headers = {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE"
+    }
+      
+    axios.post('/auth/login', {
       ...postData
-    })
+    },
+    {
+      headers: headers
+    })  
     .then(response => {
 
       if(!response.data.success){

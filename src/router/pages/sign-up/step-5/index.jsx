@@ -56,7 +56,7 @@ const Index = ({context}) => {
       gender:convertGenderLanguage(formData.signUp.gender)
     }
     
-    axios.post('/v1/auth/register', {
+    axios.post('/auth/register', {
       ...postData
     })
     .then(response => {
