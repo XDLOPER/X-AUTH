@@ -117,7 +117,7 @@ const Index = ({context}) => {
           <div style={{height:"10px"}} />
           <Checkbox 
             name="contract.infoCheck1" 
-            label="Genel Hesap Yetkilerini Onaylıyorum"
+            label="Elektronik Onay Metni"
             modal={{
               name:'okModal',
               data:{

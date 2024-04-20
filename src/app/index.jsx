@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 
 // MEDIA
   import logo from '../media/images/logo.png'
+  import logoKargomucuz from '../media/images/logo-kargomucuz.png'
 
 // CONFIG
   import x_auth_store from '../store/index'
@@ -22,6 +23,7 @@ import { Provider } from "react-redux";
   import '../style/index.css';
   import '../style/form.css';
   import '../style/layout.css';
+  import '../style/animations.css';
   import '../style/media.css';
 
 
@@ -37,7 +39,7 @@ const X_AUTH_APP = ({children}) => {
               if(projectLoading){
                 return <RouterProvider router={router}></RouterProvider>
               }else{
-                return <AtomusLoading loadingState={!projectLoading} logo={logo}/>
+                return <AtomusLoading loadingState={!projectLoading} logo={logoKargomucuz}/>
               }
               
             }

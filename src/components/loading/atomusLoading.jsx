@@ -1,16 +1,15 @@
 import React from 'react'
 
-
 const AtomusLoading = (props) => {
-    const { loadingState,logo } = props
+    const { loadingState, logo } = props
   return (
     <>
-        <div className="w-100 h-100">
+        <div className="w-100 h-100" {...props}>
             <div className="circle">
-                <div className="img" style={loadingState !== true ? {padding:0} : null}><img style={loadingState !== true ? {animationName:'pasive'} : null} className='loadingImage' src={logo} alt=""/></div>
-                <div style={loadingState !== true ? {animationName:'pasive'} : null} className="circleone"></div>
-                <div style={loadingState !== true ? {animationName:'pasive'} : null} className="circletwo"></div>
-                <div style={loadingState !== true ? {animationName:'pasive'} : null} className="circlethree"></div>
+                <div x-animation-start={loadingState ? "true" : "false"} className="logo"><img src={logo} alt=""/></div>
+                <div x-animation-start={loadingState ? "true" : "false"} className="circleone"></div>
+                <div x-animation-start={loadingState ? "true" : "false"} className="circletwo"></div>
+                <div x-animation-start={loadingState ? "true" : "false"} className="circlethree"></div>
             </div>
         </div>
     </>

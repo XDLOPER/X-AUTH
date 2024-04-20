@@ -3,5 +3,5 @@ export const initialValue = {
     // signup
     usernameAndEmail:"",
     password:"",
-    dontForgetMe:""
+    dontForgetMe:true
 }

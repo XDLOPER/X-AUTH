@@ -15,7 +15,7 @@ function SignUp({context}) {
   useEffect(() => {
     setMainTitle('kayıt ol');
     
-    setButtonBack({title:'login',active:true,URL:'/'});
+    setButtonBack({title:'oturum',active:true,URL:'/'});
     setButtonSubmit({active:false});
     setButtonNext({title:'',active:true});
   }, [useButtonNextActive,useButtonBackActive]); // neden useButtonNextActive,useButtonBackActive yaptığımı unuttum

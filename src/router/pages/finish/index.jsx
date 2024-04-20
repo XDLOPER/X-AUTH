@@ -39,7 +39,7 @@ const Index = ({context}) => {
         <img src={vectorURL ? vectorURL : null} alt="" style={{width:"75%",margin:'0 auto'}}/>
       </div>
       <div style={{width:"100%",height:'100%',display:'flex'}}>
-        <b style={{margin:'0 auto'}}>Kaydınız Tamamlandı...</b>
+        <b style={{margin:'0 auto'}}>Kaydınız Tamamlandı... Yakın zamanda görüşmek üzere.</b>
       </div>
     </>
   )

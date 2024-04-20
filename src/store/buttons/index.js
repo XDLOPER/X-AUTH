@@ -1,23 +1,25 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit"
+import { buttonType } from "../../utils/models/enun.buttons";
+
 
 const initialState = {
     buttons:[
         {
-            type:'left',
+            type:buttonType.left,
             title:'back',
             active:false,
             disabled:false,
             URL:''
         },
         {
-            type:'center',
+            type:buttonType.center,
             title:'submit',
             active:false,
             disabled:false,
             URL:''
         },
         {
-            type:'right',
+            type:buttonType.right,
             title:'next',
             active:false,  
             disabled:false, 

@@ -15,12 +15,13 @@
 
   import {examplefetch} from '../../../utils/helpers/exampleFetch'
   import { sentenceCutter } from '../../../utils/helpers/sentenceCutter.js'
+  import X_button from '../../../components/buttons/x-button.jsx'
   
 
 
 const SignIn = ({context}) => {
   // outlet context ine erişip yukardaki state i değiştirebiliyoruz kullanım outletContext() = setFormData() yukarıdaki state'i güncelliyo 
-  const [buttonFormDataSubmitRef] = useOutletContext(context) 
+  const [buttonFormDataSubmitRef] = useOutletContext(context) // => butonun refine ulaşıyoruz
   const formData = useData()
   const navigate = useNavigate()
   const universalWords = useDataUniversalWords().forms
@@ -45,22 +46,24 @@ const SignIn = ({context}) => {
 
   // comunicate the backend
     const postData = {
-      ...formData.signIn,...values,
-      username:formData.signIn.usernameAndEmail,
-      email:formData.signIn.usernameAndEmail
+      username:values.usernameAndEmail,
+      email:formData.usernameAndEmail,
+      password:values.password,
+      dfm:values.dontForgetMe
     }
 
-    const headers = {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE"
-    }
-      
-    axios.post('/auth/login', {
-      ...postData
-    },
-    {
-      headers: headers
-    })  
+    /*
+    fetch('https://api.kargomucuz.com/v1/auth/login', {
+      method: 'POST',
+      body: JSON.stringify(postData) 
+    })
+    .then(response => {
+      console.log('data:'+ response)
+      if (!response.success) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json()
+    })
     .then(response => {
 
       if(!response.data.success){
@@ -71,6 +74,9 @@ const SignIn = ({context}) => {
           },
         }) 
       }else{
+        if(values.dontForgetMe){
+          
+        }
         navigate('/finish')
       }
 
@@ -88,6 +94,42 @@ const SignIn = ({context}) => {
       setButtonSubmit({disabled:false})
       setLoading(false)
     })
+    */
+    
+    axios.post('http://localhost:4000/v1/auth/login', postData,{
+      headers:{}
+    })
+    .then(response => {
+
+      if(!response.data.success){
+        setErrors({
+          title:'error',
+          body:{
+            message:sentenceCutter(response.data?.message,50) 
+          },
+        }) 
+      }else{
+        if(values.dontForgetMe){
+          
+        }
+        navigate('/finish')
+      }
+
+      setButtonSubmit({disabled:false})
+      setLoading(false)
+    })
+    .catch(error => {
+      console.error(error);
+      setErrors({
+        title:'ERROR',
+        body:{
+          message:sentenceCutter(error?.message,50)
+        },
+      })
+      setButtonSubmit({disabled:false})
+      setLoading(false)
+    })
+    
   //
 
 
@@ -109,6 +151,10 @@ const SignIn = ({context}) => {
     setButtonSubmit({title:'oturum aç',active:true})
     setButtonNext({active:false})
   },[])
+
+  useEffect(() => {
+    console.log(formik.values)
+  }, [formik.values])
   
     return (
       <>
@@ -132,9 +178,8 @@ const SignIn = ({context}) => {
                   />
                   <button style={{display:'none'}} ref={buttonFormDataSubmitRef}></button>
             </form> 
-              <br />
-              <br />
-            <Link to="/sign-up" style={{textAlign:"center",position:"absolute",left:"50%",transform:"translate(-50%)"}}>kayıt ol</Link>
+
+            <X_button to="/sign-up" on={true} style={{height:"40px",background:"linear-gradient(45deg, #f5b780, #ffc6c6)"}}>henüz kayıtlı değilim :)</X_button>
       </>
     )
 }

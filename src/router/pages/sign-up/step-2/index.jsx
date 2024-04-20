@@ -14,7 +14,6 @@ import { setErrors, setLoading } from '../../../../store/app/actions';
 
 import { sentenceCutter } from '../../../../utils/helpers/sentenceCutter';
 
-
 const Index = ({context}) => {
   const [buttonFormDataSubmitRef] = useOutletContext(context) 
   const navigate = useNavigate()
@@ -54,14 +53,14 @@ const Index = ({context}) => {
 
     console.log()
 
-    axios.post('/auth/login', {
+    axios.post('http://localhost:4000/v1/auth/usernameOrEmailExist', {
       username: values.username,
       email: values.email,
       password: values.password
     })
     .then(response => {
 
-      if(response.data.message.includes('not match')){
+      if(response.data.data.exist){
         setErrors({
           title:'info',
           body:{
@@ -103,7 +102,7 @@ const Index = ({context}) => {
     setButtonNext({active:true})
     setButtonSubmit({active:false})
     setButtonBack({URL:'sign-up/step-1',title:''});
-  },[]);
+  },[])
 
   return (
     <>          
