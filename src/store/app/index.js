@@ -48,6 +48,9 @@ const app = createSlice({
                 state.errors = [...endTwoErrors,action.payload]
             }
         },
+        _setErrorsClear:(state,action)=>{
+            state.errors = []
+        },
         _setDeleteErrors:(state,action)=>{
             state.errors = action.payload
         },
@@ -60,5 +63,5 @@ const app = createSlice({
     }
 })
 
-export const {_setAuth,_setTheme,_setLanguage,_setLoading,_setErrors,_setDeleteErrors,_setDataUniversalWords,_setMainTitle} = app.actions
+export const {_setAuth,_setTheme,_setLanguage,_setLoading,_setErrors,_setErrorsClear,_setDeleteErrors,_setDataUniversalWords,_setMainTitle} = app.actions
 export default app.reducer

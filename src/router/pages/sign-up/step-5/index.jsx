@@ -4,6 +4,9 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import axios from 'axios'
 
+import { fadeIn } from 'react-animations'
+import { StyleSheet, css } from 'aphrodite'
+
 import { useDataUniversalWords } from '../../../../store/app/hooks';
 import { useData, useDataSignUp } from '../../../../store/controls/hooks';
 import {setButtonSubmit,setButtonBack,setButtonNext} from '../../../../store/buttons/actions'
@@ -24,6 +27,13 @@ const Index = ({context}) => {
   const navigate = useNavigate()
   const formData = useData()
   const universalWords = useDataUniversalWords().forms
+
+  const styles = StyleSheet.create({
+    effect: {
+      animationName: fadeIn,
+      animationDuration: '1s'
+    }
+  })
   
   const validationSchema = Yup.object({
     contract:Yup.object({
@@ -56,7 +66,7 @@ const Index = ({context}) => {
       gender:convertGenderLanguage(formData.signUp.gender)
     }
     
-    axios.post('/auth/register', {
+    axios.post('https://api.kargomucuz.com/v1/auth/register', {
       ...postData
     })
     .then(response => {
@@ -112,7 +122,7 @@ const Index = ({context}) => {
 
   return (
     <>
-        <form onSubmit={formik.handleSubmit}>
+        <form onSubmit={formik.handleSubmit} className={css(styles.effect)}>
           <b>Uygulama için gerekli izinleri doldurmanız gerekmektedir. (Yan tarafta bulunan bilgi bölümünden içeriğe göz atabilirsiniz).</b>
           <div style={{height:"10px"}} />
           <Checkbox 

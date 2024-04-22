@@ -2,7 +2,7 @@
   "name": "x-auth",
   "version": "0.1.0",
   "private": true,
-  "proxy":"https://api.kargomucuz.com/v1",
+  "proxy": "https://api.kargomucuz.com/v1",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build"
@@ -30,6 +30,7 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "aphrodite": "^2.4.0",
     "axios": "^1.6.8",
     "bootstrap": "^5.3.2",
     "country-list-js": "^3.1.8",
@@ -38,6 +39,7 @@
     "npm": "^10.2.4",
     "path-browserify": "^1.0.1",
     "react": "^18.2.0",
+    "react-animations": "^1.0.0",
     "react-bootstrap": "^2.9.1",
     "react-dom": "^18.2.0",
     "react-icons": "^4.12.0",

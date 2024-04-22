@@ -1,22 +1,25 @@
 import React, { useState ,useRef, useEffect} from 'react'
 import { Button, Overlay ,OverlayTrigger,Tooltip } from 'react-bootstrap';
+import useWindowSize from '../../hooks/useWindowSize';
 
 const Text = (props) => {
   const {error,touch,...rest} = props
-  const target = useRef(null);
+  const target = useRef(null)
+
+  const windowSize = useWindowSize()
 
   const touchAndError = (err,elseErr) => {
     return (error && touch) ? err : elseErr
-  } 
+  }
 
   return (
     <div className='input-wrapper'>
         <OverlayTrigger
           //trigger="click"
-          placement={'right'}
+          placement={windowSize?.width < 900 ? 'top' : 'right'}
           overlay={
             error && touch ?
-            <Tooltip id={`tooltip-right`}>
+            <Tooltip>
               <strong>{touchAndError(error,null)}</strong>
             </Tooltip>
             :

@@ -1,22 +1,17 @@
-import React,{useEffect,useState} from 'react'
-import { useOutletContext,useNavigate,useLocation } from 'react-router';
+import React,{ useEffect } from 'react'
+import { useOutletContext,useNavigate } from 'react-router'
 
-import { useDataUniversalWords } from '../../../store/app/hooks';
-import { useData } from '../../../store/controls/hooks';
+import { useData } from '../../../store/controls/hooks'
 import {setButtonBack, setButtonNext, setButtonSubmit} from '../../../store/buttons/actions'
-import {setDataSignIn, setDataSignUp, setStep} from '../../../store/controls/actions'
-
-import {location} from '../../../utils/helpers/location'
 
 import vectorURL from '../../../media/images/finish.png'
-import { setDeleteErrors, setLoading, setMainTitle } from '../../../store/app/actions';
+import celebrateURL from '../../../media/images/celebrate.jpg'
+import { setDeleteErrors, setLoading, setMainTitle } from '../../../store/app/actions'
 
 const Index = ({context}) => {
   const [buttonFormDataSubmitRef] = useOutletContext(context) 
   const navigate = useNavigate()
   const formData = useData()
-
-
 
   useEffect(() => {
     console.log(formData)
@@ -35,11 +30,11 @@ const Index = ({context}) => {
   
   return (
     <>          
-      <div style={{width:"100%",height:'100%',display:'flex'}}>
-        <img src={vectorURL ? vectorURL : null} alt="" style={{width:"75%",margin:'0 auto'}}/>
+      <div className='finishPageImageWrapper'>
+        <img src={celebrateURL ? celebrateURL : vectorURL}/>
       </div>
-      <div style={{width:"100%",height:'100%',display:'flex'}}>
-        <b style={{margin:'0 auto'}}>Kaydınız Tamamlandı... Yakın zamanda görüşmek üzere.</b>
+      <div className="finishPageTextWrapper" >
+        <p>Tebrikler <b>{ formData.signUp.name }</b> Kaydın Tamamlandı... Yakın zamanda görüşmek üzere.</p>
       </div>
     </>
   )

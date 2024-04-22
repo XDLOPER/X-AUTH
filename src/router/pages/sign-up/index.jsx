@@ -1,7 +1,7 @@
 import React,{useEffect} from 'react'
 import { Outlet, useNavigate, useOutletContext } from 'react-router';
 import {setButtonBack, setButtonNext, setButtonSubmit} from '../../../store/buttons/actions'
-import {setMainTitle} from '../../../store/app/actions'
+import {setMainTitle,setErrorsClear} from '../../../store/app/actions'
 import {useButtonBackActive, useButtonNextActive} from '../../../store/buttons/hooks'
 
 
@@ -13,7 +13,8 @@ function SignUp({context}) {
   const URL = window.location.pathname
 
   useEffect(() => {
-    setMainTitle('kayıt ol');
+    setMainTitle('kayıt ol')
+    setErrorsClear()
     
     setButtonBack({title:'oturum',active:true,URL:'/'});
     setButtonSubmit({active:false});
@@ -23,9 +24,9 @@ function SignUp({context}) {
   useEffect(() => {
     const lastSegment = URL.split('/').pop();
     if (lastSegment === 'sign-up' || 'sign-up/') {
-      navigate('step-1');
+      navigate('step-1')
     }
-  }, [navigate]);
+  }, [navigate])
   
   return (
     <>

@@ -15,16 +15,18 @@ import { Provider } from "react-redux";
   import router from '../router'
   
 // BOOTSTRAP
-  import '../../node_modules/bootstrap/dist/css/bootstrap-reboot.min.css'; // browser style reset
-  import '../../node_modules/bootstrap/dist/css/bootstrap-utilities.min.css';
-  import '../../node_modules/bootstrap/dist/css/bootstrap-grid.min.css';
-  import '../../node_modules/bootstrap/dist/css/bootstrap.css';
+  import '../../node_modules/bootstrap/dist/css/bootstrap-reboot.min.css' // browser style reset
+  import '../../node_modules/bootstrap/dist/css/bootstrap-utilities.min.css'
+  import '../../node_modules/bootstrap/dist/css/bootstrap-grid.min.css'
+  import '../../node_modules/bootstrap/dist/css/bootstrap.css'
 
-  import '../style/index.css';
-  import '../style/form.css';
-  import '../style/layout.css';
-  import '../style/animations.css';
-  import '../style/media.css';
+  import '../style/index.css'
+  import '../style/form.css'
+  import '../style/layout.css'
+  import '../style/animations.css'
+  import '../style/media.css'
+  
+  import '../style/pages.css';
 
 
 const X_AUTH_APP = ({children}) => {

@@ -1,0 +1,24 @@
+.finishPageImageWrapper{
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.finishPageImageWrapper > img {
+    width: 75%;
+    margin: 0px auto;
+}
+
+.finishPageTextWrapper{
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.finishPageTextWrapper p{
+    margin: 0px auto;
+    text-align: center;
+    font-weight: 300;
+    font-size: 17px;
+    width: 70%;
+}

@@ -3,6 +3,10 @@
   import { useFormik } from 'formik'
   import * as Yup from 'yup'
   import axios from 'axios'
+  import { BsArrowLeft, BsArrowRight } from "react-icons/bs"
+
+  import { fadeIn } from 'react-animations'
+import { StyleSheet, css } from 'aphrodite'
 
   import { useData } from '../../../store/controls/hooks.js'
   import { setDataSignIn } from '../../../store/controls/actions.js'
@@ -25,6 +29,13 @@ const SignIn = ({context}) => {
   const formData = useData()
   const navigate = useNavigate()
   const universalWords = useDataUniversalWords().forms
+
+  const styles = StyleSheet.create({
+    effect: {
+      animationName: fadeIn,
+      animationDuration: '1s'
+    }
+  })
 
   const validationSchema = Yup.object({
     usernameAndEmail:Yup
@@ -96,7 +107,7 @@ const SignIn = ({context}) => {
     })
     */
     
-    axios.post('http://localhost:4000/v1/auth/login', postData,{
+    axios.post('https://api.kargomucuz.com/v1/auth/login', postData,{
       headers:{}
     })
     .then(response => {
@@ -158,7 +169,7 @@ const SignIn = ({context}) => {
   
     return (
       <>
-            <form onSubmit={formik.handleSubmit}>
+            <form onSubmit={formik.handleSubmit} className={css(styles.effect)}>
                   <Text name="usernameAndEmail" type="text" placeholder="kullanıcı adı & e-posta" value={formik.values.usernameAndEmail} onChange={formik.handleChange} onBlur={formik.handleBlur} touch={formik.touched.usernameAndEmail} error={formik.errors.usernameAndEmail} />
                   <Text name="password" type="password" placeholder="şifre" value={formik.values.password} onChange={formik.handleChange} onBlur={formik.handleBlur} touch={formik.touched.password} error={formik.errors.password}/>
                   <Checkbox
@@ -179,7 +190,15 @@ const SignIn = ({context}) => {
                   <button style={{display:'none'}} ref={buttonFormDataSubmitRef}></button>
             </form> 
 
-            <X_button to="/sign-up" on={true} style={{height:"40px",background:"linear-gradient(45deg, #f5b780, #ffc6c6)"}}>henüz kayıtlı değilim :)</X_button>
+            <X_button to="/sign-up" on={true} style={{
+                  height: "40px",
+                  background: "linear-gradient(45deg, rgb(255 187 126), rgb(255 198 198 / 70%))",
+                  width: "60%",
+                  left: "50%",
+                  top:"20px",
+                  position: "relative",
+                  transform: "translate(-50%)"
+            }}>kayıt olmak için <BsArrowRight/></X_button>
       </>
     )
 }

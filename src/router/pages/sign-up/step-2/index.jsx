@@ -4,6 +4,9 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup'
 import axios from 'axios'
 
+import { fadeIn } from 'react-animations'
+import { StyleSheet, css } from 'aphrodite'
+
 import { useDataUniversalWords } from '../../../../store/app/hooks';
 import { useData } from '../../../../store/controls/hooks';
 import {setButtonSubmit,setButtonBack,setButtonNext} from '../../../../store/buttons/actions'
@@ -19,6 +22,13 @@ const Index = ({context}) => {
   const navigate = useNavigate()
   const formData = useData()
   const universalWords = useDataUniversalWords().forms
+
+  const styles = StyleSheet.create({
+    effect: {
+      animationName: fadeIn,
+      animationDuration: '1s'
+    }
+  })
 
   const validationSchema = Yup.object({
     username:Yup
@@ -53,7 +63,7 @@ const Index = ({context}) => {
 
     console.log()
 
-    axios.post('http://localhost:4000/v1/auth/usernameOrEmailExist', {
+    axios.post('https://api.kargomucuz.com/v1/auth/usernameOrEmailExist', {
       username: values.username,
       email: values.email,
       password: values.password
@@ -106,7 +116,7 @@ const Index = ({context}) => {
 
   return (
     <>          
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit} className={css(styles.effect)}>
         <div>
           <Text
             name="username" 

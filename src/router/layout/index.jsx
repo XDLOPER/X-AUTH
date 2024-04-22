@@ -77,7 +77,7 @@ const LAYOUT = () => {
                     layoutbButtons?.map((value,index) => LayoutButtonRender({key:index,ref:buttonFormDataSubmitRef,...value}))
                   }
                 </div>
-                <p>By<img className='footerCompanyLogo' src={logo} alt="x" />kargomucuz.</p>
+                <p>By<img className='footerCompanyLogo' src={logo} alt="x" />kargomucuz.com</p>
               </footer>
             </div>
           </div>

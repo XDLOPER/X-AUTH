@@ -1,5 +1,9 @@
 /* medias */
 
+@media screen and (min-width: 500px) and (max-width: 30000px) {
+    div#x_auth > .wrapper .auth footer#layout .buttonGroup a:nth-child(2) .x-button{width:50% !important;}
+}
+
 @media screen and (max-width: 500px) {
     div#x_auth{
         width: 100% !important;
@@ -9,5 +13,7 @@
         transform:none !important;
     }
 
-    div#x_auth > .wrapper .auth footer#auth .buttonGroup a:nth-child(2) .x-button{width:50%;}
+    div#x_auth > .wrapper .auth footer#layout .buttonGroup a:nth-child(2) .x-button{width:80% !important;}
+    div#x_auth > .wrapper .auth footer#layout .buttonGroup{grid-template-columns:20% auto 20% !important;}
+
 }

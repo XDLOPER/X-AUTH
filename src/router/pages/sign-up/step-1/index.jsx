@@ -1,8 +1,11 @@
 import React,{useEffect,useState} from 'react'
-import { useOutletContext,useNavigate } from 'react-router';
+import { useOutletContext,useNavigate } from 'react-router'
 
-import { useFormik } from 'formik';
+import { useFormik } from 'formik'
 import * as Yup from 'yup'
+
+import { fadeIn } from 'react-animations'
+import { StyleSheet, css } from 'aphrodite'
 
 import { useDataUniversalWords } from '../../../../store/app/hooks';
 import { useData } from '../../../../store/controls/hooks';
@@ -21,9 +24,15 @@ const Index = ({context}) => {
   const navigate = useNavigate()
   const formData = useData()
 
-  const universalWords = useDataUniversalWords().forms
-  const [days, setDays] = useState(date.days);
+  const styles = StyleSheet.create({
+    effect: {
+      animationName: fadeIn,
+      animationDuration: '1s'
+    }
+  })
 
+  const universalWords = useDataUniversalWords().forms
+  const [days, setDays] = useState(date.days)
 
   const validationSchema = Yup.object({
     name:Yup
@@ -114,7 +123,7 @@ const Index = ({context}) => {
 
   return (
     <>          
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit} className={css(styles.effect)}>
             
             <div style={{display:"flex",gap:'10px'}}>
               <Text
