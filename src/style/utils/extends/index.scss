@@ -1,0 +1,17 @@
+%full{
+    width: 100%;
+    height:100%;
+}
+
+%translateY{
+    @include transform($centerY:true);
+}
+
+%translateX{
+    @include transform($centerX:true);
+}
+
+%translateXY{
+    @include transform($centerXY:true);
+}
+

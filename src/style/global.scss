@@ -1,0 +1,101 @@
+// document import start
+     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;500;600;700;800;900&family=Raleway:wght@300;600;900&display=swap');
+     @import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,900&display=swap');
+// document import end
+
+// bootstrap functions and mixins start
+     @import "../../node_modules/bootstrap/scss/functions";
+     @import "../../node_modules/bootstrap/scss/mixins";
+     @import './utils/mixins/index.scss';
+// bootstrap functions and mixins end
+
+// bootstrap and custom variables start
+     @import "./override";
+     @import "../../node_modules/bootstrap/scss/variables";
+     @import "../../node_modules/bootstrap/scss/variables-dark";
+     @import "./custom-variables";
+     
+     @import "../../node_modules/bootstrap/scss/maps";
+
+     @import "./theme-color";
+// bootstrap and custom variables end
+
+// bootstrap root, reboot and class utilities start
+     @import "../../node_modules/bootstrap/scss/root";
+     @import "../../node_modules/bootstrap/scss/reboot";
+     @import './utils/extends/index.scss';
+
+     @import "../../node_modules/bootstrap/scss/utilities";
+     @import "../../node_modules/bootstrap/scss/utilities/api";
+     @import "../../node_modules/bootstrap/scss/type";
+     @import "../../node_modules/bootstrap/scss/images";
+
+// bootstrap root, reboot class utilities end
+
+// bootstrap component style start
+     @import "../../node_modules/bootstrap/scss/grid";
+     @import "../../node_modules/bootstrap/scss/containers";
+     @import "../../node_modules/bootstrap/scss/buttons";
+     @import "../../node_modules/bootstrap/scss/forms";
+     @import "../../node_modules/bootstrap/scss/offcanvas";
+     @import "../../node_modules/bootstrap/scss/dropdown";
+     @import "../../node_modules/bootstrap/scss/tooltip";
+     @import "../../node_modules/bootstrap/scss/modal";
+     @import "../../node_modules/bootstrap/scss/spinners";
+     @import "../../node_modules/bootstrap/scss/nav";
+
+
+     @import './component';
+// bootstrap component style end
+
+// bootstrap and custom responsive start
+     @import "./responsive.scss";
+// bootstrap and custom responsive end
+
+// bootstrap helpers start
+     @import "../../node_modules/bootstrap/scss/helpers";
+// bootstrap helpers end
+
+
+// ---- custom DOM styles start ----
+
+body{
+     height:100vh;
+     //font-family: 'Raleway', sans-serif;
+     font-family: 'Red Hat Display', sans-serif;
+     font-weight:600 !important;
+}
+
+#root{
+     height:100vh;
+}
+
+a{
+     text-decoration: none !important;
+}
+
+button{
+     font-weight:800 !important;
+}
+
+.hide-nav {
+     top: -130px;
+}
+
+.AbsoluteCenter{
+     position: absolute;
+     @extend %translateXY;
+}
+
+@import './layout';
+@import './pages';
+
+// ---- custom DOM styles end ----
+
+
+
+
+
+
+
+

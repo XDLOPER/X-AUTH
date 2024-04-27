@@ -1,0 +1,67 @@
+{
+     "app":{
+          "name":"x-auth",
+
+          "button":{     
+               "ok":"tamam",
+               "cancel":"iptal",
+               "close":"kapat",
+               "create":"oluştur",
+               "complete":"tamamla",
+               "next":"ileri",
+               "back":"geri"
+          },
+
+          "modal":{
+               "fileModal":{
+                    "normal":"Dosya Ekle",
+                    "profilePhotoAdd":"Profil Fotoğrafı Ekle",
+
+                    "extensionSupport":"Sadece Bu Formattaki Dosyaları İçerebilir."
+               },
+               "errorModal":{
+                    "title":"Hata",
+                    "body":""
+               }
+          }
+
+     },
+     "menus":{
+          "main":{
+               "home":"anasayfa"
+          }
+     },
+
+     "form":{
+          "placeholder":{
+               "username":"kullanıcı adı",
+               "password":"şifre",
+               "email":"e-mail",
+               "name":"isim",
+               "surname":"soyisim",
+               "biography":"biyografi"
+          },
+
+          "label":{
+               "nameAndSurname":"isim & soyisim"
+          }
+     },
+
+     "messages":{
+          "errors":{
+               "notFindFile":"Herhangi bir dosya bulunamadı.",
+               "maxFile":"Maksimum dosya sayısı aştı.",
+               "notTypeSupport":"Bu Türün Desteği Sağlanmıyor."
+          }
+     },
+
+     "time":{
+          "yearAgo":"yıl önce",
+          "monthAgo":"ay önce",
+          "dayAgo":"gün önce",
+          "hourAgo":"saat önce",
+          "minuteAgo":"dakika önce",
+          "secondAgo":"saniye önce",
+          "invalidValue":"geçersiz değer"
+     }
+}

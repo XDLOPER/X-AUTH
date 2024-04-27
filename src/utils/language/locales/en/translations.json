@@ -1,0 +1,66 @@
+{
+     "app":{
+          "name":"x-auth",
+
+          "button":{
+               "ok":"okey",
+               "cancel":"cancel",
+               "close":"close",
+               "create":"create",
+               "complete":"complete",
+               "next":"next",
+               "back":"back"
+          },
+
+          "modal":{
+               "fileModal":{
+                    "normal":"Add File",
+                    "profilePhotoAdd":"Add The Profile Photo",
+
+                    "extensionSupport":"Only This Support File Extenion."
+               },
+               "errorModal":{
+                    "title":"Error",
+                    "body":""
+               }
+          }
+     },
+     "menus":{
+          "main":{
+               "home":"home"
+          } 
+     },
+
+     "form":{
+          "placeholder":{
+               "username":"username",
+               "password":"password",
+               "email":"email",
+               "name":"name",
+               "surname":"surname",
+               "biography":"biography"
+          },
+
+          "label":{
+               "nameAndSurname":"name & surname"
+          }
+     },
+
+     "messages":{
+          "errors":{
+               "notFindFile":"Not Find File.",
+               "maxFile":"Maximum file exits exceeded.",
+               "notTypeSupport":"Not type support."
+          }
+     },
+
+     "time":{
+          "yearAgo":"year ago",
+          "monthAgo":"mount ago",
+          "dayAgo":"day ago",
+          "hourAgo":"hour ago",
+          "minuteAgo":"minute ago",
+          "secondAgo":"second ago",
+          "invalidValue":"invalid value"
+     }
+}

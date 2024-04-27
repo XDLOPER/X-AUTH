@@ -1,0 +1,90 @@
+// ---------------------------- main mode ------------------------------ //
+
+$layoutZIndexMax:999999999999999999999999999999999999999999999;
+$layoutZIndexMiddle:1;
+$layoutZIndexBack:-1;
+
+$translateLenght: -50%;
+$transition:0.1s;
+$buttonScaleIn:0.97;
+
+$formDisableOpacity:0.2 !important;
+$formPlaceholderColor:#000 !important;
+$formShadow: 0 0 10px -7px black;
+
+// border
+$radius:10px;
+$radiusMedium:20px;
+$radiusSmall:5px;
+$radiusMax:999999999999999999999999999px;
+$radiusLeaf:$radius 0px;
+
+// colors
+$light: #F5F5F5; 
+$dark: #313131;
+$blue:#3274d6;
+
+/*$customColors:(
+     "light": $light,
+     "dark": $dark,
+     "blue": $blue,
+     "stroke": $stroke,
+);*/
+
+//$theme-colors: map-merge($theme-colors, $customColors);
+
+$layout-hf-height:30px;
+$up-down-button-width:250px;
+$header-navbar-width:500px;
+$layout-shadow-width: 0 0 0.2rem ;
+
+// ---------------------------- light mode ------------------------------ //
+
+$body-bg: #F5F5F5;
+$body-color: #000;
+
+$layout-bg-primary:white;
+$layout-bg-secondary:#F5F5F5;
+
+$layout-shadow-primary: #d5d1d1;
+
+$stroke-primary:#F5F5F5;
+$stroke-secondary:#F1F1F1;
+
+$form-bg-primary:$white;
+$form-bg-secondary:#ededed;
+
+//$form-button-bg-hover-primary:#c6c7c8;
+//$form-bg-hover-primary:#181818cc;
+//$form-bg-active-primary:#c6c7c8;
+//$form-bg-active-secondary:$black;
+//$form-bg-focus-primary:#181818cc;
+
+$form-checked-primary:$black;
+
+$form-border:$stroke-secondary;
+
+// ---------------------------- dark mode ------------------------------ //
+
+$body-bg-dark: #0e0e0e;
+$body-color-dark: #f3f3f3;
+
+$layout-bg-dark-primary:$black;
+$layout-bg-dark-secondary:#313131;
+
+$layout-shadow-dark-primary: #1e1e1e;
+
+$stroke-dark-primary:#0a0a0a;
+$stroke-dark-secondary:$gray-800;
+$stroke-dark-tertiary:#3f3f3f;
+
+$form-bg-dark-primary:#000000;
+$form-bg-dark-secondary:#141414;
+$form-bg-dark-terciary:$white;
+
+$form-bg-dark-hover-primary:#181818cc;
+
+$form-checked-dark-primary:$white;
+
+$form-border-dark:#101214;
+

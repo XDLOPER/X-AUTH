@@ -1,0 +1,136 @@
+$color-mode-type: data;
+
+@include color-mode(dark) {
+
+  // DOM elements style start
+
+    body{
+      background-color:$body-bg-dark;
+      color:$body-color-dark;
+    }
+
+  // DOM elements style end
+
+  // layout start
+
+    .offcanvas-body{
+      background:$layout-bg-dark-primary;
+    }
+
+  // layout end
+
+  // page start
+
+  // page end
+
+  // component start
+
+    .btn-light ,.xButton.defaultButton,.xButton.arrowButton,.xButton.centerButton,.xButton.centerButton{
+      background:$form-bg-dark-primary;
+      border:$border-width $border-style $stroke-dark-primary ;
+      color:$body-color-dark !important;
+
+      
+      &:hover{
+        background-color: $black !important;
+        border:$border-width $border-style $stroke-dark-primary ;
+
+      }
+
+      &:active{
+        background-color: $black !important;
+      }
+
+      &:focus{
+        background-color: $black !important;
+      }
+    }
+
+    .xButton.variant{
+      background:$form-bg-dark-primary;
+      color:$body-color-dark !important;
+    }
+
+    input.xText{
+      background-color: $form-bg-dark-secondary;
+      border:$border-width $border-style $form-border-dark
+    }
+
+    select.xSelect{
+      background-color: $form-bg-dark-secondary;
+      border:$border-width $border-style $form-border-dark 
+    }
+
+    .xRadio{
+
+      .checkmark{
+        background-color: $form-bg-dark-secondary !important;
+        border:$border-width $border-style $form-border-dark !important;
+      }
+
+    }
+
+    .xRange {
+      .form-range {
+
+          &::-webkit-slider-thumb {
+              background-color: $form-bg-dark-terciary;
+            }
+          
+          &:hover::-webkit-slider-thumb {
+              background-color: $form-bg-dark-primary;
+          }
+
+          &::-webkit-slider-runnable-track {
+              background-color: $form-bg-dark-secondary !important;
+              border:$border-width $border-style $form-border-dark !important;
+
+          }
+        }
+      
+      .form-label{
+          
+      }
+  }
+
+    /*.xCheckbox{
+      .checkmark{
+        background:$body-bg-dark;
+        border:$border-width $border-style $form-border-dark
+      }
+
+      .checkbox-container input:checked ~ .checkmark {
+        border: $border-width $border-style $stroke-primary; 
+      }
+    }*/
+
+    .xCheckbox{
+
+      input.form-check-input{
+        background-color:$form-bg-dark-secondary;
+        border:$border-width $border-style $form-border-dark;
+      }
+    }
+
+    .xRadio{
+      .checkmark{
+        background:$body-bg-dark;
+        border:$border-width $border-style $form-border-dark !important
+      }
+
+      .radio-container input:checked ~ .checkmark {
+        border: $border-width $border-style $stroke-primary !important; 
+      }
+    }
+
+    // textarea component start
+      .xTextarea {
+        background-color: $form-bg-dark-secondary;
+        border: $border-width $border-style $form-border-dark
+      }
+    // textarea component end
+
+    .circleone,.circletwo,.circlethree,.circlefour  {display:block !important;position: absolute;height:  100%;width:  100%;border-radius: 100%; border: $border-width $border-style $white !important;}
+  // component end
+
+}

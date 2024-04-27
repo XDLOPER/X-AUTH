@@ -1,0 +1,53 @@
+@mixin transition($position: all, $time:0s, $timing: ease-in-out) {
+    transition: $position $time $timing !important;
+}
+
+@mixin transform($centerX: false, $centerY: false, $centerXY: false, $rotateIn:true,$zoomIn: true, $translate: '', $translateX: -50%, $translateY: -50%, $rotate: 0, $scale: 1) {
+
+    @if $centerX {
+      left: 50%;
+      right: 50%;
+      transform: translateX(#{$translateX}) scale(#{$scale}) rotate(#{$rotate}) !important;
+    } 
+    @else if $centerY {
+      top: 50%;
+      bottom: 50%;
+      transform: translateY(#{$translateY}) scale(#{$scale}) rotate(#{$rotate}) !important;
+    } 
+    @else if $centerXY {
+      left: 50%;
+      top: 50%;
+      transform: translate(#{$translateX}, #{$translateY}) scale(#{$scale}) rotate(#{$rotate}) !important;
+    }
+    @else if $rotateIn and $zoomIn {
+      transform: scale(#{$scale}) rotate(#{$rotate}) !important;
+    }  
+    @else if $rotateIn {
+      transform: rotate(#{$rotate}) !important;
+    } 
+    @else if $zoomIn {
+      transform: scale(#{$scale}) !important;
+    } 
+    @else {
+      transform: translate(#{$translate}) scale(#{$scale}) rotate(#{$rotate}) !important;
+    }
+  }
+
+@mixin buttonScaleIn($buttonScaleIn,$centerXY:false,$centerX:false,$centerY:false) {
+    opacity:0.8;
+    border:2px solid #000 !important;
+    transform-origin: center center;  
+
+    @if($centerXY){
+        @include transform($centerXY:true,$zoomIn:true,$scale:$buttonScaleIn);
+    }@else if($centerX){
+        @include transform($centerX:true,$zoomIn:true,$scale:$buttonScaleIn);
+    }@else if($centerY){
+        @include transform($centerY:true,$zoomIn:true,$scale:$buttonScaleIn);
+    }@else{
+        @include transform($zoomIn:true,$scale:$buttonScaleIn);
+    }
+    
+    
+    @include transition($time:$transition);
+}

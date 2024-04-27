@@ -1,0 +1,721 @@
+// components
+
+// other components start
+    @import '../../node_modules/react-image-crop/src/ReactCrop.scss';
+// other components end
+
+// image component start
+    .image{
+        width: 100%;
+        height:100%;
+    }
+// image component end
+
+// avatar component start
+    .avatarImage{
+        width: 100%;
+        height:100%;
+        border-radius: $radiusMax;
+    }
+// avatar component end
+
+// hr component start
+    .customHrHorizantal{
+        width:10%;
+        height: 4px;
+        background: $dark;
+        border-radius:$radiusMax;
+        border:none;
+        opacity:1 !important;
+        margin:0;
+        margin:5px 0;
+    }
+    .customHrVertical{
+        position:relative;
+        width:2px;
+        height:70%;
+        @extend %translateY;
+        background: $dark;
+        border-radius:$radiusMax;
+        margin:0;
+        margin:0px 5px;
+    }
+// hr component end 
+
+// searchBox component start
+    .searchBox{
+        position: relative;
+        width: 100%;
+        height:100%;
+        input{    
+            padding: 0px 25px !important;
+            width:100%;
+            height:100%;
+            text-indent: 0px !important;
+            text-align:center;
+            font-weight:bolder;
+            font-size:inherit !important;
+        }
+        button{
+            position: absolute;
+            width: 24px !important;
+            height: 20px !important;
+            padding: 0;
+            height:100%;
+            right:2px;
+            top:2px;
+            font-size: 14px !important;
+            line-height: 0 !important;
+            font-weight: bolder;
+        }
+        .iconGenerate{
+
+        }
+    }
+// searchBox component end
+
+// webMenu component start
+    .webMenu{
+        position: relative;
+        height:100%;
+        ul{
+            @extend %translateX;
+            position: absolute;
+            width: 100%;
+            height:100%;
+            display: inline-flex;
+            list-style-type: none;
+            li{
+                margin:0px auto;
+                height:100%;
+                width:100%;
+                text-align:center;
+
+                button{
+                    border:none ;
+                    border-radius:0;
+                    padding: 0;
+                    height:100%;
+                    width:100%;
+                    font-size: 15px;
+                }
+
+                button:active{border:$border-width $border-style transparent !important;}
+
+                button.actived{
+                    border-bottom:$border-width $border-style $blue !important;
+                }
+            }
+        }
+    }
+// webMenu component end
+
+// modal component start
+    .modal{
+        .modal-dialog{
+            margin:0;
+            padding: 10px;
+            @include transform($centerXY: true);
+
+            .modal-content{
+                border-radius: $radiusMedium;
+
+                .modal-header{
+        
+                    .closeButton{
+                        width: 30px;
+                        height: 30px;
+                        padding: 0;
+                        border-radius: $radiusMax;
+                    }
+                }
+                .modal-body{
+                    .supportExtensionsText{
+                        font-size: 13px;
+                        color:$gray-700;
+                    }
+        
+                    .wrapper{
+        
+                        .editor{
+                            width: 100%;
+                            height: 350px !important;
+                            background-color: $black;
+                            
+                            overflow: hidden;
+        
+                            .tie-image-editor{
+                                width: 100% !important;
+                                height: 100% !important;
+                            }
+                        }
+                        
+                        position: relative;
+                        .photos{
+                            width: 100%;
+                            display: flex;
+                            overflow:hidden;
+        
+                            .photo{
+                                cursor: pointer;
+                                margin:5px;
+                                border-radius:$radiusLeaf !important;
+                                overflow: hidden;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .mobileModalStyleActive{
+        transform: none;
+        left: 0;
+        top:0;
+    }
+// modal component end
+
+// dropdownMenu component start
+    .dropdown{
+
+        .dropdown-menu{
+            padding:5px;
+        }
+    }
+// dropdownMenu component end
+
+// xSpinner component start
+    .xSpinner{
+        width: 30px !important;
+        height: 30px !important;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+
+        .spinner-border{
+            @extend %translateXY;
+            animation-name: spin;
+            animation-iteration-count: infinite;
+        }
+
+    }
+
+    @keyframes spin {
+        0% { 
+            @include transform($centerXY: true, $rotate: 0); 
+        }
+        100% {
+            @include transform($centerXY: true, $rotate: 360deg);
+        }
+    }
+// xSpinner component end
+
+/* => form component start ? */
+
+    // xButton component start
+        button.xButton{
+            position: relative;
+            width: 100%;
+            border-radius:$radiusSmall;
+            overflow: hidden;
+            font-size:17px;
+
+            &:hover{
+                @include transition($time:$transition);
+                //background: $form-button-bg-hover-primary;
+            }
+
+            &:active{
+                @include buttonScaleIn($buttonScaleIn:$buttonScaleIn,$centerXY:false);
+                //background: $form-button-bg-hover-primary;
+            }
+
+            &:focus{
+                //background: $form-button-bg-hover-primary;
+            }
+
+            &:disabled{
+                opacity: $formDisableOpacity;
+            }
+        }
+
+        button.defaultButton{
+            display: flex;
+            @extend %full;
+            justify-content: center;
+            align-items: center;
+            font-weight:bold;
+            font-style: initial;
+            text-transform: capitalize !important;
+            border:$border-width $border-style $stroke-secondary;
+            background:$form-bg-primary;
+        }
+
+        button.arrowButton{
+            display: flex;
+            height:50px;
+            text-align:left !important;
+            justify-content: space-between;
+            align-items: center;
+            font-weight:bold;
+            font-style: initial;
+            text-transform: capitalize !important;
+            border:$border-width $border-style $stroke-secondary;
+            background:$form-bg-primary;
+        }
+
+        button.centerButton{
+            display: flex;
+            height:50px;
+            text-align:left !important;
+            justify-content: center;
+            align-items: center;
+            font-weight:bold;
+            font-style: initial;
+            text-transform: capitalize !important;
+            border:$border-width $border-style $stroke-secondary;
+            background:$form-bg-primary;
+        }
+
+        button.readed{
+            opacity:0.6;
+
+            span{
+                font-weight: 500 !important;
+            }
+        }
+
+        // up and down button start
+            button.anchorButton{
+                width:100%;
+                height: 100%;
+                padding: 0 !important;
+                font-size: 20px !important;
+                padding: 0;
+                line-height:0;
+
+                border:none !important;
+            }
+        // up and down button end
+
+    // xButton component end
+
+    // text component start
+
+        .input-wrapper{position: relative; width: 100%; height: 100%;}
+
+        input.xText{
+            width: 100%;
+            height:100%;
+            border-radius:$radiusSmall;
+            overflow: hidden;
+            font-size:17px;
+            text-transform: none !important;
+            padding: 0;
+            text-indent: 10px;
+            box-sizing: border-box;
+            background: $form-bg-secondary;
+            border:$border-width $border-style $form-border;
+
+            //border: 2px solid transparent;
+            //box-shadow:$formShadow;
+            font-weight: bolder;
+            display: flex;
+
+            @include transition($time:$transition);
+
+            &:hover{
+                @include transition($time:$transition);
+            }
+
+            &:active{
+                //@include buttonScaleIn($buttonScaleIn:$buttonScaleIn,$center:false);
+            }
+
+            &:disabled{
+                opacity: $formDisableOpacity;
+            }
+        }
+
+    // text component end
+
+    // checkbox component start
+        /*.xCheckbox{
+
+            position: relative; 
+            width: 100%; 
+            height:30px; 
+            margin:10px 0px;
+
+            .modalButton{position: absolute; width:auto; right: 0; text-align: right; z-index: 99; line-height: 30px;  cursor:pointer}
+            .checkbox-container span{margin: 0; padding: 0; line-height:30px;}
+
+            .checkbox-container { display: inline-block; position: relative; padding-left: 35px; margin-bottom: 12px; cursor: pointer; font-size: 16px; width: 100%; height: 100%;} 
+            .checkbox-container .label { position: absolute; padding: 4px 0px; } 
+            .checkbox-container input { position: absolute; opacity: 0; cursor: pointer; }
+
+            .checkmark { 
+                position: absolute; 
+                top: 0; 
+                left: 0; 
+                height: 25px; 
+                width: 25px; 
+                background: $form-bg-secondary;
+                border:$border-width $border-style $form-border;
+                border-radius: $radiusSmall;
+                
+                &:hover{
+                    @include transition($time:$transition);
+                }
+    
+                &:active{
+                    @include buttonScaleIn($buttonScaleIn:$buttonScaleIn);
+                }
+
+            } 
+            .checkbox-container input:checked ~ .checkmark { background-color: $dark; } .checkmark:after { content: ""; position: absolute; display: none; } 
+            .checkbox-container input:checked ~ .checkmark:after { display: block; } .checkmark:after { left: 9px; top: 5px; width: 5px; height: 10px; border: solid white; border-width: 0 3px 3px 0; transform: rotate(45deg); }
+
+        }*/
+
+        .xCheckbox{
+            .form-check{
+                display: flex;
+                justify-content: space-between;                
+            }    
+
+            input.form-check-input{
+                background-color: $form-bg-secondary;
+                border:$border-width $border-style $form-border;
+                padding: 10px 20px;
+                cursor: pointer;
+            }
+
+            .form-switch input.form-check-input:checked {
+                background-color: $form-checked-primary; // Örnek olarak yeşil yapalım
+            }
+        }
+
+    // checkbox component end
+
+    // radio component start
+        .xRadio {
+            position: relative;
+            width: 100%;
+            height: 30px;
+            margin: 10px 0;
+        
+            .modalButton {
+                position: absolute;
+                width: auto;
+                right: 0;
+                text-align: right;
+                z-index: 99;
+                line-height: 30px;
+                cursor: pointer;
+            }
+        
+            .radio-container {
+                display: inline-block;
+                position: relative;
+                padding-left: 35px;
+                margin-bottom: 12px;
+                cursor: pointer;
+                font-size: 16px;
+                width: 100%;
+                height: 100%;
+        
+                .label {
+                    position: absolute;
+                    padding: 4px 0px;
+                }
+        
+                input {
+                    position: absolute;
+                    opacity: 0;
+                    cursor: pointer;
+                }
+        
+                .checkmark {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    height: 25px;
+                    width: 25px;
+                    background-color: $form-bg-secondary;
+                    border:$border-width $border-style $form-border;    
+                    border-radius: $radiusMax;
+                    box-sizing: border-box;
+        
+                    &:hover {
+                        @include transition($time: $transition);
+                    }
+        
+                    &:active {
+                        @include buttonScaleIn($buttonScaleIn: $buttonScaleIn);
+                    }
+                }
+        
+                input:checked ~ .checkmark {
+                    border: 2px solid $form-checked-primary;
+                }
+        
+
+            }
+        
+            .radio-container span {
+                margin: 0;
+                padding: 0;
+                line-height: 30px;
+            }
+        }
+    // radio component end
+
+    // textarea component start
+        .xTextarea {
+            width: 100%;
+            height:100%;
+            border-radius:$radiusSmall;
+            overflow: hidden;
+            font-size:17px;
+            text-transform: none !important;
+            padding: 0;
+            text-indent: 10px;
+            box-sizing: border-box;
+            font-weight: bolder;
+            background-color: $form-bg-secondary;
+            border: $border-width $border-style $form-border;
+        }
+    // textarea component end
+
+    // select component start
+        select.xSelect{
+            width: 100%;
+            height:100%;
+            background-color: $form-bg-secondary;
+            border:$border-width $border-style $form-border;
+            border-radius:$radiusSmall;
+            overflow: hidden;
+            font-size:17px;
+            text-indent: 10px;
+            text-transform: none !important;
+            padding: 0;
+
+            //border: 2px solid transparent;
+            //box-shadow:$formShadow;
+            font-weight: bolder;
+            display: flex;
+
+            @include transition($time:$transition);
+
+            &:hover{
+                @include transition($time:$transition);
+            }
+
+            &:active{
+                //@include buttonScaleIn($buttonScaleIn:$buttonScaleIn,$center:false);
+            }
+
+            &:disabled{
+                opacity: $formDisableOpacity;
+            }
+        }
+
+        select.xSelect::placeholder{color:$formPlaceholderColor;}
+    // select component end
+
+
+    // range component start
+        .xRange {
+            .form-range {
+
+                &::-webkit-slider-thumb {
+                    border-radius: 50%;
+                    width: 20px;
+                    height: 20px;
+                    background-color: $form-checked-primary;
+                    border-radius: $radiusSmall;
+                  }
+                
+                &:hover::-webkit-slider-thumb {
+                    background-color: $form-checked-primary;
+                }
+
+                &::-webkit-slider-runnable-track {
+                    background-color: $form-bg-secondary ;
+                    border:$border-width $border-style $form-border;
+                    height: 15px;
+                }
+              }
+            
+            .form-label{
+                margin-bottom: 0;
+            }
+        }
+    // range component end
+
+    // file component start
+        .XFile {
+                position: relative;
+                padding: 0;
+                border-style:dashed !important;
+                border-color:$stroke-dark-secondary !important;
+                padding: 5px;
+                @include transition($time:$transition);
+
+                &:active{
+                    transform: none !important;
+                    opacity: 1 !important;
+                }
+
+                input {
+                    position: absolute;
+                    text-align: center;
+                    list-style:100%;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    opacity: 0;
+                    z-index: 2;
+
+                }
+
+                .fileContent{
+                    display: grid;
+                    grid-template-columns: repeat(2,auto);
+                    grid-auto-rows: minmax(auto, auto);
+                    gap:5px;
+                    width: 100%;
+                    height: 100%;
+
+                    .fileGenerateWrapper{
+                        button{
+                            position:absolute;
+                            margin: 0;
+                            padding: 9px !important;
+
+                            .iconGenerate{
+                                height: auto !important;
+                            }
+                        }
+                    }
+
+                    *{
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+
+                .iconGenerate{
+                    font-size: 20px !important;
+                }
+            
+                .close{
+                    position: absolute;
+                    width: 40px;
+                    height: 40px;
+                    padding: 20px;
+                    font-size: 20px;
+                    @extend %translateXY;
+                    
+                    
+                    opacity: 0.5;
+                    border-radius: $radiusMax;
+
+                    &:active{
+                        @extend %translateXY;
+                    }
+                }
+
+        }
+
+        .XFileHandleButton{
+            width: 100%;
+            height: 100%;
+            padding: 0 !important;
+            overflow: hidden;
+        }
+    // file component end
+
+/* form component end */
+
+
+
+// atomusLoading component start
+    .circle{
+        animation: appear 4s forwards;
+        animation-iteration-count: infinite;
+        position: relative;
+        top: 50%;
+        right: 0;
+        bottom: 0;
+        transform: rotate(0deg);
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 47px;
+        width: 47px;
+
+        div {flex:1; position: absolute;width: 100%;height: 100%;display: flex;padding: 5px;transition: all 0.5s;}
+        div.img img.loadingImage {width: 100% !important; flex: 1;animation: circleImages 2s  forwards;animation-iteration-count: infinite;}
+
+        .circleone,.circletwo,.circlethree,.circlefour  {display:block !important;position: absolute;height:  100%;width:  100%;border-radius: 100%; border: $border-width $border-style $black; text-align: center;}
+        .circleone{animation-name: spinx;animation-duration:3s;animation-iteration-count: infinite;}
+        .circletwo {animation-name: spiny;animation-duration:3.05s;animation-iteration-count: infinite;text-align: center;}
+        .circlethree{border-radius:20%;transform: rotate(45deg);animation-name: spinz;animation-duration:3s;animation-iteration-count: infinite;text-align: center;}
+    }
+
+    /* animations */
+    @keyframes circleImage {
+        0% {
+            opacity:0.5;
+        }
+        50% {
+            opacity:1;
+        
+        }
+        100% {
+            opacity:0.5;
+        }
+    }
+    @keyframes spinx {
+        0% {
+            transform: rotateX(0deg);
+            opacity:1;
+        }
+        50% {
+            transform: rotateX(360deg) scale(1.3);
+            opacity:1;
+        }
+        100% {
+            transform: rotateX(720deg);
+            opacity:1;
+        }
+    }
+    @keyframes spiny {
+        0% {
+            transform: rotateY(0deg);
+            opacity:1;
+        }
+        50% {
+            transform: rotateY(360deg) scale(1.3);
+            opacity:1;
+        }
+        100% {
+            transform: rotateY(720deg);
+        opacity:1;
+        }
+    }
+    @keyframes spinz {
+        0% {
+            transform: rotate(45deg);
+            opacity:1;
+        }
+        50% {
+            transform: rotateZ(360deg) scale(1.3);
+            opacity:1;
+        
+        }
+    }    
+// atomusLoading component end

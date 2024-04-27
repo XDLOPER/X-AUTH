@@ -1,0 +1,161 @@
+// layout
+
+// header start 
+
+// header end
+
+// offcanvas start
+    .offcanvas-body{
+        position: relative;
+        background: $layout-bg-primary;
+        z-index: $layoutZIndexMax !important;
+    }
+
+    .sidebarRight{
+
+        .head > .wrapper{
+            display: flex;
+            justify-content: space-between;
+            
+            button{
+                width: 50px;
+                height: 30px;
+                margin-right:5px;
+            }
+
+            h4{
+                margin:0px 0px;
+                font-weight: 800;
+                line-height: 30px;
+            }
+
+            .customHrHorizantal{
+                margin:0px 0px 20px;
+            }
+        }
+
+        .body{
+            .bells{
+            
+                button{
+                    position: relative;
+                    margin-bottom:10px;
+
+                    .bellsImageWrapper{
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        .iconGenerate{
+                            font-size:25px;
+                        }
+                    }
+
+                    span{
+                        position: absolute;
+                        left: 60px;
+                        top:0;
+                        text-transform: none !important;
+
+                    }
+
+                    .title{
+                        font-weight: 800 !important;
+                    }
+                    .time{
+                        font-weight: 600 !important;
+                        font-size: 14px;
+                        top:25px;
+                    }
+
+                }
+    
+                .bellsImageWrapper{
+                    position: relative;
+                    width: 50px;
+                    height: 50px;
+                    overflow: hidden;
+                    border-radius: $radiusLeaf;
+        
+                    img{
+                        width:100%;
+                        height:100%
+                    }
+                }
+            }
+    
+            .item{
+                position: relative;
+                height: 92%;
+    
+                .okButton{
+                    position: absolute;
+                    bottom:0;
+                    height: 50px;
+                }
+            }
+        }
+
+    }
+
+    .sidebarLeft{
+        .head > .wrapper{
+            display: flex;
+            justify-content: space-between;
+
+            button{
+                width: 50px;
+                height: 30px;
+                margin-right:5px;
+            }
+
+            h4{
+                margin:0px 0px;
+                font-weight: 800;
+                line-height: 30px;
+            }
+
+            .customHrHorizantal{
+                margin:0px 0px 20px;
+            }
+        }
+
+        .leftSideBarProfile{
+            h1{
+                text-align: center;
+                font-size: 30px;
+                margin:0px auto;
+                margin-top:10px;
+            }
+            h2{
+                text-align: center;
+                font-weight:900;
+                font-size:20px;
+            }
+        }
+        .leftSideBarAvatar{
+            width: 200px;
+            height: 200px;
+            margin:0 auto;
+            margin-top:16px;
+        }
+        .exitButtonWrapper{
+            width:100%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            padding: 16px;
+
+        }
+
+    }
+
+// offcanvas end
+
+// mobileMenu start
+
+// mobileMenu end
+
+// footer start
+
+// footer end
