@@ -23,6 +23,8 @@ const Index = ({context}) => {
   const [buttonFormDataSubmitRef] = useOutletContext(context) 
   const navigate = useNavigate()
   const formData = useData()
+  const universalWords = useDataUniversalWords().forms
+  const [days, setDays] = useState(date.days)
 
   const styles = StyleSheet.create({
     effect: {
@@ -30,9 +32,6 @@ const Index = ({context}) => {
       animationDuration: '1s'
     }
   })
-
-  const universalWords = useDataUniversalWords().forms
-  const [days, setDays] = useState(date.days)
 
   const validationSchema = Yup.object({
     name:Yup
@@ -42,8 +41,7 @@ const Index = ({context}) => {
 
     surname:Yup
     .string(universalWords.validCharacter)
-    .matches(/^[a-zA-ZçğıiöşüĞİÖŞÜÇ]+[a-zA-ZçğıiöşüĞİÖŞÜÇ]*$/, universalWords.privateCharacter)
-    .matches(/^[a-zA-Z]+$/, universalWords.privateCharacter),
+    .matches(/^[a-zA-Z0-9ğüşöçıİĞÜŞÖÇı]+$/, universalWords.privateCharacter),
 
     date:Yup.object({
       day:Yup
@@ -66,6 +64,7 @@ const Index = ({context}) => {
 
     
   })
+
   const onSubmit = (values)=>{
 
     //console.log('signIn step-1 submit edildi burada controller yapılacak',JSON.stringify(values))
@@ -107,12 +106,11 @@ const Index = ({context}) => {
           }
 
       }
-    );
+    )
 
     // gün state'ini güncelle yoksa class içindeki verileri okuyamıyor state değişimi yapamıyoruz
     setDays(updatedDays);
-  }, [formik.values.date?.moon,formik.values.date?.year]);
-
+  }, [formik.values.date?.moon,formik.values.date?.year])
 
   useEffect(() => {
     setStep(location.split('-')[1])

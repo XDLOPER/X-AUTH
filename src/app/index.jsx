@@ -36,7 +36,7 @@ const X_AUTH_APP = ({children}) => {
         <ProjectMiddlewares>
           {
             props => {
-              const {projectLoading} = props
+              const { projectLoading } = props
 
               if(projectLoading){
                 return <RouterProvider router={router}></RouterProvider>

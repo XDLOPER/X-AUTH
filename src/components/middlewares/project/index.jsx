@@ -1,4 +1,4 @@
-import React,{useEffect} from "react"
+import React, {useEffect} from "react"
 
 import { setLoading } from "../../../store/project/actions"
 import { useLoading } from "../../../store/project/hooks"
@@ -20,16 +20,21 @@ const ProjectMiddlewares = ({children}) => {
       } catch (error) {
           throw new Error(error)
       }
-    };
+    }
 
-    fetchData();
-  }, []);
-
+    fetchData()
+  }, [])
 
   /* finish => useEffect => setLoading(true olacak herşey bittikten sonra)*/
 
 
-  return (typeof children === 'function' ? children({projectLoading}) : null)
+  return (
+    <>
+      {
+        typeof children === 'function' ? children({projectLoading}) : null
+      }
+    </>
+  )
 }
 
 

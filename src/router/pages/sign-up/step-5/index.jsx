@@ -98,7 +98,7 @@ const Index = ({context}) => {
     })
   //
 
-    console.log({...formData.signUp,...values})
+    //console.log({...formData.signUp,...values})
   }
 
   const formik = useFormik({
@@ -118,11 +118,11 @@ const Index = ({context}) => {
     setButtonSubmit({title:'kayıt ol',active:true,URL:''});
     setButtonBack({title:'',active:true,URL:'sign-up/step-2'})
 
-  },[]);
+  },[])
 
   return (
     <>
-        <form onSubmit={formik.handleSubmit} className={css(styles.effect)}>
+      <form onSubmit={formik.handleSubmit} className={css(styles.effect)}>
           <b>Uygulama için gerekli izinleri doldurmanız gerekmektedir. (Yan tarafta bulunan bilgi bölümünden içeriğe göz atabilirsiniz).</b>
           <div style={{height:"10px"}} />
           <Checkbox 
@@ -174,7 +174,7 @@ const Index = ({context}) => {
             >
           </Checkbox>
           <button style={{display:'none'}} ref={buttonFormDataSubmitRef}></button>
-        </form>
+      </form>
     </>
   )
 }

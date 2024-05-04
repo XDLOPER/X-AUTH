@@ -3,6 +3,7 @@ import {Outlet} from 'react-router-dom'
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs"
 import { IoChevronDownOutline } from "react-icons/io5"
 
+import GoogleAnalytics from '../../components/others/google-analytics'
 import AtomusLoading from '../../components/loading/atomusLoading'
 import X_button from '../../components/buttons/x-button'
 import Modals from '../../components/modals'
@@ -17,7 +18,6 @@ import logo from '../../media/images/logo.png'
 import logoKargomucuz from '../../media/images/logo-kargomucuz.png'
 
 import { buttonType } from '../../utils/models//enun.buttons'
-
 
 const LAYOUT = () => {
   const buttonFormDataSubmitRef = useRef(null)
@@ -36,6 +36,7 @@ const LAYOUT = () => {
   
   return (
     <>
+    <GoogleAnalytics trackingId={process.env.REACT_APP_GOOGLE_TRACKING_ID}/> {/* => not used from root middleware. */}
       {
         modals && 
         modals.map((modal,index) => <Modals key={index} name={modal.name} modalData={modal}></Modals>)

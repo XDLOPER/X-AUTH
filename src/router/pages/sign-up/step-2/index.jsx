@@ -58,10 +58,9 @@ const Index = ({context}) => {
   const onSubmit = (values)=>{
     setLoading(true)
     setButtonSubmit({disabled:true})
+    setButtonNext({disabled:true})
     //console.log('signIn step-2 submit edildi burada controller yapılacak',JSON.stringify(values))
     setDataSignUp({...values})
-
-    console.log()
 
     axios.post('https://api.kargomucuz.com/v1/auth/usernameOrEmailExist', {
       username: values.username,
@@ -69,7 +68,6 @@ const Index = ({context}) => {
       password: values.password
     })
     .then(response => {
-
       if(response.data.data.exist){
         setErrors({
           title:'info',
@@ -81,17 +79,18 @@ const Index = ({context}) => {
           navigate('/sign-up/step-5')
       }
 
+      setButtonNext({disabled:false})
       setButtonSubmit({disabled:false})
       setLoading(false)
     })
     .catch(error => {
-      console.error(error)
       setErrors({
         title:'ERROR',
         body:{
           message:sentenceCutter(error?.message,50)
         },
       })
+      setButtonNext({disabled:false})
       setButtonSubmit({disabled:false})
       setLoading(false)
     })
