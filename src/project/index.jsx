@@ -7,7 +7,7 @@ import AtomusLoading from '../component/loading/atomusLoading'
 
 import router from '../router/index'
 import store from '../store/index'
-import logo from '../media/images/logo.png'
+import logoKargomucuz from '../media/images/logo-kargomucuz.png'
 
 const X_PROJECT_S = () => {
 
@@ -16,12 +16,12 @@ const X_PROJECT_S = () => {
         <ProjectMiddlewares>
           {
             props => {
-              const {projectLoading} = props
+              const { projectLoading } = props
 
               if(projectLoading){
                 return <RouterProvider router={router}></RouterProvider>
               }else{
-                return <AtomusLoading loadingState={!projectLoading} logo={logo}/> // => (!) necessary for component
+                return <AtomusLoading loadingState={!projectLoading} logo={logoKargomucuz}/> // => (!) necessary for component
               }
               
             }

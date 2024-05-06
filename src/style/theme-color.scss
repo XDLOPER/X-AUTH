@@ -13,6 +13,10 @@ $color-mode-type: data;
 
   // layout start
 
+    div#x_auth{
+      background-color: $layout-bg-dark-primary;
+    }
+
     .offcanvas-body{
       background:$layout-bg-dark-primary;
     }
@@ -26,8 +30,8 @@ $color-mode-type: data;
   // component start
 
     .btn-light ,.xButton.defaultButton,.xButton.arrowButton,.xButton.centerButton,.xButton.centerButton{
-      background:$form-bg-dark-primary;
-      border:$border-width $border-style $stroke-dark-primary ;
+      background:$form-bg-dark-secondary !important;
+      border:$border-width $border-style $stroke-dark-primary;
       color:$body-color-dark !important;
 
       

@@ -7,8 +7,8 @@ import XButton from '../../buttons/x-button'
 import { setModalAppend, setModalDestroy } from '../../../store/app/modals/actions'
 
 const OkModal = (props) => {
-    const {modalData} = props
-    const {ID} = modalData
+    const { modalData } = props
+    const { ID } = modalData
     const translation = useTranslation()
 
   
@@ -16,7 +16,7 @@ const OkModal = (props) => {
       <>
               <Modal.Body>{modalData.data.body}</Modal.Body>
               <Modal.Footer>
-                <XButton onClick={()=>{setModalDestroy(ID)}}>{translation.t('app.button.ok')}</XButton>
+                <XButton to onClick={()=>{setModalDestroy(ID)}}>{translation.t('button.ok')}</XButton>
                 {/* <button onClick={()=>setModalAppend({name:'okModal'})}>modal aac</button> */}
               </Modal.Footer>
         </>

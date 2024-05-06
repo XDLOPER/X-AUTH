@@ -1,8 +1,11 @@
+// ---- template screen start ----
+
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
 
 }
 
 @media only screen and (min-width: 425px) and (max-width: 768px) {
+
 
 }
 
@@ -37,28 +40,6 @@
             }
         }
     }
-
-    .sidebarLeft{
-
-        .leftSideBarProfile{
-            h1{
-
-                font-size: 25px !important;
-
-            }
-
-        }
-
-    }
-
-    .sidebarRight{
-        .body{
-            .bells{
-                button .title{font-size: 15px !important;}
-                button .time{top: 20px !important;}
-            }
-        }
-    }
   
 }
 
@@ -76,35 +57,41 @@
             }
         }
     }
+  
+    
+}
+// ---- template screen end ----
 
-    .sidebarLeft{
 
-        .leftSideBarProfile{
-            h1{
+// ---- cross screen start ----
+@media only screen and (max-width:500px){
+    div#x_auth{
+        width: 100% !important;
+        height: 100% !important;
+        left: 0 !important;
+        top: 0 !important;
+        transform:none !important;
 
-                font-size: 25px !important;
+        .wrapper .auth footer#layout{
+            .buttonGroup{
+                grid-template-columns:20% auto 20% !important;
 
+                a:nth-child(2) .xButton{width:90% !important;}
             }
-
         }
-
     }
+}
 
-    .sidebarRight{
-        .head {
-            .wrapper {
-                h4{
-                    font-size: 17px !important;
+@media screen and (min-width: 500px) {
+    div#x_auth{
+        .wrapper .auth{
+            footer#layout{
+                .buttonGroup{
+                    a:nth-child(2) .xButton{width:60% !important;}
                 }
             }
         }
-        .body{
-            .bells{
-                button .title{font-size: 14px !important;}
-            }
-        }
     }
-  
 }
 
-// bazı bölgelerde style lar aynı bu sebeple ortak küme içersinde farklı media oluşturulabilir.
+// ---- cross screen end ----

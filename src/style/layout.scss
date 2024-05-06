@@ -1,161 +1,107 @@
 // layout
 
-// header start 
+div#x_auth{
+    position: absolute; 
+    display:flex; 
+    width: 425px; 
+    min-height:85%; 
+    background:white; 
+    box-sizing: border-box;
+    overflow: hidden !important; 
+    padding:20px; 
+    border-radius:$radiusMedium !important;
 
-// header end
+    @extend %translateXY;
 
-// offcanvas start
-    .offcanvas-body{
-        position: relative;
-        background: $layout-bg-primary;
-        z-index: $layoutZIndexMax !important;
-    }
+    .wrapper .auth{
+        header#layout{
+            background-color:transparent;
 
-    .sidebarRight{
+            .loading{
+                width: 47px; 
+                height: 47px; 
+                margin:0 auto;
+            }
+        }
 
-        .head > .wrapper{
-            display: flex;
-            justify-content: space-between;
+        hr#layout{
+            width:10%; 
+            height: 4px; 
+            background: #000; 
+            border-radius:999px; 
+            border: none; 
+            margin:10px auto 0px; 
+            opacity: 1;
+        }
+
+        h1#layout-title{
+            text-align: center; 
+            font-weight: bolder; 
+            font-size: 20px; 
+        }
+
+        div.content{
+            flex:100; display:block !important;
+
+            .content-error{
+                position: relative; 
+                border-radius:5px; 
+                max-height:90px; 
+                background:transparent; 
+                margin-bottom:30px; 
+                overflow:hidden;
             
-            button{
-                width: 50px;
-                height: 30px;
-                margin-right:5px;
-            }
-
-            h4{
-                margin:0px 0px;
-                font-weight: 800;
-                line-height: 30px;
-            }
-
-            .customHrHorizantal{
-                margin:0px 0px 20px;
+                .gradient-bar{
+                    content:''; 
+                    bottom:0; 
+                    position: absolute; 
+                    width: 100%; 
+                    height:40%; 
+                    background:linear-gradient(0deg, #ffffff, transparent)
+                }
+                div.toast{width: 100% !important; }
             }
         }
 
-        .body{
-            .bells{
+        footer#layout{
+            background-color: transparent;
+
+            .buttonGroup{
+                grid-template-columns: 15% auto 15%;  
+                height:40px; 
+                margin-bottom:10px; 
+                gap:0 5px;
+                
             
-                button{
-                    position: relative;
-                    margin-bottom:10px;
-
-                    .bellsImageWrapper{
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-
-                        .iconGenerate{
-                            font-size:25px;
-                        }
-                    }
-
-                    span{
-                        position: absolute;
-                        left: 60px;
-                        top:0;
-                        text-transform: none !important;
-
-                    }
-
-                    .title{
-                        font-weight: 800 !important;
-                    }
-                    .time{
-                        font-weight: 600 !important;
-                        font-size: 14px;
-                        top:25px;
-                    }
-
+                a:nth-child(2){
+                    text-align: center;
                 }
     
-                .bellsImageWrapper{
-                    position: relative;
-                    width: 50px;
-                    height: 50px;
-                    overflow: hidden;
-                    border-radius: $radiusLeaf;
-        
-                    img{
-                        width:100%;
-                        height:100%
-                    }
+                a:nth-child(2) .xButton{ // => düzenlenicek
+                    background-color: black ;
+                    color:white !important
+                }
+    
+                a:nth-child(3) .xButton{ // => düzenlenicek
+                    background-color: black ; 
+                    color:white !important
                 }
             }
-    
-            .item{
-                position: relative;
-                height: 92%;
-    
-                .okButton{
-                    position: absolute;
-                    bottom:0;
-                    height: 50px;
-                }
+
+            p.footerCompanyText{
+                text-align: center; 
+                
+                align-self: center; 
+                font-weight: 900; 
+                letter-spacing: 0.5px; 
+                font-size: 9px; 
+                color:#c2c2c2
             }
+
+            img.footerCompanyLogo{
+                width: 13px; 
+            }
+
         }
-
     }
-
-    .sidebarLeft{
-        .head > .wrapper{
-            display: flex;
-            justify-content: space-between;
-
-            button{
-                width: 50px;
-                height: 30px;
-                margin-right:5px;
-            }
-
-            h4{
-                margin:0px 0px;
-                font-weight: 800;
-                line-height: 30px;
-            }
-
-            .customHrHorizantal{
-                margin:0px 0px 20px;
-            }
-        }
-
-        .leftSideBarProfile{
-            h1{
-                text-align: center;
-                font-size: 30px;
-                margin:0px auto;
-                margin-top:10px;
-            }
-            h2{
-                text-align: center;
-                font-weight:900;
-                font-size:20px;
-            }
-        }
-        .leftSideBarAvatar{
-            width: 200px;
-            height: 200px;
-            margin:0 auto;
-            margin-top:16px;
-        }
-        .exitButtonWrapper{
-            width:100%;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            padding: 16px;
-
-        }
-
-    }
-
-// offcanvas end
-
-// mobileMenu start
-
-// mobileMenu end
-
-// footer start
-
-// footer end
+}

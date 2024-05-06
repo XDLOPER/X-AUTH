@@ -1,13 +1,12 @@
 import React,{useState} from 'react'
 import { Toast } from 'react-bootstrap'
-
-import { useErrors } from '../../store/app/hooks';
-import { setErrors } from '../../store/app/actions';
+import { useTranslation } from 'react-i18next'
 
 const Toasts = (props) => {
-    const [show, setShow] = useState(true);
-    const errorsData = useErrors()
     const {data,onClose,...rest} = props
+    const [show, setShow] = useState(true)
+    
+    const translation = useTranslation()
 
     const toastShowClose = () => {
       setShow(false)
@@ -18,7 +17,7 @@ const Toasts = (props) => {
             <strong className="me-auto">{data?.title}</strong>
             <small>{data?.time}</small>
         </Toast.Header>
-        <Toast.Body>{data?.body ? data.body?.message?.toString() : 'bir sorun oluştu'}</Toast.Body>
+        <Toast.Body>{data?.body ? data.body?.message?.toString() : translation.t('toast.errorToast.body')}</Toast.Body>
     </Toast>
   )
 }

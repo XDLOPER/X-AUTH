@@ -1,40 +1,31 @@
 {
      "app":{
-          "name":"x-auth",
+          "subTitle":"auth gate",
 
-          "button":{
-               "ok":"okey",
-               "cancel":"cancel",
-               "close":"close",
-               "create":"create",
-               "complete":"complete",
-               "next":"next",
-               "back":"back"
+          "menus":{
+               "main":{
+                    "signIn":"sign in",
+                    "signUp":"sign up",
+                    "finish":"redirecting.."
+               }
           },
 
-          "modal":{
-               "fileModal":{
-                    "normal":"Add File",
-                    "profilePhotoAdd":"Add The Profile Photo",
-
-                    "extensionSupport":"Only This Support File Extenion."
-               },
-               "errorModal":{
-                    "title":"Error",
-                    "body":""
+          "pages":{
+               "beforeTheEnd":{
+                    "mainInfoText":"You need to give necessary permissions for the application. You can access the detailed page from the relevant section.",
+                    "infoCheck1":"terms of use and privacy policy",
+                    "infoCheck2":"authorization and access permissions",
+                    "infoCheck3":"account access and data sharing"
                }
           }
-     },
-     "menus":{
-          "main":{
-               "home":"home"
-          } 
+
      },
 
      "form":{
           "placeholder":{
                "username":"username",
                "password":"password",
+               "rePassword":"re password",
                "email":"email",
                "name":"name",
                "surname":"surname",
@@ -42,25 +33,117 @@
           },
 
           "label":{
-               "nameAndSurname":"name & surname"
+               "nameAndSurname":"name & surname",
+               "usernameAndEmail":"username & e-mail",
+               "keepLoggedIn":"keep me logged in"
+          },
+
+          "messages":{
+               "invalidCharacter":"invalid value",
+               "invalidSpecialCharacter":"special characters are not allowed",
+               "required":"required",
+               
+               "password":{
+                    "notMatching":"passwords do not match"
+               },
+               
+               "email":{
+                    "invalidEmail":"please enter a valid email address",
+                    "notMatching":"email addresses do not match"
+               },
+
+               "min":{
+                    "two":"at least 2 characters required",
+                    "six":"at least 6 characters required"
+               },
+
+               "max":{
+                    "ten":"should be less than 10 characters",
+                    "thirty":"should be less than 30 characters"
+               }
           }
      },
 
+     "modal":{
+          "keepLoggedIn":{
+               "title":"We Keep Your Account Open",
+               "body":"Hello! We're informing you to keep your account secure and provide better service. The term 'token' refers to an encrypted identifier used in information exchange over the internet. We use this information to keep your account open and to get to know you better.\n\nThese tokens play a role in the authentication and authorization process, ensuring that only authorized individuals have access to accounts. Your security is our top priority, and this information is one of the steps we take to keep your account secure. If you have any doubts or concerns, please let us know. Thank you!"
+          },
+
+          "fileModal":{
+               "normal":"Add File",
+               "profilePhotoAdd":"Add The Profile Photo",
+
+               "extensionSupport":"Only This Support File Extenion."
+          },
+
+          "errorModal":{
+               "title":"Error",
+               "body":""
+          }
+     },
+
+     "toast":{
+          "successToast":{
+               "title":"Success",
+               "body":"Request successfully completed."
+          },
+
+          "errorToast":{
+               "title":"Error",
+               "body":"An unknown client-side error occurred."
+          }
+     },
+
+     "button":{     
+          "ok":"ok",
+          "cancel":"cancel",
+          "close":"close",
+          "create":"create",
+          "complete":"complete",
+          "next":"next",
+          "back":"back",
+
+          "login":"login",
+          "register":"register",
+          "registerForward":"register to"
+     },
+     
      "messages":{
           "errors":{
-               "notFindFile":"Not Find File.",
-               "maxFile":"Maximum file exits exceeded.",
-               "notTypeSupport":"Not type support."
+               "notFindFile":"File not found.",
+               "maxFile":"Maximum file limit exceeded.",
+               "notTypeSupport":"File type not supported."
           }
+     },
+
+     "calendar":{
+          "january":"january",
+          "february":"february",
+          "march":"march",
+          "april":"april",
+          "may":"may",
+          "june":"june",
+          "july":"july",
+          "august":"august",
+          "september":"september",
+          "october":"october",
+          "november":"november",
+          "december":"december"
      },
 
      "time":{
           "yearAgo":"year ago",
-          "monthAgo":"mount ago",
+          "monthAgo":"month ago",
           "dayAgo":"day ago",
           "hourAgo":"hour ago",
           "minuteAgo":"minute ago",
           "secondAgo":"second ago",
           "invalidValue":"invalid value"
+     },
+
+     "constsAndEnums":{
+          "male":"male",
+          "female":"female"
      }
 }

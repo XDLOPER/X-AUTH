@@ -1,29 +1,23 @@
 import React, { useEffect, useState } from 'react'
-import {useTranslation} from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 
-import {setRightSidebarOpen,setRightSidebarType,setLeftSidebarOpen, setLeftSidebarType} from '../../../../store/app/index/actions'
-import {useAuth} from '../../../../store/app/index/hooks'
+import AtomusLoading from '../../../../component/loading/atomusLoading'
 
-import {APP_MENU_CONST} from '../../../../utils/consts/menus/app.menu'
+import { useLoading } from '../../../../store/app/index/hooks'
+
+import logoKargomucuz from '../../../../media/images/logo-kargomucuz.png'
 
 const HEADER = ({ children,...props }) => {
-  const { visible, open, menuOpen, ...rest} = props
   const translation = useTranslation()
-  const isAuth = useAuth()
+  const loading = useLoading()
 
   return (
-    <header id="header" className='container-fluid p-0' style={visible ? {"overflow":"hidden"} : {}}>
-      {
-        open &&
-          <></>
-      }
-
-      {
-        menuOpen && 
-          <></>
-      }
+    <header id="layout" className='p-relative w-100 d-flex p-0 top-0'>
+      <div className="loading">
+        <AtomusLoading loadingState={loading} logo={logoKargomucuz}></AtomusLoading>
+      </div>
     </header>
-  );
-};
+  )
+}
 
 export default HEADER

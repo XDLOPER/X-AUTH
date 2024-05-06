@@ -1,9 +1,13 @@
-import React, { useRef, forwardRef, useImperativeHandle } from 'react';
-import { OverlayTrigger, Tooltip } from 'react-bootstrap';
+import React, { useRef, forwardRef, useImperativeHandle } from 'react'
+import { OverlayTrigger, Tooltip } from 'react-bootstrap'
+
+import useWindowSize from '../../../hooks/useWindowSize'
 
 const XTextHidden = forwardRef((props, ref) => {
-  const { error, touch, ...rest } = props;
-  const inputRef = useRef();
+  const { error, touch, ...rest } = props
+  const inputRef = useRef()
+
+  const windowSize = useWindowSize()
 
   const touchAndError = (err, elseErr) => {
     return error && touch ? err : elseErr;
@@ -28,15 +32,14 @@ const XTextHidden = forwardRef((props, ref) => {
   return (
     <div className='input-wrapper'>
       <OverlayTrigger
-        placement={'right'}
+        placement={windowSize?.width < 900 ? 'top' : 'right'}
         overlay={
-          error ? (
-            <Tooltip id={`tooltip-right`}>
-              <strong>{touchAndError(error, null)}</strong>
-            </Tooltip>
-          ) : (
-            <></>
-          )
+          error && touch ?
+          <Tooltip>
+            <strong>{touchAndError(error,null)}</strong>
+          </Tooltip>
+          :
+          <></>
         }
       >
         <input

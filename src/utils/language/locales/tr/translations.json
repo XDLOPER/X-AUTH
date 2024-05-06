@@ -1,41 +1,31 @@
 {
      "app":{
-          "name":"x-auth",
+          "subTitle":"yetki kapısı",
 
-          "button":{     
-               "ok":"tamam",
-               "cancel":"iptal",
-               "close":"kapat",
-               "create":"oluştur",
-               "complete":"tamamla",
-               "next":"ileri",
-               "back":"geri"
+          "menus":{
+               "main":{
+                    "signIn":"giriş yap",
+                    "signUp":"kayıt ol",
+                    "finish":"yönlendiriliyorsunuz.."
+               }
           },
 
-          "modal":{
-               "fileModal":{
-                    "normal":"Dosya Ekle",
-                    "profilePhotoAdd":"Profil Fotoğrafı Ekle",
-
-                    "extensionSupport":"Sadece Bu Formattaki Dosyaları İçerebilir."
-               },
-               "errorModal":{
-                    "title":"Hata",
-                    "body":""
+          "pages":{
+               "beforeTheEnd":{
+                    "mainInfoText":"uygulama için gerekli izinleri vermeniz gerekmektedir. detaylı sayfaya ilgili bölümden ulaşabilirsiniz.",
+                    "infoCheck1":"kullanım şartları ve gizlilik politikası",
+                    "infoCheck2":"yetki ve erişim izinleri",
+                    "infoCheck3":"hesap erişimi ve veri paylaşımı"
                }
           }
 
-     },
-     "menus":{
-          "main":{
-               "home":"anasayfa"
-          }
      },
 
      "form":{
           "placeholder":{
                "username":"kullanıcı adı",
                "password":"şifre",
+               "rePassword":"tekrardan şifre",
                "email":"e-mail",
                "name":"isim",
                "surname":"soyisim",
@@ -43,16 +33,104 @@
           },
 
           "label":{
-               "nameAndSurname":"isim & soyisim"
+               "nameAndSurname":"isim & soyisim",
+               "usernameAndEmail":"kullanıcı adı & e-posta",
+               "keepLoggedIn":"oturumu açık tut"
+          },
+
+          "messages":{
+               "invalidCharacter":"geçersiz değer",
+               "invalidSpecialCharacter":"birtakım özel karakterler girilemez",
+               "required":"zorunludur",
+               
+               "password":{
+                    "notMatching":"şifreler eşleşmiyor"
+               },
+               
+               "email":{
+                    "invalidEmail":"doğru formatta mail adresi giriniz",
+                    "notMatching":"email eşleşmiyor"
+               },
+
+               "min":{
+                    "two":"minimum 2 karakter gerekli",
+                    "six":"minimum 6 karakter gerekli"
+               },
+
+               "max":{
+                    "ten":"10 karakterden küçük olmalı",
+                    "thirty":"30 karakterden küçük olmalı"
+               }
           }
      },
 
+     "modal":{
+          "keepLoggedIn":{
+               "title":"Hesabını Açık Tutuyoruz",
+               "body":"Merhaba! Sana, hesabını güvenli bir şekilde korumak ve daha iyi bir hizmet sunabilmek adına bir bilgilendirme iletiyoruz. 'Token' terimi, internet üzerindeki bilgi alışverişinde kullanılan şifrelenmiş bir kimlik bilgisini ifade eder. Hesabını açık tutabilmemiz ve seni daha iyi tanıyabilmemiz için bu bilgileri kullanıyoruz.\n\nBu tokenlar, kimlik doğrulama ve yetkilendirme süreçlerinde rol oynar, böylece yalnızca yetkili kişilerin hesaplarına erişim sağlanır. Senin güvenliğin bizim önceliğimizdir ve bu bilgilendirme, hesabını güvende tutmak adına attığımız adımlardan biridir. Eğer herhangi bir şüphen veya sorunun varsa, lütfen bize bildir. Teşekkür ederiz!"
+          },
+
+          "fileModal":{
+               "normal":"Dosya Ekle",
+               "profilePhotoAdd":"Profil Fotoğrafı Ekle",
+
+               "extensionSupport":"Sadece Bu Formattaki Dosyaları İçerebilir."
+          },
+
+          "errorModal":{
+               "title":"Hata",
+               "body":""
+          }
+     },
+
+     "toast":{
+
+          "successToast":{
+               "title":"Başarılı",
+               "body":"İstek başarılı bir şekilde gerçekleştirildi."
+          },
+
+          "errorToast":{
+               "title":"Hata",
+               "body":"İstemci taraflı bilinmeyen bir hata oluştu."
+          }
+     },
+
+     "button":{     
+          "ok":"tamam",
+          "cancel":"iptal",
+          "close":"kapat",
+          "create":"oluştur",
+          "complete":"tamamla",
+          "next":"ileri",
+          "back":"geri",
+
+          "login":"oturum aç",
+          "register":"kayıt ol",
+          "registerForward":"kayıt olmak için"
+     },
+     
      "messages":{
           "errors":{
                "notFindFile":"Herhangi bir dosya bulunamadı.",
                "maxFile":"Maksimum dosya sayısı aştı.",
                "notTypeSupport":"Bu Türün Desteği Sağlanmıyor."
           }
+     },
+
+     "calendar":{
+          "january":"ocak",
+          "february":"şubat",
+          "march":"mart",
+          "april":"nisan",
+          "may":"mayıs",
+          "june":"haziran",
+          "july":"temmuz",
+          "august":"ağustos",
+          "september":"eylül",
+          "october":"ekim",
+          "november":"kasım",
+          "desember":"aralık"
      },
 
      "time":{
@@ -63,5 +141,10 @@
           "minuteAgo":"dakika önce",
           "secondAgo":"saniye önce",
           "invalidValue":"geçersiz değer"
+     },
+
+     "constsAndEnums":{
+          "male":"erkek",
+          "female":"kadın"
      }
 }

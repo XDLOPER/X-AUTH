@@ -1,10 +1,14 @@
-import React, { useState, useEffect ,useRef } from 'react';
-import { Form, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import React, { useState, useEffect ,useRef } from 'react'
+import { Form, OverlayTrigger, Tooltip } from 'react-bootstrap'
+
+import useWindowSize from '../../hooks/useWindowSize'
 
 const XSelect = (props) => {
-  const [showTooltip, setShowTooltip] = useState(false);
-  const refTooltip = useRef(null);
-  const { error, touch, data, ...rest } = props;
+  const { error, touch, data, ...rest } = props
+  const [showTooltip, setShowTooltip] = useState(false)
+  const refTooltip = useRef(null)
+  
+  const windowSize = useWindowSize()
 
   const touchAndError = (err,elseErr) => {
     return (error && touch) ? err : elseErr
@@ -12,18 +16,18 @@ const XSelect = (props) => {
 
   useEffect(() => {
     setShowTooltip(error ? true : false)
-  }, [error]);
+  }, [error])
   
   return (
     <div className="input-wrapper">
       <OverlayTrigger
-        placement="right"
+        placement={windowSize?.width < 900 ? 'top' : 'right'}
         overlay={
           error && touch ?
-          <Tooltip id={`tooltip-right`}>
+          <Tooltip>
             <strong>{touchAndError(error,null)}</strong>
           </Tooltip>
-          : 
+          :
           <></>
         }
       >
